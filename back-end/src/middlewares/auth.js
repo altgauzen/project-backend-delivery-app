@@ -1,18 +1,24 @@
-// const { translateToken } = require('../utils/handleToken');
-// const formatError = require('../utils/formatError');
+require('dotenv').config();
+const jwt = require('jsonwebtoken');
 
-// module.exports = async (req, res, next) => {
-//   try {
-//     const { authorization } = req.headers;
-    
-//     if (!authorization) return res.status(401).send({ message: 'missing auth token' });
-    
-//     const { data: { id, role, userEmail } } = translateToken(authorization);
-//     req.body.userId = id;
-//     req.body.role = role;
-//     req.body.email = userEmail;
-//     next();
-//   } catch (error) {
-//     next(formatError(401, 'jwt malformed'));
-//   }
-// };
+const SECRET = process.env.JWT_SECRET;
+
+const createToken = (payload) => jwt.sign(payload, SECRET);
+
+const validate = (token) => jwt.verify(token, SECRET);
+
+const validateToken = (req, res, next) => {
+  try {
+    const { authorization } = req.headers;
+    if (!authorization) return res.status(401).json({ message: 'Token not found' });
+    const Payload = validate(authorization);
+    req.user = Payload.payload.id;
+    next();
+  } catch (error) {
+    res.status(401).json({ message: 'Expired or invalid token' });
+  }
+};
+module.exports = {
+  createToken,
+  validateToken,
+};
