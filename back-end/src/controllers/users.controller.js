@@ -3,8 +3,8 @@ const { success, created } = require('../utils/dictionary/statusCode');
 
 const create = async (req, res, next) => {
   try {
-    const { name, email, role, encryption } = req.body;
-    const hash = encryption;
+    const { name, email, role, password } = req.body;
+    const hash = password;
     const newUser = await createUser(name, email, hash, role);
     return res.status(created).json(newUser);
   } catch (error) {
@@ -14,8 +14,8 @@ const create = async (req, res, next) => {
 
 const login = async (req, res, next) => {
   try {
-    const { email, encryption } = req.body;
-    const token = await userLogin(email, encryption);
+    const { email, password } = req.body;
+    const token = await userLogin(email, password);
 
     return res.status(success).json({ token });
   } catch (error) {

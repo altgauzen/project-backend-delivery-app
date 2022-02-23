@@ -6,7 +6,7 @@ module.exports = async (req, res, next) => {
 
     const encryption = md5(password);
 
-    req.body.encryption = encryption;
+    req.body.password = encryption;
     next();
   } catch (error) {
     next(error);
