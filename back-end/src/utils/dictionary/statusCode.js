@@ -8,4 +8,5 @@ module.exports = {
   notFound: 404,
   unprocessableEntity: 422,
   serverError: 500,
+  forbidden: 403,
 };
