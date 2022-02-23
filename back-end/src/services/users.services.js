@@ -1,6 +1,6 @@
 const Joi = require('joi');
 const { User } = require('../database/models');
-const { badRequest, conflict } = require('../utils/dictionary/statusCode');
+const { badRequest, conflict, notFound } = require('../utils/dictionary/statusCode');
 const errorConstructor = require('../utils/functions/errorHandlers');
 const { createToken } = require('../middlewares/auth');
 
@@ -46,30 +46,28 @@ const userLogin = async (email, password) => {
   if (error) throw errorConstructor(badRequest, error.message);
 
   const searchingUser = await User.findOne({ where: { email }, raw: true });
-  console.log(searchingUser);
   if (!searchingUser || searchingUser.password !== password) {
     throw errorConstructor(badRequest, 'Invalid fields');
   }
 
   const token = createToken({ payload: searchingUser });
-
   return token;
 };
 
-// const getUserAll = async () => {
-//   const users = await User.findAll({ attributes: { exclude: ['password'] } });
-//   return users;
-// };
+const getUserAll = async () => {
+  const users = await User.findAll({ attributes: { exclude: ['password'] } });
+  return users;
+};
 
-// const getUserById = async (id) => {
-//   const user = await User.findByPk(id, { attributes: { exclude: ['password'] } });
-//   if (!user) throw errorConstructor(notFound, 'Not Found');
-//   return user;
-// };
+const getUserById = async (id) => {
+  const user = await User.findByPk(id, { attributes: { exclude: ['password'] } });
+  if (!user) throw errorConstructor(notFound, 'Not Found');
+  return user;
+};
 
 module.exports = {
   createUser,
-  // getUserAll,
-  // getUserById,
+  getUserAll,
+  getUserById,
   userLogin,
 };
