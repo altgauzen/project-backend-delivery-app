@@ -4,10 +4,8 @@ const encryption = require('../middlewares/encryptionMd5');
 
 const router = express.Router();
 
-
-router.post('/register', userController.create);
+router.post('/register', encryption, userController.create);
+router.post('/login', encryption, userController.login);
 router.get('/getUsersAll', userController.getAllUsers);
-router.post('/login', userController.login);
-
 
 module.exports = router;

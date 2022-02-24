@@ -1,5 +1,3 @@
-
-const md5 = require('md5');
 const { createUser, userLogin, getUserAll } = require('../services/users.services');
 const { success, created } = require('../utils/dictionary/statusCode');
 
