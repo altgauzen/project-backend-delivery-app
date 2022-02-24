@@ -1,22 +1,27 @@
+import { useHistory } from 'react-router-dom';
 import React, { useState } from 'react';
 import UserService from '../../service/user.service';
 import './login.css';
 import rockGlass from '../../images/rockGlass.svg';
 
 function Login() {
-  const [name, setName] = useState('');
+  const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
   const signup = () => {
     new UserService()
-      .login(name, password)
-      .then((token) => {
+      .login(email, password)
+      .then((res) => {
+        const { token } = res.data;
+        console.log(token);
         localStorage.setItem('token', token);
       })
       .catch((err) => {
         console.log(err);
       });
   };
+
+  const history = useHistory();
 
   return (
     <div className="container">
@@ -29,8 +34,8 @@ function Login() {
         <input
           type="text"
           id="setName"
-          value={ name }
-          onChange={ ({ target }) => setName(target.value) }
+          value={ email }
+          onChange={ ({ target }) => setEmail(target.value) }
         />
       </label>
       <label htmlFor="setPassword">
@@ -46,7 +51,7 @@ function Login() {
         <button type="submit" onClick={ signup }>
           Login
         </button>
-        <button type="submit">
+        <button type="submit" onClick={ () => history.push('/register') }>
           Cadastre-se
         </button>
       </div>
