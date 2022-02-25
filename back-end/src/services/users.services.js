@@ -1,8 +1,9 @@
 const Joi = require('joi');
-const { User } = require('../database/models');
+const { user } = require('../database/models');
 const { badRequest, conflict, notFound } = require('../utils/dictionary/statusCode');
 const errorConstructor = require('../utils/functions/errorHandlers');
 const { createToken } = require('../middlewares/auth');
+console.log('searchingUser->', user)
 
 const schemaUser = Joi.object({
   name: Joi.string().min(8).required(),
@@ -19,12 +20,12 @@ const schemaLogin = Joi.object({
 });
 
 const getUserByEmail = async (email) => {
-  const user = await User.findOne({
+  const response = await user.findOne({
     where: { email },
     attributes: { exclude: ['password'] },
     raw: true,
   });
-  return user;
+  return response;
 };
 
 const createUser = async (name, email, password, role) => {
@@ -32,7 +33,7 @@ const createUser = async (name, email, password, role) => {
   if (error) throw errorConstructor(badRequest, error.message);
   const userVerifcExist = await getUserByEmail(email);
   if (userVerifcExist) throw errorConstructor(conflict, 'Conflict');
-  const createdUserResponse = await User.create({
+  const createdUserResponse = await user.create({
     name,
     email,
     password,
@@ -45,9 +46,9 @@ const userLogin = async (email, password) => {
   const { error } = schemaLogin.validate({ email, password });
   if (error) throw errorConstructor(badRequest, error.message);
 
-  const searchingUser = await User.findOne({ where: { email }, raw: true });
+  const searchingUser = await user.findOne({ where: { email }, raw: true });
   if (!searchingUser || searchingUser.password !== password) {
-    throw errorConstructor(notFound, 'Not Fund');
+    throw errorConstructor(notFound, 'Not Found');
   }
 
   const token = createToken({ payload: searchingUser });
@@ -55,14 +56,14 @@ const userLogin = async (email, password) => {
 };
 
 const getUserAll = async () => {
-  const users = await User.findAll({ attributes: { exclude: ['password'] } });
+  const users = await user.findAll({ attributes: { exclude: ['password'] } });
   return users;
 };
 
 const getUserById = async (id) => {
-  const user = await User.findByPk(id, { attributes: { exclude: ['password'] } });
-  if (!user) throw errorConstructor(notFound, 'Not Found');
-  return user;
+  const response = await user.findByPk(id, { attributes: { exclude: ['password'] } });
+  if (!response) throw errorConstructor(notFound, 'Not Found');
+  return response;
 };
 
 module.exports = {
