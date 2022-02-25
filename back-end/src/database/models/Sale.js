@@ -1,6 +1,6 @@
 module.exports = (sequelize, DataTypes) => {
   const Sale = sequelize.define(
-    "sale",
+    "sales",
     {
       userId: DataTypes.INTEGER,
       sellerId: DataTypes.INTEGER,
@@ -10,7 +10,7 @@ module.exports = (sequelize, DataTypes) => {
       saleDate: DataTypes.DATE,
       status: DataTypes.STRING,
     },
-    { timestamps: false, underscored: true, tableName: 'sale' }
+    { timestamps: false }
   );
 
   Sale.associate = (models) => {

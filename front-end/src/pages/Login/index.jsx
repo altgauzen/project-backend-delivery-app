@@ -42,7 +42,7 @@ function Login() {
       <label htmlFor="setName">
         login:
         <input
-          data-testids="common_login__input-email"
+          data-testid="common_login__input-email"
           type="email"
           id="setName"
           value={email}
@@ -52,7 +52,7 @@ function Login() {
       <label htmlFor="setPassword">
         Senha:
         <input
-          data-testids="common_login__input-password"
+          data-testid="common_login__input-password"
           type="password"
           id="setPassword"
           value={password}
@@ -61,7 +61,7 @@ function Login() {
       </label>
       <div>
         <button
-          data-testids="common_login__button-login"
+          data-testid="common_login__button-login"
           type="submit"
           onClick={signup}
           disabled={handleButton}
@@ -69,7 +69,7 @@ function Login() {
           Login
         </button>
         <button
-          data-testids="common_login__button-register"
+          data-testid="common_login__button-register"
           type="submit"
           onClick={() => history.push("/register")}
         >

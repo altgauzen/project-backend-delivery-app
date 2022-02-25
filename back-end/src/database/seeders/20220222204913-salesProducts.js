@@ -21,9 +21,7 @@ module.exports = {
           quantity: 100,
         },
       ],
-      { timestamps: false,
-        tableName: 'saleProducts'
-      }
+      { timestamps: false }
     );
   },
 
