@@ -1,0 +1,23 @@
+.container {
+  display: flex;
+  flex-direction: column;
+}
+
+.container input {
+  border: none;
+  border-radius: 5px;
+  font-size: medium;
+  margin: 9px;
+}
+
+.container button {
+  background-color: rgba(124, 153, 95, 0.679);
+  border-radius: 5px;
+  font-size: medium;
+  width: 150px;
+}
+
+.container button:hover {
+  background-color: rgba(132, 211, 54, 0.679);
+  cursor: pointer;
+}

@@ -1,22 +1,21 @@
-const Sale = (sequelize, DataTypes) => {
+module.exports = (sequelize, DataTypes) => {
   const Sale = sequelize.define(
-    'Sales', 
+    "sale",
     {
-      total_price: DataTypes.FLOAT,
-      delivery_address: DataTypes.STRING,
-      delivery_number: DataTypes.STRING,
-      sale_date: DataTypes.DATEONLY,
+      userId: DataTypes.INTEGER,
+      sellerId: DataTypes.INTEGER,
+      totalPrice: DataTypes.FLOAT,
+      deliverAddress: DataTypes.STRING,
+      deliverNumber: DataTypes.STRING,
+      saleDate: DataTypes.DATE,
       status: DataTypes.STRING,
     },
-    { timestamps: false },
+    { timestamps: false, underscored: true, tableName: 'sale' }
   );
+
   Sale.associate = (models) => {
-    Sale.belongsTo(models.User, { foreignKey: 'user_id', as: 'Users' })
-  }
-  Sale.associate = (models) => {
-    Sale.belongsTo(models.User, { foreignKey: 'seller_id', as: 'Users' })
-  }
+    Sale.belongsTo(models.user, { as: "user", foreignkey: "user_id" });
+    Sale.belongsTo(models.user, { as: "saller", foreignkey: "seller_id" });
+  };
   return Sale;
 };
-
-module.exports = Sale;

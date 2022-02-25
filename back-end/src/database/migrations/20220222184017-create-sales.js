@@ -1,63 +1,42 @@
-'use strict';
-
 module.exports = {
   up: async (queryInterface, Sequelize) => {
-    await queryInterface.createTable('Sales', {
-      id: {
+    await queryInterface.createTable('sales',
+    { 
+      id: { 
         allowNull: false,
         autoIncrement: true,
-        primaryKey: true,
-        type: Sequelize.INTEGER
+        primaryKey: true, 
+        type: Sequelize.INTEGER 
       },
-      user_id: {
+      userId: { 
         allowNull: false,
-        primaryKey: true,
         type: Sequelize.INTEGER,
-        references: {
-          model: 'Users',
-          key: 'id',
-        }, 
-        onDelete: 'CASCADE',
+        field: 'user_id',
+        references: { model: 'users', key: 'id' },
         onUpdate: 'CASCADE',
+        onDelete: 'CASCADE' 
       },
-      seller_id: {
+      sellerId: { 
+        allowNull: false, 
+        type: Sequelize.INTEGER, 
+        field: 'seller_id',
+        references: { model: 'users', key: 'id' },
+        onUpdate: 'CASCADE', 
+        onDelete: 'CASCADE' 
+      },
+      totalPrice: { 
         allowNull: false,
-        primaryKey: true,
-        type: Sequelize.INTEGER,
-        references: {
-          model: 'Users',
-          key: 'id',
-        }, 
-        onDelete: 'CASCADE',
-        onUpdate: 'CASCADE',
-      },
-      total_price: {
         type: Sequelize.FLOAT,
-        allowNull: false,
+        field: 'total_price'
       },
-      delivery_address: {
-        type: Sequelize.STRING,
-        allowNull: false,
-      },
-      delivery_number: {
-        type: Sequelize.STRING,
-        allowNull: false,
-      },
-      sale_date: {
-        type: Sequelize.DATEONLY,
-        allowNull: false,
-        defaultValue: Sequelize.NOW
-      },
-      status: {
-        type: Sequelize.STRING,
-        allowNull: false,
-      },
+      deliveryAddress: { allowNull: false, type: Sequelize.STRING, field: 'delivery_address' },
+      deliveryNumber: { allowNull: false, type: Sequelize.STRING, field: 'delivery_number' },
+      saleDate: { allowNull: false, type: Sequelize.DATE, field: 'sale_date' },
+      status: { allowNull: false, type: Sequelize.STRING } 
     });
   },
 
-  down: async (queryInterface, Sequelize) => {
- 
-     await queryInterface.dropTable('Sales');
-     
-  }
+  down: async (queryInterface, _Sequelize) => {
+    await queryInterface.dropTable('sales');
+  },
 };
