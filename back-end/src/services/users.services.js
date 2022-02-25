@@ -47,7 +47,7 @@ const userLogin = async (email, password) => {
 
   const searchingUser = await User.findOne({ where: { email }, raw: true });
   if (!searchingUser || searchingUser.password !== password) {
-    throw errorConstructor(badRequest, 'Invalid fields');
+    throw errorConstructor(notFound, 'Not Fund');
   }
 
   const token = createToken({ payload: searchingUser });

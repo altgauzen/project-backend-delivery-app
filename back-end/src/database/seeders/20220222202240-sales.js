@@ -3,7 +3,7 @@
 module.exports = {
   up: async (queryInterface, Sequelize) => {
     await queryInterface.bulkInsert(
-      "Sales",
+      "sales",
       [
         {
           user_id: 3,
@@ -33,11 +33,14 @@ module.exports = {
           status: "AGUARDANDO PAGAMENTO",
         },
       ],
-      { timestamps: false }
+      { 
+        timestamps: false,
+        tableName: 'sales'
+      }
     );
   },
 
   down: async (queryInterface, Sequelize) => {
-    await queryInterface.bulkDelete("Sales", null, {});
+    await queryInterface.bulkDelete("sales", null, {});
   },
 };

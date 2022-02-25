@@ -3,7 +3,7 @@
 module.exports = {
   up: async (queryInterface, Sequelize) => {
     await queryInterface.bulkInsert(
-      "Products",
+      "products",
       [
         {
           name: "Antartica Pilsen 300ml",
@@ -21,11 +21,11 @@ module.exports = {
           url_image: `http://localhost/${__dirname}/public/becks_600ml.jpg`,
         },
       ],
-      { timestamps: false }
+      { timestamps: false, tableName: 'products' }
     );
   },
 
   down: async (queryInterface, Sequelize) => {
-    await queryInterface.bulkDelete("Products", null, {});
+    await queryInterface.bulkDelete("products", null, {});
   },
 };

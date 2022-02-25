@@ -6,7 +6,7 @@ const create = async (req, res, next) => {
     const { name, email, role, password } = req.body;
     const hash = password;
     const newUser = await createUser(name, email, hash, role);
-    return res.status(created).json(newUser);
+    return res.status(created).json({Registros: newUser});
   } catch (error) {
     next(error);
   }
