@@ -1,6 +1,6 @@
 import React from "react";
 
-function Header() {
+function Navbar() {
   return (
     <navbar style={ { display: 'flex', width: '100%' } }>
       <p data-testid="customer_products__element-navbar-link-products">
@@ -13,4 +13,4 @@ function Header() {
   );
 }
 
-export default Header;
+export default Navbar;
