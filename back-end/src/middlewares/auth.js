@@ -1,13 +1,18 @@
 require('dotenv').config();
 const jwt = require('jsonwebtoken');
 
+const jwtConfig = {
+  expiresIn: '1d',
+  algorithm: process.env.JWT_ALGORITHM || 'HS256',
+};
+
 const SECRET = process.env.JWT_SECRET;
 
-const createToken = (payload) => jwt.sign(payload, SECRET);
+const createToken = (payload) => jwt.sign(payload, SECRET, jwtConfig);
 
 const validate = (token) => jwt.verify(token, SECRET);
 
-const validateToken = (req, res, next) => {
+const validateToken = async (req, res, next) => {
   try {
     const { authorization } = req.headers;
     if (!authorization) return res.status(401).json({ message: 'Token not found' });
