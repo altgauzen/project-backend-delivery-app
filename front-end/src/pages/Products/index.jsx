@@ -1,7 +1,25 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
+import Navbar from '../../components/Navbar';
+import ProductsService from '../../service/product.service';
 
 function CustomerProducts() {
-  return (<div>/customer/products</div>);
+  const [products, setProducts] = useState([]);
+  useEffect(() => {
+    new ProductsService()
+      .getProductsAll(localStorage.getItem("token"))
+      .then((res) => {
+        setProducts(res);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }, []);
+  return (
+    <div>
+      <Navbar />
+      /customer/products
+    </div>
+  );
 }
 
 export default CustomerProducts;
