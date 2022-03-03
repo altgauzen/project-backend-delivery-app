@@ -12,7 +12,7 @@ class UserService {
     });
     return response;
   }
-  
+
   async register(name, email, password) {
     const response = await axios({
       method: 'post',

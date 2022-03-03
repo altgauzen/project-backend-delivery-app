@@ -6,8 +6,7 @@ const create = async (req, res, next) => {
     const { name, email, role = 'customer', password } = req.body;
     const hash = password;
     const newUser = await createUser(name, email, hash, role);
-    console.log(newUser)
-    delete newUser.dataValues.role
+    delete newUser.dataValues.role;
     return res.status(created).json({ Registros: newUser });
   } catch (error) {
     next(error);

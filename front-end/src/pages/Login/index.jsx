@@ -22,7 +22,7 @@ function Login() {
       })
       .catch((err) => {
         setError(true);
-        setMessageError(err.message)
+        setMessageError(err.message);
         console.log('ERRO -> ', err);
       });
   };
@@ -74,7 +74,12 @@ function Login() {
           Cadastre-se
         </button>
       </div>
-      {error ? <ErrorLogin datatestid="common_login__element-invalid-email" message={ messageError } /> : ''}
+      {
+        error ? <ErrorLogin
+          datatestid="common_login__element-invalid-email"
+          message={ messageError }
+        /> : ''
+      }
     </div>
   );
 }

@@ -19,8 +19,7 @@ function Register() {
   const signup = () => {
     new UserService()
       .register(name, email, password)
-      .then((res) => {
-        const a = res.data;
+      .then(() => {
         history.push('/customer/products');
       })
       .catch((err) => {
@@ -66,16 +65,15 @@ function Register() {
     return true;
   };
 
-
   const handleButtonRegister = (e) => {
-    e.preventDefault()
+    e.preventDefault();
     signup();
   };
 
   return (
-    <div className='container'>
+    <div className="container">
       <h1>Cadastro</h1>
-      <form action="" method="post" className='formContainer'>
+      <form action="" method="post" className="formContainer">
         <label htmlFor="name">
           Nome:
           <input
@@ -110,13 +108,18 @@ function Register() {
         </label>
         <button
           type="submit"
-          data-testid='common_register__button-register'
+          data-testid="common_register__button-register"
           disabled={ submit() }
-          onClick={handleButtonRegister}
+          onClick={ handleButtonRegister }
         >
           CADASTRAR
         </button>
-        {error ? <ErrorLogin datatestid="common_register__element-invalid_register" message={ messageError } /> : ''}
+        {
+          error ? <ErrorLogin
+            datatestid="common_register__element-invalid_register"
+            message={ messageError }
+          /> : ''
+        }
       </form>
     </div>
   );
