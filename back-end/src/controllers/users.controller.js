@@ -3,9 +3,11 @@ const { success, created } = require('../utils/dictionary/statusCode');
 
 const create = async (req, res, next) => {
   try {
-    const { name, email, role, password } = req.body;
+    const { name, email, role = 'customer', password } = req.body;
     const hash = password;
     const newUser = await createUser(name, email, hash, role);
+    console.log(newUser)
+    delete newUser.dataValues.role
     return res.status(created).json({ Registros: newUser });
   } catch (error) {
     next(error);

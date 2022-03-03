@@ -1,7 +1,7 @@
 import React from 'react';
 
-function errorLogin() {
-  return (<div data-testid="common_login__element-invalid-email">errorLogin</div>);
+function errorLogin({ datatestid, message }) {
+  return (<div data-testid={datatestid}>{message}</div>);
 }
 
 export default errorLogin;
