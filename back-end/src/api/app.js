@@ -2,9 +2,9 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const cors = require('cors');
 // const http = require('http').createServer();
+const path = require('path');
 const router = require('../router');
 const error = require('../middlewares/errorHandlers');
-const path = require('path');
 
 const app = express();
 
