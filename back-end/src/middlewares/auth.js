@@ -6,7 +6,7 @@ const jwtConfig = {
   algorithm: process.env.JWT_ALGORITHM || 'HS256',
 };
 
-const SECRET = process.env.JWT_SECRET;
+const SECRET = process.env.JWT_SECRET || 'secret_key';
 
 const createToken = (payload) => jwt.sign(payload, SECRET, jwtConfig);
 
@@ -17,7 +17,7 @@ const validateToken = async (req, res, next) => {
     const { authorization } = req.headers;
     if (!authorization) return res.status(401).json({ message: 'Token not found' });
     const Payload = validate(authorization);
-    req.user = Payload.payload.id;
+    req.user = Payload.payload;
     next();
   } catch (error) {
     res.status(401).json({ message: 'Expired or invalid token' });
