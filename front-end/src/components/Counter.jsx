@@ -1,13 +1,18 @@
-import React, { useState } from 'react';
+import React, { useContext } from 'react';
 import PropTypes from 'prop-types';
+import contextValue from '../context/context';
 
 function Counter({ id }) {
-  const [counter, setCounter] = useState(0);
+  const { counter, setCounter } = useContext(contextValue);
   const incrementClick = () => {
     setCounter(counter + 1);
   };
   const decrementClick = () => {
-    setCounter(counter - 1);
+    if (counter === 0) {
+      setCounter(counter)
+    } else {
+      setCounter(counter - 1);
+    }
   };
   return (
     <div>

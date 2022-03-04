@@ -1,9 +1,13 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { useHistory } from 'react-router-dom';
 
 function Navbar({ user }) {
+  const history = useHistory();
+
   const logout = () => {
     localStorage.clear();
+    history.push('/login')
   };
 
   return (
@@ -17,15 +21,13 @@ function Navbar({ user }) {
       >
         {user.name}
       </div>
-      <div
-        role="button"
-        tabIndex={ user.id }
+      <button
+        type="button"
         data-testid="customer_products__element-navbar-link-logout"
-        onKeyDown={ () => logout }
-        onClick={ () => logout }
+        onClick={ logout }
       >
         SAIR
-      </div>
+      </button>
     </navbar>
   );
 }
@@ -34,6 +36,10 @@ Navbar.propTypes = {
   user: PropTypes.shape({
     name: PropTypes.string,
     id: PropTypes.number,
+    email: PropTypes.string,
+    password: PropTypes.string,
+    role: PropTypes.string,
+    token: PropTypes.string
   }).isRequired,
 };
 

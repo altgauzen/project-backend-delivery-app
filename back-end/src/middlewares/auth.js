@@ -6,7 +6,7 @@ const jwtConfig = {
   algorithm: process.env.JWT_ALGORITHM || 'HS256',
 };
 
-const SECRET = process.env.JWT_SECRET;
+const SECRET = process.env.JWT_SECRET || 'secret_key';
 
 const createToken = (payload) => jwt.sign(payload, SECRET, jwtConfig);
 

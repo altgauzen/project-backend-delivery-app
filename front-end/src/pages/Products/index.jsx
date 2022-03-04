@@ -1,20 +1,20 @@
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect } from 'react';
 import Counter from '../../components/Counter';
 import Navbar from '../../components/Navbar';
 import ProductsService from '../../service/product.service';
-// import './costumer'
+import contextValue from '../../context/context';
+import './products.css'
+
+
 function CustomerProducts() {
-  const [products, setProducts] = useState([]);
-  const [user, setUser] = useState('');
+  const { products, setProducts, user, setUser } = useContext(contextValue);
 
   useEffect(() => {
     new ProductsService()
       .getProductsAll(localStorage.getItem('token'))
       .then(({ data }) => {
-        const { name, email, role } = data;
-        localStorage.setItem('name', name);
-        localStorage.setItem('email', email);
-        localStorage.setItem('role', role);
+        console.log(data);
+        localStorage.setItem('user', JSON.stringify(data.user));
         setUser(data.user);
         setProducts(data.products);
       })
@@ -24,15 +24,15 @@ function CustomerProducts() {
   }, []);
 
   return (
-    <div>
+    <div className="containerProducts">
       <Navbar user={ user } />
-      <section className="containerProducts">
+      <section className="cardsProducts">
         {products ? products.map(({ urlImage, id, name, price }) => (
           <div key={ `${name}${id}` }>
             <h1
               data-testid={ `customer_products__element-card-price-${id}` }
             >
-              { price }
+              { String(price).replace('.', ',') }
             </h1>
             <img
               data-testid={ `customer_products__img-card-bg-image-${id}` }
