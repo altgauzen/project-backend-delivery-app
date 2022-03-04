@@ -20,7 +20,7 @@ function CustomerProducts() {
       .catch((err) => {
         console.log(err);
       });
-  }, []);
+  }, [setProducts, setUser]);
 
   return (
     <div className="containerProducts">
