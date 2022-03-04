@@ -8,7 +8,7 @@ function Navbar({ user }) {
 
   const logout = () => {
     localStorage.clear();
-    history.push('/login')
+    history.push('/login');
   };
 
   return (
@@ -33,7 +33,6 @@ function Navbar({ user }) {
   );
 }
 
-
 Navbar.propTypes = {
   user: PropTypes.shape({
     name: PropTypes.string,
@@ -41,7 +40,7 @@ Navbar.propTypes = {
     email: PropTypes.string,
     password: PropTypes.string,
     role: PropTypes.string,
-    token: PropTypes.string
+    token: PropTypes.string,
   }).isRequired,
 };
 

@@ -9,7 +9,7 @@ function Counter({ id }) {
   };
   const decrementClick = () => {
     if (counter === 0) {
-      setCounter(counter)
+      setCounter(counter);
     } else {
       setCounter(counter - 1);
     }

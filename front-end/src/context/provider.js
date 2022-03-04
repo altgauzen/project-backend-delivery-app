@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types';
-import React, { useState } from 'react'
+import React, { useState } from 'react';
 import context from './context';
 
 function Provider({ children }) {
@@ -13,14 +13,14 @@ function Provider({ children }) {
     user,
     setUser,
     counter,
-    setCounter
-  }
-  
+    setCounter,
+  };
+
   return (
     <context.Provider value={ contextValue }>
       {children}
     </context.Provider>
-  )
+  );
 }
 
 Provider.propTypes = {
