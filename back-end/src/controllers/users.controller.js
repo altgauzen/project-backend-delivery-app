@@ -1,4 +1,4 @@
-const { createUser, userLogin, getUserAll } = require('../services/users.services');
+const { createUser, userLogin, getUserAll } = require('../services/users.service');
 const { success, created } = require('../utils/dictionary/statusCode');
 
 const create = async (req, res, next) => {

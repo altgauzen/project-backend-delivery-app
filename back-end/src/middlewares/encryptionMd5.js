@@ -1,14 +1,16 @@
 const md5 = require('md5');
 
-module.exports = async (req, res, next) => {
+const encryption = async (req, res, next) => {
   try {
     const { password } = req.body;
 
-    const encryption = md5(password);
+    const hash = md5(password);
 
-    req.body.password = encryption;
+    req.body.password = hash;
     next();
   } catch (error) {
     next(error);
   }
 };
+
+module.exports = encryption;
