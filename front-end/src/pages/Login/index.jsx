@@ -9,6 +9,7 @@ function Login() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState(false);
+  const [messageError, setMessageError] = useState('');
   const history = useHistory();
 
   const signup = () => {
@@ -21,6 +22,7 @@ function Login() {
       })
       .catch((err) => {
         setError(true);
+        setMessageError(err.message);
         console.log('ERRO -> ', err);
       });
   };
@@ -72,7 +74,12 @@ function Login() {
           Cadastre-se
         </button>
       </div>
-      {error ? <ErrorLogin /> : ''}
+      {
+        error ? <ErrorLogin
+          datatestid="common_login__element-invalid-email"
+          message={ messageError }
+        /> : ''
+      }
     </div>
   );
 }
