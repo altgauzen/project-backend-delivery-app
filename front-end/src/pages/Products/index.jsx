@@ -3,8 +3,7 @@ import Counter from '../../components/Counter';
 import Navbar from '../../components/Navbar';
 import ProductsService from '../../service/product.service';
 import contextValue from '../../context/context';
-import './products.css'
-
+import './products.css';
 
 function CustomerProducts() {
   const { products, setProducts, user, setUser } = useContext(contextValue);

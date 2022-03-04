@@ -7,7 +7,7 @@ function Navbar({ user }) {
 
   const logout = () => {
     localStorage.clear();
-    history.push('/login')
+    history.push('/login');
   };
 
   return (
@@ -39,7 +39,7 @@ Navbar.propTypes = {
     email: PropTypes.string,
     password: PropTypes.string,
     role: PropTypes.string,
-    token: PropTypes.string
+    token: PropTypes.string,
   }).isRequired,
 };
 
