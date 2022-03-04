@@ -5,6 +5,7 @@ const cors = require('cors');
 const router = require('../router');
 const error = require('../middlewares/errorHandlers');
 const path = require('path');
+
 const app = express();
 
 // const io = require('socket.io')(http, {
@@ -13,6 +14,7 @@ const app = express();
 //     methods: ['GET', 'POST', 'PUT', 'DELETE'],
 //   },
 // });
+
 app.use(express.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cors());

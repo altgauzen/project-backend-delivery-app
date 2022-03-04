@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import PropTypes from 'prop-types';
 
 function Counter({ id }) {
   const [counter, setCounter] = useState(0);
@@ -11,17 +12,30 @@ function Counter({ id }) {
   return (
     <div>
       <button
-        data-testid={`customer_products__button-card-add-item-${ id }`}
-        onClick={decrementClick}>
+        type="button"
+        data-testid={ `customer_products__button-card-add-item-${id}` }
+        onClick={ decrementClick }
+      >
         -
       </button>
       <input
         type="number"
-        data-testid={`customer_products__input-card-quantity-${ id }`}
-        value={counter} />
-      <button data-testid={`customer_products__button-card-rm-item-${ id }`} onClick={incrementClick}>+</button>
+        data-testid={ `customer_products__input-card-quantity-${id}` }
+        value={ counter }
+      />
+      <button
+        type="button"
+        data-testid={ `customer_products__button-card-rm-item-${id}` }
+        onClick={ incrementClick }
+      >
+        +
+      </button>
     </div>
   );
 }
+
+Counter.propTypes = {
+  id: PropTypes.number.isRequired,
+};
 
 export default Counter;

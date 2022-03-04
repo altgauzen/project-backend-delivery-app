@@ -1,4 +1,4 @@
-const User = require('../services/users.services');
+const User = require('../services/users.service');
 
 module.exports = (io) => io.on('connection', (socket) => {
   socket.on('login', async (email, password) => {
