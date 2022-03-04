@@ -2,7 +2,8 @@ const express = require('express');
 const userController = require('../controllers/users.controller');
 const productController = require('../controllers/products.controller');
 const encryption = require('../middlewares/encryptionMd5');
-const { validateToken } = require('../middlewares/auth')
+const { validateToken } = require('../middlewares/auth');
+
 const router = express.Router();
 
 router.post('/register',  encryption, userController.create);

@@ -1,10 +1,10 @@
-import axios from "axios";
+import axios from 'axios';
 
 class UserService {
   async login(email, password) {
     const response = await axios({
-      method: "post",
-      url: "http://localhost:3001/login",
+      method: 'post',
+      url: 'http://localhost:3001/login',
       data: {
         email,
         password,
