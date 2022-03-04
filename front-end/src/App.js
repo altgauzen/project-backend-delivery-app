@@ -6,7 +6,6 @@ import Login from './pages/Login/index';
 import Register from './pages/Register/index';
 import Provider from './context/provider';
 
-
 function App() {
   return (
     <div className="App">
