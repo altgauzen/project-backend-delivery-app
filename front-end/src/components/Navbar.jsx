@@ -12,7 +12,7 @@ function Navbar({ user }) {
   };
 
   return (
-    <navbar style={ { display: 'flex', width: '100%' } }>
+    <nav style={ { display: 'flex', width: '100%' } }>
       <div data-testid="customer_products__element-navbar-link-products">
         PRODUTOS
       </div>
@@ -29,19 +29,12 @@ function Navbar({ user }) {
       >
         SAIR
       </button>
-    </navbar>
+    </nav>
   );
 }
 
 Navbar.propTypes = {
-  user: PropTypes.shape({
-    name: PropTypes.string,
-    id: PropTypes.number,
-    email: PropTypes.string,
-    password: PropTypes.string,
-    role: PropTypes.string,
-    token: PropTypes.string,
-  }).isRequired,
+  user: PropTypes.any.isRequired,
 };
 
 export default Navbar;

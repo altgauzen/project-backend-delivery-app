@@ -4,10 +4,10 @@ import Navbar from '../../components/Navbar';
 import ProductsService from '../../service/product.service';
 import contextValue from '../../context/context';
 import './products.css';
-import Utils from '../../utils/functions/index.js';
+import Utils from '../../utils/functions/index';
 
 function CustomerProducts() {
-  const { products, setProducts, user, setUser } = useContext(contextValue);
+  const { products, setProducts, user, setUser, cart } = useContext(contextValue);
 
   useEffect(() => {
     new ProductsService()
@@ -26,9 +26,13 @@ function CustomerProducts() {
     <div className="containerProducts">
       <Navbar user={ user } />
       <section className="cardsProducts">
+        <div data-testid="customer_products__checkout-bottom-value">{
+          cart.reduce((previousTotal, currentTotal) => parseFloat(previousTotal.subTotal
+            .replace(',', '.')) + parseFloat(currentTotal.subTotal
+              .replace(',', '.')), 0)}</div>
         {products ? products.map((product) => (
-          <Product product={ product } />
-        )) : '' }
+          <Product key={ `${product.id}-${product.name}` } product={ product } />
+        )) : ''}
       </section>
     </div>
   );

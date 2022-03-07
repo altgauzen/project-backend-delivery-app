@@ -1,77 +1,62 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext, useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import contextValue from '../context/context';
-import Utils from '../utils/functions/index.js';
+import Utils from '../utils/functions/index';
 
 function Product({ product }) {
   const { cart, setCart } = useContext(contextValue);
   const [quantity, setQuantity] = useState(0);
   const { urlImage, id, name, price } = product;
 
-  const incrementClick = () => {
+  const setCartManual = () => {
     const item = cart.filter((car) => id === car.productId);
-
-    if (!item.length) {
-      setQuantity(1);
+    const unitPrice = parseFloat(price);
+    if (!item.length && quantity !== 0) {
+      const subTotal = price * quantity;
       setCart([...cart, {
         productId: id,
         name,
-        quantity: 1,
-        unitPrice: price,
-        subTotal: price
+        quantity,
+        unitPrice: unitPrice.toFixed(2).replace(/\./, ','),
+        subTotal: subTotal.toFixed(2).replace(/\./, ','),
       }]);
-      Utils.setLocalStorage("carrinho", [...cart, {
+      Utils.setLocalStorage('carrinho', [...cart, {
         productId: id,
         name,
-        quantity: 1,
-        unitPrice: price,
-        subTotal: price
+        quantity,
+        unitPrice: unitPrice.toFixed(2).replace(/\./, ','),
+        subTotal: subTotal.toFixed(2).replace(/\./, ','),
       }]);
     } else {
-      const newCarrt = cart.map(car => {
+      const newCarrt = cart.map((car) => {
         if (car.productId === item[0].productId) {
-          car.quantity++;
-          car.subTotal = car.quantity * car.unitPrice;
-          setQuantity(car.quantity);
+          const subTotal = price * quantity;
+          car.quantity = quantity;
+          car.subTotal = subTotal.toFixed(2).replace(/\./, ',');
         }
         return car;
-      })
-      setCart(newCarrt);
-    }
-    Utils.setLocalStorage('carrinho', cart);
-  };
-
-   const decrementClick = () => {
-    const item = cart.filter((car) => id === car.productId);
-      const newCarrt = cart.map(car => {
-        if (car.productId === item[0].productId && car.quantity !== 0) {
-          car.quantity--;
-          car.subTotal = car.quantity * car.unitPrice;
-          setQuantity(car.quantity);
-        }
-        return car;
-      })
+      });
       setCart(newCarrt);
       Utils.setLocalStorage('carrinho', cart);
+    }
   };
 
-  const setQuantityManual = ({ target }) => {
-    const item = cart.filter((car) => id === car.productId);
-    setQuantity(Number(target.value));
-    const newCarrt = cart.map(car => {
-      if (car.productId === item[0].productId) {
-        car.quantity= quantity;
-        car.subTotal = quantity * car.unitPrice;
-        setQuantity(car.quantity);
-      }
-      return car;
-    })
-    setCart(newCarrt);
-  }
+  useEffect(() => {
+    setCartManual();
+  }, [setQuantity, quantity, setCartManual]);
 
+  const controlQuantity = async ({ target: { innerText, value } }) => {
+    if (innerText === '+') {
+      setQuantity(quantity + 1);
+    } else if (innerText === '-' && quantity !== 0) {
+      setQuantity(quantity - 1);
+    } else if (value !== '0') {
+      setQuantity(Number(value));
+    }
+  };
 
   return (
-    <div key={ `${name}${id}` }>
+    <div>
       <h1
         data-testid={ `customer_products__element-card-price-${id}` }
       >
@@ -91,20 +76,20 @@ function Product({ product }) {
         <button
           type="button"
           data-testid={ `customer_products__button-card-add-item-${id}` }
-          onClick={ decrementClick }
+          onClick={ (e) => controlQuantity(e) }
         >
           -
         </button>
         <input
-          type="number"
-          data-testid={`customer_products__input-card-quantity-${id}`}
-          onChange={setQuantityManual}
+          type="text"
+          data-testid={ `customer_products__input-card-quantity-${id}` }
+          onChange={ (e) => controlQuantity(e) }
           value={ quantity }
         />
         <button
           type="button"
           data-testid={ `customer_products__button-card-rm-item-${id}` }
-          onClick={ incrementClick }
+          onClick={ (e) => controlQuantity(e) }
         >
           +
         </button>
@@ -114,7 +99,12 @@ function Product({ product }) {
 }
 
 Product.propTypes = {
-  id: PropTypes.number.isRequired,
+  product: PropTypes.shape({
+    id: PropTypes.number,
+    name: PropTypes.string,
+    urlImage: PropTypes.string,
+    price: PropTypes.string,
+  }).isRequired,
 };
 
 export default Product;
