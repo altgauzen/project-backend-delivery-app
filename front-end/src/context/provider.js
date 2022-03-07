@@ -5,15 +5,15 @@ import context from './context';
 function Provider({ children }) {
   const [products, setProducts] = useState([]);
   const [user, setUser] = useState('');
-  const [counter, setCounter] = useState(0);
+  const [cart, setCart] = useState([]);
 
   const contextValue = {
     products,
     setProducts,
     user,
     setUser,
-    counter,
-    setCounter,
+    cart,
+    setCart,
   };
 
   return (
