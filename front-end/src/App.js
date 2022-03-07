@@ -2,6 +2,7 @@ import React from 'react';
 import { Switch, Route, Redirect } from 'react-router-dom';
 import './App.css';
 import CustomerProducts from './pages/CustomerProducts';
+import CustomerCheckout from './pages/CustomerCheckout';
 import Login from './pages/Login/index';
 import Register from './pages/Register/index';
 
@@ -18,6 +19,7 @@ function App() {
         <Route path="/login" component={ Login } />
         <Route path="/register" component={ Register } />
         <Route path="/customer/products" component={ CustomerProducts } />
+        <Route path="/customer/checkout" component={ CustomerCheckout } />
       </Switch>
       {/* </Provider> */}
     </div>
