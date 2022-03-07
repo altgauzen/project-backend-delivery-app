@@ -1,0 +1,17 @@
+/* teste */
+.containerProducts {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  width: 100vw;
+}
+
+.cardsProducts {
+  display: flex;
+  flex-direction: row;
+  width: 400px;
+}
+
+.cardsProducts img {
+  width: 50%;
+}

@@ -1,1 +1,10 @@
 /* // teste */
+
+/* .container {
+  width: 80%;
+} */
+
+.formContainer {
+  display: flex;
+  flex-direction: column;
+}

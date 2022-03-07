@@ -1,22 +1,30 @@
-// import PropTypes from 'prop-types';
-// import React, {
-//   useState
-// } from 'react'
-// import recipeContext from './recipeContext';
+import PropTypes from 'prop-types';
+import React, { useState } from 'react';
+import context from './context';
 
-// function Provider({ children }) {
+function Provider({ children }) {
+  const [products, setProducts] = useState([]);
+  const [user, setUser] = useState('');
+  const [counter, setCounter] = useState(0);
 
-//   const obj = {
-//   }
-//   return (
-//     <recipeContext.Provider value={ obj }>
-//       {children}
-//     </recipeContext.Provider>
-//   )
-// }
+  const contextValue = {
+    products,
+    setProducts,
+    user,
+    setUser,
+    counter,
+    setCounter,
+  };
 
-// Provider.propTypes = {
-//   children: PropTypes.node.isRequired,
-// };
+  return (
+    <context.Provider value={ contextValue }>
+      {children}
+    </context.Provider>
+  );
+}
 
-// export default Provider
+Provider.propTypes = {
+  children: PropTypes.node.isRequired,
+};
+
+export default Provider;
