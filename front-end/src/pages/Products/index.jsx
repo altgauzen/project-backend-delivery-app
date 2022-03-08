@@ -26,10 +26,13 @@ function CustomerProducts() {
     <div className="containerProducts">
       <Navbar user={ user } />
       <section className="cardsProducts">
-        <div data-testid="customer_products__checkout-bottom-value">{
-          cart.reduce((previousTotal, currentTotal) => parseFloat(previousTotal.subTotal
-            .replace(',', '.')) + parseFloat(currentTotal.subTotal
-              .replace(',', '.')), 0)}</div>
+        <div data-testid="customer_products__checkout-bottom-value">
+          {
+            cart.reduce((previousTotal, currentTotal) => parseFloat(previousTotal.subTotal
+              .replace(',', '.')) + parseFloat(currentTotal.subTotal
+              .replace(',', '.')), 0)
+          }
+        </div>
         {products ? products.map((product) => (
           <Product key={ `${product.id}-${product.name}` } product={ product } />
         )) : ''}

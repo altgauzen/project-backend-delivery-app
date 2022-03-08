@@ -34,7 +34,9 @@ function Navbar({ user }) {
 }
 
 Navbar.propTypes = {
-  user: PropTypes.any.isRequired,
+  user: PropTypes.shape({
+    name: PropTypes.string,
+  }).isRequired,
 };
 
 export default Navbar;
