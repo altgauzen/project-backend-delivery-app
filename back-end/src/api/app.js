@@ -4,7 +4,7 @@ const cors = require('cors');
 const { createServer } = require('http');
 const path = require('path');
 
-const changeStatusOrder = require('../socket/changeStatusOrder');
+
 const error = require('../middlewares/errorHandlers');
 
 const app = express();
@@ -28,6 +28,7 @@ app.use(express.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cors());
 
+const changeStatusOrder = require('../socket/changeStatusOrder');
 changeStatusOrder(io);
 
 app.use(router);
