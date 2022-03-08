@@ -9,7 +9,8 @@
 .cardsProducts {
   display: flex;
   flex-direction: row;
-  width: 400px;
+  flex-wrap: wrap;
+  width: 100%;
 }
 
 .cardsProducts img {

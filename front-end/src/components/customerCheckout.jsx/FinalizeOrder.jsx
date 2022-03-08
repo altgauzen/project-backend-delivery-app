@@ -1,9 +1,15 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import './FinalizeOrder.css';
-
-import mockProducts from '../../utils/mock/mockProducts';
+import contextValue from '../../context/context';
 
 export default function FinalizeOrder() {
+  const { totalPrice } = useContext(contextValue);
+
+  const handlerRow = ({ target }, index) => {
+    const newCart = cart.filter((item) => item !== cart[index]);
+    setCart(newCart);
+  };
+
   return (
     <div className="finalize-order">
       <table className="table">
@@ -16,33 +22,33 @@ export default function FinalizeOrder() {
         </thead>
         <tbody className="titles">
           {
-            mockProducts.map((row, index) => (
+            cart.map((row, index) => (
               <tr key={ index }>
                 <td
                   data-testid={
                     `customer_checkout__element-order-table-item-number-${index}`
                   }
                 >
-                  { row.item }
+                  { row.productId }
                 </td>
                 <td
                   data-testid={ `customer_checkout__element-order-table-name-${index}` }
                 >
-                  { row.descricao }
+                  { row.name }
                 </td>
                 <td
                   data-testid={
                     `customer_checkout__element-order-table-quantity-${index}`
                   }
                 >
-                  { `R$ ${row.quantidade}` }
+                  { `R$ ${row.quantity}` }
                 </td>
                 <td
                   data-testid={
                     `customer_checkout__element-order-table-unit-price-${index}`
                   }
                 >
-                  { `R$ ${row.valorUnitario}` }
+                  { `R$ ${row.unitPrice}` }
                 </td>
                 <td
                   data-testid={
@@ -54,6 +60,7 @@ export default function FinalizeOrder() {
                 <button
                   type="button"
                   data-testid={ `customer_checkout__element-order-table-remove-${index}` }
+                  onClick={ (event) => handlerRow(event, index) }
                 >
                   Remover
                 </button>
@@ -66,7 +73,7 @@ export default function FinalizeOrder() {
         type="button"
         data-testid="customer_checkout__element-order-total-price"
       >
-        Total R$ 28,50
+        {`Total R$ ${totalPrice}`}
       </button>
     </div>
   );

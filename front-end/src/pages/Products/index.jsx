@@ -1,13 +1,24 @@
+import { useHistory } from 'react-router-dom';
 import React, { useContext, useEffect } from 'react';
-import Product from '../../components/Product';
-import Navbar from '../../components/Navbar';
+import Product from '../../components/Products';
+import Navbar from '../../components/Header/Navbar';
 import ProductsService from '../../service/product.service';
 import contextValue from '../../context/context';
 import './products.css';
 import Utils from '../../utils/functions/index';
 
 function CustomerProducts() {
-  const { products, setProducts, user, setUser, cart } = useContext(contextValue);
+  const {
+    products,
+    setProducts,
+    user,
+    setUser,
+    cart,
+    totalPrice,
+    setCart,
+    setTotalPrice,
+  } = useContext(contextValue);
+  const history = useHistory();
 
   useEffect(() => {
     new ProductsService()
@@ -16,23 +27,48 @@ function CustomerProducts() {
         Utils.setLocalStorage('user', data.user);
         setUser(data.user);
         setProducts(data.products);
+        setCart(data.products.map(({ id, name, price }) => ({
+          productId: id,
+          name,
+          quantity: 0,
+          unitPrice: Utils.putMaskNumber(Number(price)),
+          subTotal: Utils.putMaskNumber(0 * Number(price)),
+        })));
       })
       .catch((err) => {
         console.log(err);
       });
-  }, [setProducts, setUser]);
+  }, [setUser, setProducts, setCart]);
 
+  const totalPriceState = () => {
+    let total = 0;
+    cart.forEach((value) => { total += Utils.removeMaskNumber(value.subTotal); });
+    setTotalPrice(Utils.putMaskNumber(total));
+  };
+
+  const redirectCheckout = (e) => {
+    e.preventDefault();
+    history.push('/customer/checkout');
+  };
   return (
     <div className="containerProducts">
       <Navbar user={ user } />
       <section className="cardsProducts">
-        <div data-testid="customer_products__checkout-bottom-value">{
-          cart.reduce((previousTotal, currentTotal) => parseFloat(previousTotal.subTotal
-            .replace(',', '.')) + parseFloat(currentTotal.subTotal
-              .replace(',', '.')), 0)}</div>
         {products ? products.map((product) => (
-          <Product key={ `${product.id}-${product.name}` } product={ product } />
+          <Product
+            setTotalPrice={ totalPriceState }
+            key={ `${product.id}-${product.name}` }
+            product={ product }
+          />
         )) : ''}
+        {Utils.removeMaskNumber(totalPrice) > 0 ? (
+        <button
+          type="button"
+          onClick={ redirectCheckout }
+          data-testid="customer_products__checkout-bottom-value"
+        >
+          {`${totalPrice}`}
+        </button>) : ''}
       </section>
     </div>
   );

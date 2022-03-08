@@ -2,6 +2,7 @@ import React from 'react';
 
 import PropTypes from 'prop-types';
 import { useHistory } from 'react-router-dom';
+import './navbar.css'
 
 function Navbar({ user }) {
   const history = useHistory();
@@ -12,7 +13,7 @@ function Navbar({ user }) {
   };
 
   return (
-    <nav style={ { display: 'flex', width: '100%' } }>
+    <header className='containerHeader'>
       <div data-testid="customer_products__element-navbar-link-products">
         PRODUTOS
       </div>
@@ -29,12 +30,14 @@ function Navbar({ user }) {
       >
         SAIR
       </button>
-    </nav>
+    </header>
   );
 }
 
 Navbar.propTypes = {
-  user: PropTypes.any.isRequired,
+  user: PropTypes.objectOf({
+    name: PropTypes.string,
+  }).isRequired,
 };
 
 export default Navbar;

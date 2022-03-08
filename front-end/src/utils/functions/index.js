@@ -2,4 +2,8 @@ const setLocalStorage = (key, data) => {
   localStorage.setItem(key, JSON.stringify(data));
 };
 
-export default { setLocalStorage };
+const putMaskNumber = (num) => num.toFixed(2).replace(/\./, ',');
+
+const removeMaskNumber = (num) => Number(num.replace(',', '.'));
+
+export default { setLocalStorage, putMaskNumber, removeMaskNumber };

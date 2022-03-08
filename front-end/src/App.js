@@ -6,6 +6,7 @@ import Products from './pages/Products';
 import Login from './pages/Login/index';
 import Register from './pages/Register/index';
 import Provider from './context/provider';
+import Checkout from './pages/CustomerCheckout/index';
 
 function App() {
   return (
@@ -18,6 +19,7 @@ function App() {
           <Route path="/login" component={ Login } />
           <Route path="/register" component={ Register } />
           <Route path="/customer/products" component={ Products } />
+          <Route path="/customer/checkout" component={ Checkout } />
         </Switch>
       </Provider>
     </div>
