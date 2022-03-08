@@ -4,9 +4,6 @@ const cors = require('cors');
 const { createServer } = require('http');
 const path = require('path');
 
-
-const error = require('../middlewares/errorHandlers');
-
 const app = express();
 
 const EXPRESS_PORT = 3000;
@@ -33,5 +30,8 @@ changeStatusOrder(io);
 
 app.use(router);
 
+const error = require('../middlewares/errorHandlers');
+
 app.use(error);
+
 module.exports = http;
