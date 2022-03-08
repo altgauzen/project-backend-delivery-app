@@ -5,6 +5,7 @@ import './App.css';
 import Products from './pages/Products';
 import Login from './pages/Login/index';
 import Register from './pages/Register/index';
+import Orders from './pages/Orders/index';
 import Provider from './context/provider';
 
 function App() {
@@ -19,6 +20,7 @@ function App() {
           <Route path="/login" component={ Login } />
           <Route path="/register" component={ Register } />
           <Route path="/customer/products" component={ Products } />
+          <Route path="/customer/Orders" component={ Orders } />
         </Switch>
       </Provider>
     </div>

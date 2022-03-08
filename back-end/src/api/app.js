@@ -6,12 +6,12 @@ const path = require('path');
 
 const app = express();
 
-const EXPRESS_PORT = 3000;
+const FRONT_PORT = 3000;
 
 const http = createServer(app);
 const io = require('socket.io')(http, {
   cors: {
-    origin: `http://localhost:${EXPRESS_PORT}`, 
+    origin: `http://localhost:${FRONT_PORT}`, 
     methods: ['GET', 'POST', 'PUT', 'DELETE'],
   },
 });

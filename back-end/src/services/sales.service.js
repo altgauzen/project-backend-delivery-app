@@ -1,8 +1,13 @@
-const { Sale } = require('../database/models');
+const { sales } = require('../database/models');
 
 const updateSaleStatusOrder = async ({ saleId, status }) => {
-  const response = await Sale.update({ status }, { where: { id: saleId } });
+  const response = await sales.update({ status }, { where: { id: saleId } });
   return response;
 };
 
-module.exports = { updateSaleStatusOrder };
+const getAllSalesService = async () => {
+  const response = await sales.findAll({ raw: true });
+  return response;
+};
+
+module.exports = { updateSaleStatusOrder, getAllSalesService };
