@@ -1,5 +1,5 @@
 import { useHistory } from 'react-router-dom';
-import React, { useContext, useEffect } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import Product from '../../components/Products';
 import Navbar from '../../components/Header/Navbar';
 import ProductsService from '../../service/product.service';
@@ -18,6 +18,7 @@ function CustomerProducts() {
     setCart,
     setTotalPrice,
   } = useContext(contextValue);
+  const [disabled, setDisabled] = useState(true);
   const history = useHistory();
 
   useEffect(() => {
@@ -44,6 +45,7 @@ function CustomerProducts() {
     let total = 0;
     cart.forEach((value) => { total += Utils.removeMaskNumber(value.subTotal); });
     setTotalPrice(Utils.putMaskNumber(total));
+    if (Utils.removeMaskNumber(totalPrice) === 0) setDisabled(!disabled);
   };
 
   const redirectCheckout = (e) => {
@@ -61,15 +63,15 @@ function CustomerProducts() {
             product={ product }
           />
         )) : ''}
-        {Utils.removeMaskNumber(totalPrice) > 0 ? (
-          <button
+        <button
           className='cartShop'
           type="button"
           onClick={ redirectCheckout }
-          data-testid="customer_products__checkout-bottom-value"
+          data-testid="customer_products__button-cart"
+          disabled={ disabled }
         >
-          {`${totalPrice}`}
-        </button>) : ''}
+          Ver Carrinho: R$ <span data-testid="customer_products__checkout-bottom-value">{`${totalPrice}`}</span>
+        </button>
       </section>
     </div>
   );

@@ -50,8 +50,8 @@ function Product({ product, setTotalPrice }) {
       <div className='containerDescription'>
         <h1
           data-testid={ `customer_products__element-card-price-${id}` }
-        >
-          { String(price).replace('.', ',') }
+        > 
+          {`R$ ${ Utils.putMaskNumber(Number(price)) }`}
         </h1>
         <img
           data-testid={ `customer_products__img-card-bg-image-${id}` }
@@ -73,7 +73,7 @@ function Product({ product, setTotalPrice }) {
           -
         </button>
         <input
-          type="text"
+          type="number"
           data-testid={ `customer_products__input-card-quantity-${id}` }
           onChange={ (e) => controlQuantity(e) }
           value={ quantity }

@@ -3,7 +3,7 @@ import './FinalizeOrder.css';
 import contextValue from '../../context/context';
 
 export default function FinalizeOrder() {
-  const { totalPrice } = useContext(contextValue);
+  const { totalPrice, cart } = useContext(contextValue);
 
   const handlerRow = ({ target }, index) => {
     const newCart = cart.filter((item) => item !== cart[index]);
