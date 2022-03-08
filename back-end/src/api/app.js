@@ -4,7 +4,6 @@ const cors = require('cors');
 const { createServer } = require('http');
 const path = require('path');
 
-const router = require('../router');
 const changeStatusOrder = require('../socket/changeStatusOrder');
 const error = require('../middlewares/errorHandlers');
 
@@ -19,6 +18,8 @@ const io = require('socket.io')(http, {
     methods: ['GET', 'POST', 'PUT', 'DELETE'],
   },
 });
+
+const router = require('../router');
 
 app.get('/coffee', (_req, res) => res.status(418).end());
 
