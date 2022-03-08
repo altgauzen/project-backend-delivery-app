@@ -1,19 +1,29 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext, useEffect, useCallback } from 'react';
 import PropTypes from 'prop-types';
 import contextValue from '../../context/context';
 import Utils from '../../utils/functions/index';
 import './products.css';
 
-
 function Product({ product, setTotalPrice }) {
-  const { cart, setCart } = useContext(contextValue);
-  const [quantity, setQuantity] = useState(0);
+  const { setCart } = useContext(contextValue);
   const { urlImage, id, name, price } = product;
 
+  const productsQuantityLocal = useCallback(() => {
+    const qtd = Utils.getLocalStorage('carrinho');
+    qtd.forEach((prod) => {
+      if (prod.productId === id) {
+        document.getElementById(`inputQuantity-${id}`)
+          .value = prod.quantity;
+      }
+    });
+  }, [id]);
+
   const setCartManual = (operation) => {
-    const item = cart.filter((car) => id === car.productId)[0];
+    const local = Utils.getLocalStorage('carrinho');
+    const item = local.find((car) => id === car.productId);
     item.subTotal = Utils.removeMaskNumber(item.subTotal);
     item.unitPrice = Utils.removeMaskNumber(item.unitPrice);
+
     switch (operation) {
     case '+':
       item.quantity += 1;
@@ -22,7 +32,6 @@ function Product({ product, setTotalPrice }) {
       item.unitPrice = Utils.putMaskNumber(item.unitPrice);
       break;
     case '-':
-      console.log(item.unitPrice, operation);
       if (item.quantity !== 0) item.quantity -= 1;
       item.subTotal = item.quantity * item.unitPrice;
       item.subTotal = Utils.putMaskNumber(item.subTotal);
@@ -35,23 +44,28 @@ function Product({ product, setTotalPrice }) {
       item.unitPrice = Utils.putMaskNumber(item.unitPrice);
       break;
     }
-    setQuantity(item.quantity);
-    setCart(cart.map((prod) => (item.productId === prod.id ? item : prod)));
-    Utils.setLocalStorage('carrinho', cart.filter(car => car.quantity !== 0));
+    const newLocal = local.map((prod) => (prod.productId === id ? item : prod));
+    Utils.setLocalStorage('carrinho', newLocal);
+    productsQuantityLocal();
+    setCart(newLocal);
     setTotalPrice();
   };
 
-  const controlQuantity = async ({ target: { innerText, value } }) => {
+  useEffect(() => {
+    productsQuantityLocal();
+  }, [productsQuantityLocal]);
+
+  const controlQuantity = ({ target: { innerText, value } }) => {
     setCartManual(innerText || (Number(value)));
   };
-
+  let quantity = Utils.getLocalStorage('carrinho').find(x => x.productId === id).quantity;
   return (
-    <div className='containerCard'>
-      <div className='containerDescription'>
+    <div className="containerCard">
+      <div className="containerDescription">
         <h1
           data-testid={ `customer_products__element-card-price-${id}` }
-        > 
-          {`R$ ${ Utils.putMaskNumber(Number(price)) }`}
+        >
+          {`R$ ${Utils.putMaskNumber(Number(price))}`}
         </h1>
         <img
           data-testid={ `customer_products__img-card-bg-image-${id}` }
@@ -70,10 +84,11 @@ function Product({ product, setTotalPrice }) {
           data-testid={ `customer_products__button-card-add-item-${id}` }
           onClick={ (e) => controlQuantity(e) }
         >
-          -
+          +
         </button>
         <input
           type="number"
+          id={ `inputQuantity-${id}` }
           data-testid={ `customer_products__input-card-quantity-${id}` }
           onChange={ (e) => controlQuantity(e) }
           value={ quantity }
@@ -83,7 +98,7 @@ function Product({ product, setTotalPrice }) {
           data-testid={ `customer_products__button-card-rm-item-${id}` }
           onClick={ (e) => controlQuantity(e) }
         >
-          +
+          -
         </button>
       </div>
     </div>

@@ -13,7 +13,6 @@ function CustomerProducts() {
     setProducts,
     user,
     setUser,
-    cart,
     totalPrice,
     setCart,
     setTotalPrice,
@@ -28,13 +27,15 @@ function CustomerProducts() {
         Utils.setLocalStorage('user', data.user);
         setUser(data.user);
         setProducts(data.products);
-        setCart(data.products.map(({ id, name, price }) => ({
-          productId: id,
-          name,
-          quantity: 0,
-          unitPrice: Utils.putMaskNumber(Number(price)),
-          subTotal: Utils.putMaskNumber(0 * Number(price)),
-        })));
+        if (!Utils.getLocalStorage('carrinho')) {
+          Utils.setLocalStorage('carrinho', data.products.map(({ id, name, price }) => ({
+            productId: id,
+            name,
+            quantity: 0,
+            unitPrice: Utils.putMaskNumber(Number(price)),
+            subTotal: Utils.putMaskNumber(0 * Number(price)),
+          })));
+        }
       })
       .catch((err) => {
         console.log(err);
@@ -43,7 +44,7 @@ function CustomerProducts() {
 
   const totalPriceState = () => {
     let total = 0;
-    cart.forEach((value) => { total += Utils.removeMaskNumber(value.subTotal); });
+    Utils.getLocalStorage('carrinho').forEach((value) => { total += Utils.removeMaskNumber(value.subTotal); });
     setTotalPrice(Utils.putMaskNumber(total));
     if (Utils.removeMaskNumber(totalPrice) === 0) setDisabled(!disabled);
   };
@@ -52,6 +53,7 @@ function CustomerProducts() {
     e.preventDefault();
     history.push('/customer/checkout');
   };
+
   return (
     <div className="containerProducts">
       <Navbar user={ user } />
