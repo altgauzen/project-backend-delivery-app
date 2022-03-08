@@ -37,7 +37,7 @@ function Product({ product, setTotalPrice }) {
     }
     setQuantity(item.quantity);
     setCart(cart.map((prod) => (item.productId === prod.id ? item : prod)));
-    Utils.setLocalStorage('carrinho', cart);
+    Utils.setLocalStorage('carrinho', cart.filter(car => car.quantity !== 0));
     setTotalPrice();
   };
 

@@ -1,10 +1,14 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect } from 'react';
 import './FinalizeOrder.css';
 import contextValue from '../../context/context';
 
 export default function FinalizeOrder() {
-  const { totalPrice, cart } = useContext(contextValue);
+  const { totalPrice, cart, setCart } = useContext(contextValue);
 
+  useEffect(() => {
+    setCart(cart.filter(car => car.quantity !== 0));
+  }, [setCart])
+  
   const handlerRow = ({ target }, index) => {
     const newCart = cart.filter((item) => item !== cart[index]);
     setCart(newCart);
