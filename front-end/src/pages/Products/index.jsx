@@ -62,7 +62,8 @@ function CustomerProducts() {
           />
         )) : ''}
         {Utils.removeMaskNumber(totalPrice) > 0 ? (
-        <button
+          <button
+          className='cartShop'
           type="button"
           onClick={ redirectCheckout }
           data-testid="customer_products__checkout-bottom-value"

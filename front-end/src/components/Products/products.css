@@ -20,5 +20,6 @@
 }
 
 .containerInput input {
+  text-align: center;
   width: 50%;
 }

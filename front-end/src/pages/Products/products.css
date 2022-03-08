@@ -16,3 +16,11 @@
 .cardsProducts img {
   width: 50%;
 }
+
+.cartShop {
+  bottom: 60px;
+  height: 50px;
+  position: fixed;
+  right: 32px;
+  width: 300px;
+}
