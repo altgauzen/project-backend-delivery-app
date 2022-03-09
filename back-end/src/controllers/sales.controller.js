@@ -6,8 +6,8 @@ const getAllSales = async (req, res, next) => {
     const { user } = req;
     const { authorization } = req.headers;
     user.token = authorization;
-    const sales = await getAllSalesService();
-    return res.status(success).json({ sales, user });
+    const orders = await getAllSalesService();
+    return res.status(success).json({ orders, user });
   } catch (error) {
     console.log(`GET ALLSALES -> ${error.message}`);
     next(error);
