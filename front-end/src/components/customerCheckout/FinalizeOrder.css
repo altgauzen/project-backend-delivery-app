@@ -1,0 +1,17 @@
+.finalize-order {
+  background-color: rgb(133, 198, 252);
+}
+
+.table {
+  background-color: rgb(178, 217, 250);
+  margin: 1em;
+}
+
+.titles, .values {
+  background-color: white;
+  margin: 1em;
+  margin-left: 0%;
+  padding: 1em;
+  width: 100vh;
+}
+
