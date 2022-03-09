@@ -4,7 +4,7 @@ class GetAllSales {
   async getSalesAll(token) {
     const response = await axios({
       method: 'get',
-      url: 'http://localhost:3001/getSalesAll',
+      url: 'http://localhost:3001/customer/orders',
       data: {},
       headers: { authorization: token },
     });

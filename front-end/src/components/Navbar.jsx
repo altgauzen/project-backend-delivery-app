@@ -16,7 +16,13 @@ function Navbar({ user }) {
       <div data-testid="customer_products__element-navbar-link-products">
         PRODUTOS
       </div>
-      <div data-testid="customer_products__element-navbar-link-orders">MEUS PEDIDOS</div>
+      <button
+        type="button"
+        data-testid="customer_products__element-navbar-link-orders"
+        onClick={ () => history.push('/customer/orders') }
+      >
+        <span>MEUS PEDIDOS</span>
+      </button>
       <div
         data-testid="customer_products__element-navbar-user-full-name"
       >

@@ -12,7 +12,7 @@ function Orders() {
 
   useEffect(() => {
     new OrderService()
-      .getAllSales(localStorage.getItem('token'))
+      .getSalesAll(localStorage.getItem('token'))
       .then(({ data }) => {
         setOrders(data.orders);
       })

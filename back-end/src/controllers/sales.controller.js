@@ -3,9 +3,9 @@ const { success } = require('../utils/dictionary/statusCode');
 
 const getAllSales = async (req, res, next) => {
   try {
-    // const { user } = req;
-    // const { authorization } = req.headers;
-    // user.token = authorization;
+    const { user } = req;
+    const { authorization } = req.headers;
+    user.token = authorization;
     const sales = await getAllSalesService();
     return res.status(success).json({ sales, user });
   } catch (error) {
