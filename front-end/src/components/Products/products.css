@@ -1,0 +1,25 @@
+.containerCard {
+  background-color: rgb(207, 242, 194);
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  margin: 90px 15px 15px;
+}
+
+.containerDescription {
+  align-items: center;
+  display: flex;
+  flex-flow: column wrap;
+  justify-content: center;
+  width: 200px;
+}
+
+.containerInput {
+  display: flex;
+  justify-content: center;
+}
+
+.containerInput input {
+  text-align: center;
+  width: 50%;
+}
