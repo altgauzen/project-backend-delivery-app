@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useCallback } from 'react';
+import React, { useContext, useEffect, useCallback, useState } from 'react';
 import PropTypes from 'prop-types';
 import contextValue from '../../context/context';
 import Utils from '../../utils/functions/index';
@@ -7,58 +7,44 @@ import './products.css';
 function Product({ product, setTotalPrice }) {
   const { setCart } = useContext(contextValue);
   const { urlImage, id, name, price } = product;
+  const [quantity, setQuantity] = useState(0);
 
-  const productsQuantityLocal = useCallback(() => {
-    const qtd = Utils.getLocalStorage('carrinho');
-    qtd.forEach((prod) => {
-      if (prod.productId === id) {
-        document.getElementById(`inputQuantity-${id}`)
-          .value = prod.quantity;
-      }
-    });
-  }, [id]);
-
-  const setCartManual = (operation) => {
+  const setCartManual = useCallback((operation) => {
     const local = Utils.getLocalStorage('carrinho');
     const item = local.find((car) => id === car.productId);
     item.subTotal = Utils.removeMaskNumber(item.subTotal);
     item.unitPrice = Utils.removeMaskNumber(item.unitPrice);
 
-    switch (operation) {
-    case '+':
-      item.quantity += 1;
-      item.subTotal = item.quantity * item.unitPrice;
-      item.subTotal = Utils.putMaskNumber(item.subTotal);
-      item.unitPrice = Utils.putMaskNumber(item.unitPrice);
-      break;
-    case '-':
-      if (item.quantity !== 0) item.quantity -= 1;
-      item.subTotal = item.quantity * item.unitPrice;
-      item.subTotal = Utils.putMaskNumber(item.subTotal);
-      item.unitPrice = Utils.putMaskNumber(item.unitPrice);
-      break;
-    default:
-      item.quantity = operation;
-      item.subTotal = operation * item.unitPrice;
-      item.subTotal = Utils.putMaskNumber(item.subTotal);
-      item.unitPrice = Utils.putMaskNumber(item.unitPrice);
-      break;
-    }
+    item.quantity = operation;
+    item.subTotal = operation * item.unitPrice;
+    item.subTotal = Utils.putMaskNumber(item.subTotal);
+    item.unitPrice = Utils.putMaskNumber(item.unitPrice);
+
     const newLocal = local.map((prod) => (prod.productId === id ? item : prod));
     Utils.setLocalStorage('carrinho', newLocal);
-    productsQuantityLocal();
     setCart(newLocal);
     setTotalPrice();
-  };
+  }, [quantity]);
 
   useEffect(() => {
-    productsQuantityLocal();
-  }, [productsQuantityLocal]);
+    setCartManual(quantity);
+  }, [setCartManual]);
 
-  const controlQuantity = ({ target: { innerText, value } }) => {
-    setCartManual(innerText || (Number(value)));
+  const increment = () => {
+    setQuantity((prevQuantity) => prevQuantity + 1);
   };
-  let quantity = Utils.getLocalStorage('carrinho').find(x => x.productId === id).quantity;
+
+  const decrement = () => {
+    if (quantity !== 0) {
+      setQuantity((prevQuantity) => prevQuantity - 1);
+    }
+  };
+
+  const inputValue = (event) => {
+    const { value } = event.target;
+    setQuantity(Number(value));
+  };
+
   return (
     <div className="containerCard">
       <div className="containerDescription">
@@ -81,24 +67,24 @@ function Product({ product, setTotalPrice }) {
       <div className="containerInput">
         <button
           type="button"
-          data-testid={ `customer_products__button-card-add-item-${id}` }
-          onClick={ (e) => controlQuantity(e) }
+          data-testid={ `customer_products__button-card-rm-item-${id}` }
+          onClick={ () => decrement() }
         >
-          +
+          -
         </button>
         <input
           type="number"
           id={ `inputQuantity-${id}` }
           data-testid={ `customer_products__input-card-quantity-${id}` }
-          onChange={ (e) => controlQuantity(e) }
+          onChange={ (e) => inputValue(e) }
           value={ quantity }
         />
         <button
           type="button"
-          data-testid={ `customer_products__button-card-rm-item-${id}` }
-          onClick={ (e) => controlQuantity(e) }
+          data-testid={ `customer_products__button-card-add-item-${id}` }
+          onClick={ () => increment() }
         >
-          -
+          +
         </button>
       </div>
     </div>

@@ -6,10 +6,10 @@ export default function FinalizeOrder() {
   const { totalPrice, cart, setCart } = useContext(contextValue);
 
   useEffect(() => {
-    setCart(cart.filter(car => car.quantity !== 0));
-  }, [setCart])
-  
-  const handlerRow = ({ target }, index) => {
+    setCart(cart.filter((car) => car.quantity !== 0));
+  }, [setCart]);
+
+  const handlerRow = (index) => {
     const newCart = cart.filter((item) => item !== cart[index]);
     setCart(newCart);
   };
@@ -64,7 +64,7 @@ export default function FinalizeOrder() {
                 <button
                   type="button"
                   data-testid={ `customer_checkout__element-order-table-remove-${index}` }
-                  onClick={ (event) => handlerRow(event, index) }
+                  onClick={ () => handlerRow(index) }
                 >
                   Remover
                 </button>

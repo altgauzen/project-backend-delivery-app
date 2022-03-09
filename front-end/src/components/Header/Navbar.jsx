@@ -2,7 +2,7 @@ import React from 'react';
 
 import PropTypes from 'prop-types';
 import { useHistory } from 'react-router-dom';
-import './navbar.css'
+import './navbar.css';
 
 function Navbar({ user }) {
   const history = useHistory();
@@ -13,7 +13,7 @@ function Navbar({ user }) {
   };
 
   return (
-    <header className='containerHeader'>
+    <header className="containerHeader">
       <div data-testid="customer_products__element-navbar-link-products">
         PRODUTOS
       </div>

@@ -12,7 +12,7 @@ export default function DetailForDelivery() {
   const handlerInput = ({ target: { value } }, set) => {
     set(value);
   };
-
+  console.log(select, address, number);
   const history = useHistory();
 
   return (

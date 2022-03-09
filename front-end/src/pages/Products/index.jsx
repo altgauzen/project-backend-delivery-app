@@ -43,10 +43,15 @@ function CustomerProducts() {
   }, [setUser, setProducts, setCart]);
 
   const totalPriceState = () => {
-    let total = 0;
-    Utils.getLocalStorage('carrinho').forEach((value) => { total += Utils.removeMaskNumber(value.subTotal); });
+    let total = 0.00;
+    Utils.getLocalStorage('carrinho')
+      .forEach((value) => { total += Utils.removeMaskNumber(value.subTotal); });
     setTotalPrice(Utils.putMaskNumber(total));
-    if (Utils.removeMaskNumber(totalPrice) === 0) setDisabled(!disabled);
+    if (total === 0.00) {
+      setDisabled(true);
+    } else {
+      setDisabled(false);
+    }
   };
 
   const redirectCheckout = (e) => {
@@ -66,13 +71,19 @@ function CustomerProducts() {
           />
         )) : ''}
         <button
-          className='cartShop'
+          className="cartShop"
           type="button"
           onClick={ redirectCheckout }
           data-testid="customer_products__button-cart"
           disabled={ disabled }
         >
-          Ver Carrinho: R$ <span data-testid="customer_products__checkout-bottom-value">{`${totalPrice}`}</span>
+          Ver Carrinho: R$
+          {' '}
+          <span
+            data-testid="customer_products__checkout-bottom-value"
+          >
+            {`${totalPrice}`}
+          </span>
         </button>
       </section>
     </div>
