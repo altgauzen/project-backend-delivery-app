@@ -14,13 +14,13 @@ export default function FinalizeOrder() {
     const newCart = cart.filter((item) => item !== cart[index]);
     Utils.setLocalStorage('carrinho', newCart);
     setCart(newCart);
-    if (newCart.length === 0){
-      setTotalPrice(0)
+    if (newCart.length === 0) {
+      setTotalPrice(0);
     }
-    return newCart
+    return newCart;
   };
 
-  console.log(cart)
+  console.log(cart);
   return (
     <div className="finalize-order">
       <table className="table">
