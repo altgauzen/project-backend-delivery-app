@@ -6,7 +6,7 @@ const updateSaleStatusOrder = async ({ saleId, status }) => {
 };
 
 const getAllSalesService = async () => {
-  const response = await sales.findAll();
+  const response = await sales.findAll({ raw: true });
   return response;
 };
 

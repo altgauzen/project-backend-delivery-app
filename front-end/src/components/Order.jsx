@@ -58,16 +58,16 @@ function Order({ order }) {
 
   return (
     <div>
-      <h1
+      <span
         data-testid={ `customer_orders__element-order-id-${id}` }
       >
         { `Pedido ${order.id}` }
-      </h1>
-      <h2
+      </span>
+      <span
         data-testid={ `customer_orders__element-delivery-status-${id}` }
       >
         { order.status }
-      </h2>
+      </span>
       <div
         data-testid={ `customer_orders__element-order-date-${id}` }
       >

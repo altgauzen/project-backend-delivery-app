@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-class GetAllSales {
+class GetSales {
   async getSalesAll(token) {
     const response = await axios({
       method: 'get',
@@ -12,4 +12,4 @@ class GetAllSales {
   }
 }
 
-export default GetAllSales;
+export default GetSales;
