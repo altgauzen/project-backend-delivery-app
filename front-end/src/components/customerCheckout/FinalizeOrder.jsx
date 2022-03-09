@@ -4,7 +4,7 @@ import contextValue from '../../context/context';
 import Utils from '../../utils/functions';
 
 export default function FinalizeOrder() {
-  const { totalPrice, cart, setCart } = useContext(contextValue);
+  const { totalPrice, cart, setCart, setTotalPrice } = useContext(contextValue);
 
   useEffect(() => {
     setCart(Utils.getLocalStorage('carrinho'));
@@ -12,9 +12,15 @@ export default function FinalizeOrder() {
 
   const handlerRow = (index) => {
     const newCart = cart.filter((item) => item !== cart[index]);
+    Utils.setLocalStorage('carrinho', newCart);
     setCart(newCart);
+    if (newCart.length === 0){
+      setTotalPrice(0)
+    }
+    return newCart
   };
 
+  console.log(cart)
   return (
     <div className="finalize-order">
       <table className="table">
@@ -46,7 +52,7 @@ export default function FinalizeOrder() {
                     `customer_checkout__element-order-table-quantity-${index}`
                   }
                 >
-                  { `R$ ${row.quantity}` }
+                  { row.quantity }
                 </td>
                 <td
                   data-testid={
@@ -78,7 +84,7 @@ export default function FinalizeOrder() {
         type="button"
         data-testid="customer_checkout__element-order-total-price"
       >
-        {`Total R$ ${totalPrice}`}
+        {`Total: R$ ${totalPrice}`}
       </button>
     </div>
   );
