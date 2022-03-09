@@ -1,48 +1,72 @@
-import React, { useContext, useEffect, useCallback, useState } from 'react';
+import React, { useContext, useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import contextValue from '../../context/context';
 import Utils from '../../utils/functions/index';
 import './products.css';
 
 function Product({ product, setTotalPrice }) {
-  const { setCart } = useContext(contextValue);
   const { urlImage, id, name, price } = product;
+  const { setCart } = useContext(contextValue);
   const [quantity, setQuantity] = useState(0);
 
-  const setCartManual = useCallback((operation) => {
-    const local = Utils.getLocalStorage('carrinho');
-    const item = local.find((car) => id === car.productId);
-    item.subTotal = Utils.removeMaskNumber(item.subTotal);
-    item.unitPrice = Utils.removeMaskNumber(item.unitPrice);
+  const setCartManual = (operation) => {
+    let local = Utils.getLocalStorage('carrinho') || [];
 
-    item.quantity = operation;
-    item.subTotal = operation * item.unitPrice;
-    item.subTotal = Utils.putMaskNumber(item.subTotal);
-    item.unitPrice = Utils.putMaskNumber(item.unitPrice);
-
-    const newLocal = local.map((prod) => (prod.productId === id ? item : prod));
-    Utils.setLocalStorage('carrinho', newLocal);
-    setCart(newLocal);
+    const getItem = local.find((car) => id === car.productId);
+    if (getItem) {
+      getItem.subTotal = Utils.removeMaskNumber(getItem.subTotal);
+      getItem.unitPrice = Utils.removeMaskNumber(getItem.unitPrice);
+      getItem.quantity = operation;
+      getItem.subTotal = operation * getItem.unitPrice;
+      getItem.subTotal = Utils.putMaskNumber(getItem.subTotal);
+      getItem.unitPrice = Utils.putMaskNumber(getItem.unitPrice);
+      local = local.map((prod) => (prod.productId === id ? getItem : prod));
+    } else {
+      const newObj = {
+        productId: id,
+        name,
+        quantity: operation,
+        unitPrice: Utils.putMaskNumber(+price),
+        subTotal: Utils.putMaskNumber(operation * (+price)),
+      };
+      local = [...local, newObj];
+    }
+    Utils.setLocalStorage('carrinho', local.filter((prod) => prod.quantity !== 0));
+    setCart(() => local);
     setTotalPrice();
-  }, [quantity]);
+  };
 
   useEffect(() => {
-    setCartManual(quantity);
-  }, [setCartManual]);
+    setQuantity(() => {
+      const carr = Utils.getLocalStorage('carrinho');
+      const idCarr = carr && carr.length ? carr.find((x) => x.productId === id) : false;
+      return idCarr ? idCarr.quantity : 0;
+    });
+    setTotalPrice();
+  }, [id, quantity, setTotalPrice]);
 
   const increment = () => {
-    setQuantity((prevQuantity) => prevQuantity + 1);
+    setQuantity((prevQuantity) => {
+      const currentQuantity = prevQuantity + 1;
+      setCartManual(currentQuantity);
+      return currentQuantity;
+    });
   };
 
   const decrement = () => {
     if (quantity !== 0) {
-      setQuantity((prevQuantity) => prevQuantity - 1);
+      setQuantity((prevQuantity) => {
+        const currentQuantity = prevQuantity - 1;
+        setCartManual(currentQuantity);
+        return currentQuantity;
+      });
     }
   };
 
   const inputValue = (event) => {
     const { value } = event.target;
-    setQuantity(Number(value));
+    setQuantity(+value);
+    setCartManual(+value);
   };
 
   return (
