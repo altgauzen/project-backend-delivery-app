@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useState } from 'react';
 //  import Order from '../../components/Order';
-import Navbar from '../../components/Navbar';
+import Navbar from '../../components/Header/Navbar';
 import OrderService from '../../service/sale.service';
 import contextValue from '../../context/context';
 //  import './products.css';
