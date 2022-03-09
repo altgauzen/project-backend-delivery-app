@@ -9,6 +9,7 @@
 .containerDescription {
   align-items: center;
   display: flex;
+  flex-flow: column;
   flex-direction: column;
   justify-content: center;
   width: 200px;

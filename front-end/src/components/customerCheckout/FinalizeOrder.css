@@ -8,10 +8,10 @@
 }
 
 .titles, .values {
-  background-color: rgb(255, 255, 255);
-  margin-left: 0%;
-  width: 100vh;
-  padding: 1em;
+  background-color: white;
   margin: 1em;
+  margin-left: 0%;
+  padding: 1em;
+  width: 100vh;
 }
 

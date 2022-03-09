@@ -48,15 +48,15 @@ function Product({ product, setTotalPrice }) {
   return (
     <div className="containerCard">
       <div className="containerDescription">
-        <h1 data-testid={`customer_products__element-card-price-${id}`}>
+        <h1 data-testid={ `customer_products__element-card-price-${id}` }>
           {`R$ ${Utils.putMaskNumber(Number(price))}`}
         </h1>
         <img
-          data-testid={`customer_products__img-card-bg-image-${id}`}
-          src={urlImage}
-          alt={name}
+          data-testid={ `customer_products__img-card-bg-image-${id}` }
+          src={ urlImage }
+          alt={ name }
         />
-        <h2 data-testid={`customer_products__element-card-title-${id}`}>
+        <h2 data-testid={ `customer_products__element-card-title-${id}` }>
           {name}
         </h2>
       </div>
@@ -85,7 +85,7 @@ function Product({ product, setTotalPrice }) {
       </div>
     </div>
   );
-};
+}
 
 Product.propTypes = {
   product: PropTypes.shape({
