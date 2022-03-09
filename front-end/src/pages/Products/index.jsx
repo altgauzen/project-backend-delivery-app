@@ -27,15 +27,6 @@ function CustomerProducts() {
         Utils.setLocalStorage('user', data.user);
         setUser(data.user);
         setProducts(data.products);
-        if (!Utils.getLocalStorage('carrinho')) {
-          Utils.setLocalStorage('carrinho', data.products.map(({ id, name, price }) => ({
-            productId: id,
-            name,
-            quantity: 0,
-            unitPrice: Utils.putMaskNumber(Number(price)),
-            subTotal: Utils.putMaskNumber(0 * Number(price)),
-          })));
-        }
       })
       .catch((err) => {
         console.log(err);
@@ -43,14 +34,16 @@ function CustomerProducts() {
   }, [setUser, setProducts, setCart]);
 
   const totalPriceState = () => {
-    let total = 0.00;
-    Utils.getLocalStorage('carrinho')
-      .forEach((value) => { total += Utils.removeMaskNumber(value.subTotal); });
-    setTotalPrice(Utils.putMaskNumber(total));
-    if (total === 0.00) {
-      setDisabled(true);
-    } else {
-      setDisabled(false);
+    if (Utils.getLocalStorage('carrinho')) {
+      let total = 0.00;
+      Utils.getLocalStorage('carrinho')
+        .forEach((value) => { total += Utils.removeMaskNumber(value.subTotal); });
+      setTotalPrice(Utils.putMaskNumber(total));
+      if (total === 0.00) {
+        setDisabled(true);
+      } else {
+        setDisabled(false);
+      }
     }
   };
 
