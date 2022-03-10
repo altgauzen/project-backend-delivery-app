@@ -37,10 +37,12 @@ function Product({ product, setTotalPrice }) {
   };
 
   useEffect(() => {
+    console.log('QUANTITY -->', quantity, '<-- QUANTITY');
+
     setQuantity(() => {
       const carr = Utils.getLocalStorage('carrinho');
       const idCarr = carr && carr.length ? carr.find((x) => x.productId === id) : false;
-      return idCarr ? idCarr.quantity : 0;
+      return idCarr && idCarr !== quantity ? idCarr.quantity : 0;
     });
     setTotalPrice();
   }, [id, quantity, setTotalPrice]);
@@ -62,7 +64,6 @@ function Product({ product, setTotalPrice }) {
       });
     }
   };
-
   const inputValue = (event) => {
     const { value } = event.target;
     setQuantity(+value);
