@@ -8,23 +8,20 @@ export default function OrderDetailsComponent() {
 
   useEffect(() => {
     setCart(Utils.getLocalStorage('carrinho'));
+    let total = 0.0;
+    Utils.getLocalStorage('carrinho').forEach((value) => {
+      total += Utils.removeMaskNumber(value.subTotal);
+    });
   }, [setCart]);
 
-  const handlerRow = (index) => {
-    const newCart = cart.filter((item) => item !== cart[index]);
-    Utils.setLocalStorage('carrinho', newCart);
-    setCart(newCart);
-    if (newCart.length === 0) {
-      setTotalPrice(0);
-    }
-    return newCart;
-  };
-
-  console.log(cart);
   return (
-    <div className="finalize-order">
+    <div className="detail-order">
+      <h1>Detalhes do Pedido</h1>
       <table className="table">
         <thead className="titles">
+          <th>
+            <td></td>
+          </th>
           <th>Item</th>
           <th>Descrição</th>
           <th>Quantidade</th>
@@ -68,13 +65,6 @@ export default function OrderDetailsComponent() {
                 >
                   { `R$ ${row.subTotal}` }
                 </td>
-                <button
-                  type="button"
-                  data-testid={ `customer_checkout__element-order-table-remove-${index}` }
-                  onClick={ () => handlerRow(index) }
-                >
-                  Remover
-                </button>
               </tr>
             ))
           }

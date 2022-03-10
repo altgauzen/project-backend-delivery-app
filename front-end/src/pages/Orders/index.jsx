@@ -1,18 +1,17 @@
 import React, { useContext, useEffect, useState } from 'react';
-// import { useHistory } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 //  import Order from '../../components/Order';
 import moment from 'moment';
 import Navbar from '../../components/Header/Navbar';
 import OrderService from '../../service/sale.service';
 import contextValue from '../../context/context';
-//  import './products.css';
 import Utils from '../../utils/functions/index';
 import './orders.css';
 
 function Orders() {
   const { user, setUser } = useContext(contextValue);
   const [orders, setOrders] = useState([]);
-  // const history = useHistory();
+  const history = useHistory();
 
   useEffect(() => {
     new OrderService()
@@ -36,7 +35,7 @@ function Orders() {
         {
           orders ? orders.map((order) => (
             <div
-              // onClick={ () => { history.push(`/customer/orders/${order.id}`) } }
+              onClick={ () => { history.push(`/customer/orders/${order.id}`) } }
               key={ order.id }
               className="containerOrders"
             >

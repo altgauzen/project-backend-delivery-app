@@ -18,12 +18,12 @@ function App() {
           <Route exact path="/">
             <Redirect to="/login" />
           </Route>
-          <Route path="/login" component={ Login } />
-          <Route path="/register" component={ Register } />
-          <Route path="/customer/products" component={ Products } />
-          <Route path="/customer/orders" component={ Orders } />
+          <Route exact path="/login" component={ Login } />
+          <Route exact path="/register" component={ Register } />
+          <Route exact path="/customer/products" component={ Products } />
+          <Route exact path="/customer/orders" component={ Orders } />
           <Route exact path="/customer/orders/:id" component={ OrderDetails } />
-          <Route path="/customer/checkout" component={ Checkout } />
+          <Route exact path="/customer/checkout" component={ Checkout } />
         </Switch>
       </Provider>
     </div>

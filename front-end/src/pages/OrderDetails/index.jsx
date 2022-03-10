@@ -1,15 +1,17 @@
-import React from 'react';
+import React, { useContext } from 'react';
 
-//  import OrderDetailsComponent from '../../components/Orders/OrderDetailsComponent';
-//  import Header from '../../components/Header/Navbar';
-//  import context from '../../context/context';
+import OrderDetailsComponent from '../../components/Orders/OrderDetailsComponent';
+import Header from '../../components/Header/Navbar';
+import contextValue from '../../context/context';
+import './ordersDetails.css';
 
 function OrderDetails() {
+  const { user } = useContext(contextValue);
+
   return (
-    <section>
-      <h1>TESTE ORDER DETAILS</h1>
-      {/* <Header  user={ user }/>
-      <OrderDetailsComponent /> */}
+    <section className="pageOrders">
+      <Header  user={ user }/>
+      <OrderDetailsComponent />
     </section>
   );
 }
