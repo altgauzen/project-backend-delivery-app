@@ -18,7 +18,10 @@
     "test": "jest --runInBand --detectOpenHandles --forceExit --verbose",
     "test:dev": "NODE_ENV=development npm run jest -- --runInBand --detectOpenHandles --forceExit --verbose",
     "test:dev:open": "NODE_ENV=development HEADLESS=false npm run test:dev",
-    "test:dev:report": "./__tests__/reports/generate.sh"
+    "test:dev:report": "./__tests__/reports/generate.sh",
+    "start:front": "cd front-end/ && npm start",
+    "start:back": "cd back-end/ && npm run dev",
+    "start:dev": "gnome-terminal -- npm run start:front -q && npm run start:back"
   },
   "repository": {
     "type": "git",

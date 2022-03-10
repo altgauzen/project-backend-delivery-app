@@ -1,5 +1,4 @@
 import React from 'react';
-
 import PropTypes from 'prop-types';
 import { useHistory } from 'react-router-dom';
 import './navbar.css';
@@ -17,7 +16,13 @@ function Navbar({ user }) {
       <div data-testid="customer_products__element-navbar-link-products">
         PRODUTOS
       </div>
-      <div data-testid="customer_products__element-navbar-link-orders">MEUS PEDIDOS</div>
+      <button
+        type="button"
+        data-testid="customer_products__element-navbar-link-orders"
+        onClick={ () => history.push('/customer/orders') }
+      >
+        <span>MEUS PEDIDOS</span>
+      </button>
       <div
         data-testid="customer_products__element-navbar-user-full-name"
       >
@@ -35,8 +40,12 @@ function Navbar({ user }) {
 }
 
 Navbar.propTypes = {
-  user: PropTypes.objectOf({
+  user: PropTypes.shape({
+    id: PropTypes.number,
     name: PropTypes.string,
+    email: PropTypes.string,
+    role: PropTypes.string,
+    token: PropTypes.string,
   }).isRequired,
 };
 
