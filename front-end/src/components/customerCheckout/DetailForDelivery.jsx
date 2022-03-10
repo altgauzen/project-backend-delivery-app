@@ -1,19 +1,50 @@
-import React, { useState } from 'react';
+import React, { useState, useContext, useEffect } from 'react';
 import './DetailForDelivery.css';
-
 import { useHistory } from 'react-router-dom';
-import mockGetAllUsers from '../../utils/mock/mockGetAllUsers';
+import contextValue from '../../context/context';
+import SalesService from '../../service/sale.service';
+import Utils from '../../utils/functions/index';
 
 export default function DetailForDelivery() {
   const [select, setSelect] = useState(null);
   const [address, setAddress] = useState(null);
   const [number, setNumber] = useState(null);
+  const [sellers, setSellers] = useState([]);
+
+  const { totalPrice, cart, user } = useContext(contextValue);
+  const history = useHistory();
+
+
+  useEffect(() => {
+    new SalesService()
+      .getSellerAll(Utils.getLocalStorage('user').token)
+      .then((res) => { if (res) setSellers(res.data) })
+      .catch((err) => { console.error(err) });
+  }, []);
 
   const handlerInput = ({ target: { value } }, set) => {
     set(value);
   };
-  console.log(select, address, number);
-  const history = useHistory();
+
+  const saleCreate = async () => {
+    const obj = {
+      saller_id: select,
+      userId: user.id,
+      totalPrice,
+      deliveryAddress: address,
+      deliveryNumber: number,
+      status: 'AGUARDANDO PAGAMENTO',
+    };
+    new SalesService()
+      .createSale(Utils.getLocalStorage('token'), obj)
+      .then((res) => {
+        console.log(res);
+        // history.push(`/customer/orders/${res.data.id}`);
+      })
+      .catch((err) => {
+        console.error(err);
+      });
+  };
 
   return (
     <div className="detail-for-delivery">
@@ -25,9 +56,10 @@ export default function DetailForDelivery() {
             data-testid="customer_checkout__select-seller"
             onClick={ (event) => handlerInput(event, setSelect) }
           >
+            <option value={''} />
             {
-              mockGetAllUsers.map((user) => (
-                <option key={ user.id } value={ `${user.name}` }>{user.name}</option>
+              sellers.map((seller) => (
+                <option key={ seller.id } value={ seller.id }>{seller.name}</option>
               ))
             }
           </select>
@@ -56,8 +88,8 @@ export default function DetailForDelivery() {
 
       <button
         data-testid="customer_checkout__button-submit-order"
-        type="submit"
-        onChange={ () => history.push('/customer/orders') }
+        type="button"
+        onClick={ saleCreate }
       >
         FINALIZAR PEDIDO
       </button>
