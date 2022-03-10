@@ -47,12 +47,11 @@ const validateProductsTotalPrice = async (page, itemList) => {
       delay: 100,
     });
 
-    const resp = await expect(page).toGetValueFromElement(
+    await expect(page).toGetValueFromElement(
       customerProductsPage.input.card.quantity +
         `[data-testid$='-${productId}']`,
       String(quantity)
     );
-    console.log('resp', resp);
   }
 
   await expect(page).toGetTextFromElement(
