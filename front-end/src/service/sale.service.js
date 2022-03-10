@@ -21,6 +21,16 @@ class SalesService {
     });
     return response;
   }
+
+  async getSellerAll(token) {
+    const response = await axios({
+      method: 'get',
+      url: 'http://localhost:3001/sellers',
+      data: {},
+      headers: { authorization: token },
+    });
+    return response;
+  }
 }
 
 export default SalesService;

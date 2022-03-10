@@ -1,14 +1,14 @@
-const { sales } = require('../database/models');
+const { sales, users } = require('../database/models');
 const Joi = require('joi');
 const { badRequest } = require('../utils/dictionary/statusCode');
 const errorConstructor = require('../utils/functions/errorHandlers');
 
 const schemaSales = Joi.object({
-  user_id: Joi.number().required(),
-  seller_id: Joi.number().required(),
-  total_price: Joi.number().required(),
-  delivery_address: Joi.string().required(),
-  delivery_number: Joi.number().required(),
+  userId: Joi.number().required(),
+  sellerId: Joi.number().required(),
+  totalPrice: Joi.number().required(),
+  deliveryAddress: Joi.string().required(),
+  deliveryNumber: Joi.number().required(),
   status: Joi.string().required(),
 });
 
@@ -22,11 +22,19 @@ const getAllSalesService = async () => {
   return response;
 };
 
-const createSaleService = async (user_id, seller_id, total_price, delivery_address, delivery_number, status) => {
-  const { error } = schemaSales.validate({ user_id, seller_id, total_price, delivery_address, delivery_number, status });
-  if (error) throw errorConstructor(badRequest, error.message);
-  const { saleId } = await sales.create({ user_id, seller_id, total_price, delivery_address, delivery_number, status });
-  return saleId;
+const getAllSeller = async () => {
+  const response = await users.findAll({
+    where: { role: 'seller' },
+    attributes: { exclude: ['password', 'email'] },
+  });
+  return response;
+};
+
+const createSaleService = async (user_id, seller_id, tota_price, delivery_address, delivery_number, status) => {
+  // const { error } = schemaSales.validate({ seller_id, total_price, delivery_address, delivery_number, status });
+  // if (error) throw errorConstructor(badRequest, error.message);
+  const response = await sales.create({ user_id, seller_id, tota_price, delivery_address, delivery_number, status });
+  return response;
 }
 
-module.exports = { updateSaleStatusOrder, getAllSalesService, createSaleService };
+module.exports = { updateSaleStatusOrder, getAllSalesService, createSaleService, getAllSeller };

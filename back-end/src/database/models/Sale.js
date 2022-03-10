@@ -7,13 +7,14 @@ module.exports = (sequelize, DataTypes) => {
       totalPrice: DataTypes.FLOAT,
       deliveryAddress: DataTypes.STRING,
       deliveryNumber: DataTypes.STRING,
-      // saleDate: DataTypes.DATE,
+      saleDate: DataTypes.DATE,
       status: DataTypes.STRING,
     },
     {
       timestamps: false,
-      underscored: true,
-      createdAt: 'sale_date',
+      // underscored: true,
+      // createdAt: 'sale_date',
+      // updateAt: 'sale_date',
     }
   );
 
