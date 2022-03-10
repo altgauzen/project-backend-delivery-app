@@ -14,12 +14,13 @@ export default function FinalizeOrder() {
     const newCart = cart.filter((item) => item !== cart[index]);
     Utils.setLocalStorage('carrinho', newCart);
     setCart(newCart);
-    if (newCart.length === 0) {
-      setTotalPrice(0);
-    }
+    let total = 0.0;
+    Utils.getLocalStorage('carrinho').forEach((value) => {
+      total += Utils.removeMaskNumber(value.subTotal);
+    });
+    setTotalPrice(Utils.putMaskNumber(total));
     return newCart;
   };
-
   console.log(cart);
   return (
     <div className="finalize-order">
@@ -32,52 +33,52 @@ export default function FinalizeOrder() {
           <th>Sub-total</th>
         </thead>
         <tbody className="titles">
-          {
-            cart.map((row, index) => (
-              <tr key={ index }>
-                <td
-                  data-testid={
-                    `customer_checkout__element-order-table-item-number-${index}`
-                  }
-                >
-                  { row.productId }
-                </td>
-                <td
-                  data-testid={ `customer_checkout__element-order-table-name-${index}` }
-                >
-                  { row.name }
-                </td>
-                <td
-                  data-testid={
-                    `customer_checkout__element-order-table-quantity-${index}`
-                  }
-                >
-                  { row.quantity }
-                </td>
-                <td
-                  data-testid={
-                    `customer_checkout__element-order-table-unit-price-${index}`
-                  }
-                >
-                  { `R$ ${row.unitPrice}` }
-                </td>
-                <td
-                  data-testid={
-                    `customer_checkout__element-order-table-sub-total-${index}`
-                  }
-                >
-                  { `R$ ${row.subTotal}` }
-                </td>
-                <button
-                  type="button"
-                  data-testid={ `customer_checkout__element-order-table-remove-${index}` }
-                  onClick={ () => handlerRow(index) }
-                >
-                  Remover
-                </button>
-              </tr>
-            ))
-          }
+          {cart.map((row, index) => (
+            <tr key={ index }>
+              <td
+                data-testid={
+                  `customer_checkout__element-order-table-item-number-${index}`
+                }
+              >
+                {index + 1}
+              </td>
+              <td
+                data-testid={
+                  `customer_checkout__element-order-table-name-${index}`
+                }
+              >
+                {row.name}
+              </td>
+              <td
+                data-testid={
+                  `customer_checkout__element-order-table-quantity-${index}`
+                }
+              >
+                {row.quantity}
+              </td>
+              <td
+                data-testid={
+                  `customer_checkout__element-order-table-unit-price-${index}`
+                }
+              >
+                {`R$ ${row.unitPrice}`}
+              </td>
+              <td
+                data-testid={
+                  `customer_checkout__element-order-table-sub-total-${index}`
+                }
+              >
+                {`R$ ${row.subTotal}`}
+              </td>
+              <button
+                type="button"
+                data-testid={ `customer_checkout__element-order-table-remove-${index}` }
+                onClick={ () => handlerRow(index) }
+              >
+                Remover
+              </button>
+            </tr>
+          ))}
         </tbody>
       </table>
       <button

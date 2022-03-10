@@ -1,19 +1,39 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import './DetailForDelivery.css';
-
 import { useHistory } from 'react-router-dom';
-import mockGetAllUsers from '../../utils/mock/mockGetAllUsers';
+import contextValue from '../../context/context';
+import SalesService from '../../service/sale.service';
+import Utils from '../../utils/functions';
 
 export default function DetailForDelivery() {
-  const [select, setSelect] = useState(null);
+  const [, setSelect] = useState(null);
   const [address, setAddress] = useState(null);
   const [number, setNumber] = useState(null);
+  const { totalPrice, cart, user } = useContext(contextValue);
+  const history = useHistory();
 
   const handlerInput = ({ target: { value } }, set) => {
     set(value);
   };
-  console.log(select, address, number);
-  const history = useHistory();
+
+  const saleCreate = async () => {
+    const obj = {
+      userId: user.id,
+      totalPrice,
+      deliveryAddress: address,
+      deliveryNumber: number,
+      status: 'AGUARDANDO PAGAMENTO',
+    };
+    new SalesService()
+      .createSale(Utils.getLocalStorage('token'), obj)
+      .then((res) => {
+        console.log(res);
+        history.push(`/customer/orders/${res.id}`);
+      })
+      .catch((err) => {
+        console.error(err);
+      });
+  };
 
   return (
     <div className="detail-for-delivery">
@@ -26,8 +46,8 @@ export default function DetailForDelivery() {
             onClick={ (event) => handlerInput(event, setSelect) }
           >
             {
-              mockGetAllUsers.map((user) => (
-                <option key={ user.id } value={ `${user.name}` }>{user.name}</option>
+              cart.map((car) => (
+                <option key={ car.id } value={ `${car.name}` }>{car.name}</option>
               ))
             }
           </select>
@@ -57,7 +77,7 @@ export default function DetailForDelivery() {
       <button
         data-testid="customer_checkout__button-submit-order"
         type="submit"
-        onChange={ () => history.push('/customer/orders') }
+        onClick={ saleCreate }
       >
         FINALIZAR PEDIDO
       </button>

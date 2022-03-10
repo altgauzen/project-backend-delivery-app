@@ -1,6 +1,17 @@
 import axios from 'axios';
 
-class GetSales {
+class SalesService {
+
+  async createSale(token, sale) {
+    const response = await axios({
+      method: 'post',
+      url: 'http://localhost:3001/createSale',
+      data: {sale},
+      headers: { authorization: token },
+    });
+    return response;
+  }
+
   async getSalesAll(token) {
     const response = await axios({
       method: 'get',
@@ -12,4 +23,4 @@ class GetSales {
   }
 }
 
-export default GetSales;
+export default SalesService;

@@ -12,5 +12,6 @@ router.post('/login', encryption, userController.login);
 router.get('/getUsersAll', validateToken, userController.getAllUsers);
 router.get('/getProductsAll', validateToken, productController.getAllProducts);
 router.get('/customer/orders', validateToken, saleController.getAllSales);
+router.post('/createSale', validateToken, saleController.createSaleController);
 
 module.exports = router;
