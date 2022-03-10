@@ -6,6 +6,7 @@ import Products from './pages/Products';
 import Login from './pages/Login/index';
 import Register from './pages/Register/index';
 import Orders from './pages/Orders/index';
+import OrderDetails from './pages/OrderDetails';
 import Provider from './context/provider';
 import Checkout from './pages/CustomerCheckout/index';
 
@@ -21,6 +22,7 @@ function App() {
           <Route path="/register" component={ Register } />
           <Route path="/customer/products" component={ Products } />
           <Route path="/customer/orders" component={ Orders } />
+          <Route exact path="/customer/orders/:id" component={ OrderDetails } />
           <Route path="/customer/checkout" component={ Checkout } />
         </Switch>
       </Provider>

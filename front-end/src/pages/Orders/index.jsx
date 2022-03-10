@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
+// import { useHistory } from 'react-router-dom';
 //  import Order from '../../components/Order';
 import moment from 'moment';
 import Navbar from '../../components/Header/Navbar';
@@ -12,6 +12,7 @@ import './orders.css';
 function Orders() {
   const { user, setUser } = useContext(contextValue);
   const [orders, setOrders] = useState([]);
+  // const history = useHistory();
 
   useEffect(() => {
     new OrderService()
@@ -32,11 +33,10 @@ function Orders() {
         <Navbar user={ user } />
       </nav>
       <section className="ordersStyle">
-        {console.log(orders)}
         {
           orders ? orders.map((order) => (
-            <Link
-              to={ `/customer/orders/${order.id}` }
+            <div
+              // onClick={ () => { history.push(`/customer/orders/${order.id}`) } }
               key={ order.id }
               className="containerOrders"
             >
@@ -52,7 +52,7 @@ function Orders() {
               <div>
                 {`R$ ${Utils.putMaskNumber(Number(order.totalPrice))}`}
               </div>
-            </Link>
+            </div>
           )) : null
         }
       </section>
