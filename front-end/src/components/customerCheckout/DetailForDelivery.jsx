@@ -11,7 +11,7 @@ export default function DetailForDelivery() {
   const [number, setNumber] = useState(null);
   const [sellers, setSellers] = useState([]);
 
-  const { totalPrice, cart, user } = useContext(contextValue);
+  const { totalPrice, cart, user, loading, setLoading } = useContext(contextValue);
   const history = useHistory();
 
 
@@ -26,20 +26,21 @@ export default function DetailForDelivery() {
     set(value);
   };
 
-  const saleCreate = async () => {
+  const saleCreate = () => {
     const obj = {
-      saller_id: select,
-      userId: user.id,
-      totalPrice,
-      deliveryAddress: address,
-      deliveryNumber: number,
+      seller_id: +select,
+      user_id: +user.id,
+      total_price: Utils.removeMaskNumber(totalPrice),
+      delivery_address: address,
+      delivery_number: number,
       status: 'AGUARDANDO PAGAMENTO',
+      sale_date: new Date()
     };
     new SalesService()
-      .createSale(Utils.getLocalStorage('token'), obj)
+      .createSale(Utils.getLocalStorage('user').token, obj)
       .then((res) => {
         console.log(res);
-        // history.push(`/customer/orders/${res.data.id}`);
+        history.push(`/customer/orders/${res.data.id}`);
       })
       .catch((err) => {
         console.error(err);

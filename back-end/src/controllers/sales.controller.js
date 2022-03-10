@@ -25,10 +25,10 @@ const getAllSellerController = async (req, res, next) => {
 }
 const createSaleController = async (req, res, next) => {
   try {
-    const { sellerId, totalPrice, deliveryAddress, deliveryNumber, status } = req.body;
-    const userId = req.user.id;
-    const sales = await createSaleService(userId, sellerId, totalPrice, deliveryAddress, deliveryNumber, status, status);
-    return res.status(success).json({ sales, user });
+    const user_id = req.user.id;
+    const { sale } = req.body;
+   const sales = await createSaleService({...sale, user_id});
+    return res.status(success).json(sales);
   } catch (error) {
     console.log(`GET CREATESALES -> ${error.message}`);
     next(error);
