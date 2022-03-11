@@ -11,7 +11,6 @@ function CustomerProducts() {
   const {
     products,
     setProducts,
-    user,
     setUser,
     totalPrice,
     setCart,
@@ -54,7 +53,7 @@ function CustomerProducts() {
 
   return (
     <div className="containerProducts">
-      <Navbar user={ user } />
+      <Navbar />
       <section className="cardsProducts">
         {products ? products.map((product) => (
           <Product
