@@ -46,7 +46,7 @@ const validateProductsTotalPrice = async (page, itemList) => {
       clickCount: quantity,
       delay: 100,
     });
-
+    console.log('productID', productId);
     await expect(page).toGetValueFromElement(
       customerProductsPage.input.card.quantity +
         `[data-testid$='-${productId}']`,

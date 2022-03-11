@@ -1,4 +1,6 @@
-const { getAllSalesService, createSaleService, getAllSeller } = require('../services/sales.service');
+const {
+  getAllSalesService,
+  createSaleService, getAllSeller } = require('../services/sales.service');
 const { success } = require('../utils/dictionary/statusCode');
 
 const getAllSales = async (req, res, next) => {
@@ -22,17 +24,16 @@ const getAllSellerController = async (req, res, next) => {
     console.log(`GET ALLSELLER -> ${error.message}`);
     next(error);
   }
-}
+};
 const createSaleController = async (req, res, next) => {
   try {
-    const user_id = req.user.id;
     const { sale } = req.body;
-   const sales = await createSaleService({...sale, user_id});
+    const sales = await createSaleService(sale);
     return res.status(success).json(sales);
   } catch (error) {
     console.log(`GET CREATESALES -> ${error.message}`);
     next(error);
   }
-}
+};
 
 module.exports = { getAllSales, createSaleController, getAllSellerController };

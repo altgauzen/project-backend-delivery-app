@@ -1,8 +1,8 @@
 /* eslint-disable no-unused-vars */
-import React from "react";
-import styled from "styled-components";
+import React from 'react';
+import styled from 'styled-components';
 
-import losango from "../../../public/img/loading.png";
+import losango from '../../../public/img/loading.png';
 
 const Container = styled.div`
   display: flex;
@@ -130,10 +130,10 @@ export default function Loading() {
   return (
     <Container>
       <Losangos>
-        <img src={losango} alt="losango1" className="losango1" />
-        <img src={losango} alt="losango2" className="losango2" />
-        <img src={losango} alt="losango3" className="losango3" />
-        <img src={losango} alt="losango4" className="losango4" />
+        <img src={ losango } alt="losango1" className="losango1" />
+        <img src={ losango } alt="losango2" className="losango2" />
+        <img src={ losango } alt="losango3" className="losango3" />
+        <img src={ losango } alt="losango4" className="losango4" />
       </Losangos>
     </Container>
   );

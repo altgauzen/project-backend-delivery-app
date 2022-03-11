@@ -91,7 +91,7 @@ function Product({ product, setTotalPrice }) {
           -
         </button>
         <input
-          type="number"
+          type="text"
           id={ `inputQuantity-${id}` }
           data-testid={ `customer_products__input-card-quantity-${id}` }
           onChange={ (e) => inputValue(e) }
