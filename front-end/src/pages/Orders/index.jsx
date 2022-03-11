@@ -6,6 +6,7 @@ import Navbar from '../../components/Header/Navbar';
 import OrderService from '../../service/sale.service';
 import contextValue from '../../context/context';
 import Utils from '../../utils/functions/index';
+import socketClient from '../../utils/soketClient/index'
 import './orders.css';
 
 function Orders() {
@@ -25,6 +26,10 @@ function Orders() {
         console.log(err);
       });
   }, [setOrders, setUser]);
+
+  // useEffect(() => {
+  //   socketClient.on('updated', ({ saleId, status }))
+  // })
 
   return (
     <div className="pageOrders">
