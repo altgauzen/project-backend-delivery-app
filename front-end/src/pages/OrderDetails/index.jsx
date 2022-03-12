@@ -12,14 +12,11 @@ function OrderDetails() {
   const { id: orderId } = useParams();
   const [orderDetails, setOrderDetails] = useState(null);
   const [seller, setSeller] = useState(null);
+  const [isLoading, setLoading] = useState(true);
   const user = JSON.parse(localStorage.getItem('user'));
   const { token, role } = user;
 
-  console.log('NO ORDER DETAILS, VEM user?', user);
-  //  console.log('NO ORDER DETAILS, VEM role?', role);
-
   useEffect(() => {
-    //  console.log('NO ORDER DETAILS, VEM id?', id);
     new SalesService()
       .getSaleById(token, orderId)
       .then((res) => {
@@ -35,14 +32,16 @@ function OrderDetails() {
     new UserService()
     .getUserById(token, idSeller)
     .then((res) => {
-      console.log(res.data, 'aaaaaa')
       if (res) setSeller(res.data)
+      setLoading(false)
     })
     .catch((err) => { console.error(err) });
   };
 
-  console.log('NO ORDER DETAILS, VEM orderDetails?', orderDetails);
-  console.log('NO ORDER DETAILS, VEM seller?', seller);
+  if (isLoading) {
+    return <div className="App">Loading...</div>;
+  }
+
   return (
     <section className="pageOrders">
       <Navbar  user={ user }/>

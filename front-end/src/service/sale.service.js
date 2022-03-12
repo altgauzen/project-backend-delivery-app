@@ -39,7 +39,7 @@ class SalesService {
       data: {},
       headers: { authorization: token },
     });
-    console.log('NO FRONT SALE SERVICE VEM SALEBYID?', response);
+    //  console.log('NO FRONT SALE SERVICE VEM SALEBYID?', response);
     return response;
   }
 }
