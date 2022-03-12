@@ -1,4 +1,4 @@
- {/* <table className="table">
+/* <table className="table">
           <thead className="titles">
             <th>Item</th>
             <th>Descrição</th>
@@ -53,4 +53,4 @@
           data-testid="customer_checkout__element-order-total-price"
         >
           {`Total: R$ ${totalPrice}`}
-        </button> */}
+        </button> */

@@ -6,7 +6,7 @@ import Navbar from '../../components/Header/Navbar';
 import OrderService from '../../service/sale.service';
 import contextValue from '../../context/context';
 import Utils from '../../utils/functions/index';
-import socketClient from '../../utils/soketClient/index'
+// import socketClient from '../../utils/soketClient/index'
 import './orders.css';
 
 function Orders() {
@@ -39,7 +39,8 @@ function Orders() {
       <section className="ordersStyle">
         {
           orders ? orders.map((order) => (
-            <div
+            <button
+              type="button"
               onClick={ () => { history.push(`/customer/orders/${order.id}`) } }
               key={ order.id }
               className="containerOrders"
@@ -56,7 +57,7 @@ function Orders() {
               <div>
                 {`R$ ${Utils.putMaskNumber(Number(order.totalPrice))}`}
               </div>
-            </div>
+            </button>
           )) : null
         }
       </section>

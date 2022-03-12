@@ -16,6 +16,16 @@ function OrderDetails() {
   const user = JSON.parse(localStorage.getItem('user'));
   const { token, role } = user;
 
+  const getSeller = (idSeller) => {
+    new UserService()
+      .getUserById(token, idSeller)
+      .then((res) => {
+        if (res) setSeller(res.data);
+        setLoading(false);
+      })
+      .catch((err) => console.error(err));
+  };
+
   useEffect(() => {
     new SalesService()
       .getSaleById(token, orderId)
@@ -26,17 +36,8 @@ function OrderDetails() {
         }
       })
       .catch((err) => console.error(err));
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
-
-  const getSeller = (idSeller) => {
-    new UserService()
-      .getUserById(token, idSeller)
-      .then((res) => {
-        if (res) setSeller(res.data);
-        setLoading(false);
-      })
-      .catch((err) => console.error(err));
-  };
 
   if (isLoading) {
     return <div className="App">Loading...</div>;
