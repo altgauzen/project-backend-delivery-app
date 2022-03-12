@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import OrderDetailsHeader from '../../components/Orders/OrderDetailsHeader';
-import OrderProductsTable from '../../components/Orders/OrderProcuctsTable';
+// import OrderProductsTable from '../../components/Orders/OrderProcuctsTable';
 import Navbar from '../../components/Header/Navbar';
 import SalesService from '../../service/sale.service';
 import UserService from '../../service/user.service';
@@ -12,23 +12,11 @@ function OrderDetails() {
   const { id: orderId } = useParams();
   const [orderDetails, setOrderDetails] = useState(null);
   const [seller, setSeller] = useState(null);
+  const [isLoading, setLoading] = useState(true);
   const user = JSON.parse(localStorage.getItem('user'));
   const { token, role } = user;
 
-  console.log('NO ORDER DETAILS, VEM user?', user);
-  //  console.log('NO ORDER DETAILS, VEM role?', role);
-
-  const getSeller = (idSeller) => {
-    new UserService()
-      .getUserById(token, idSeller)
-      .then((res) => {
-        if (res) setSeller(res.data);
-      })
-      .catch((err) => console.error(err));
-  };
-
   useEffect(() => {
-    //  console.log('NO ORDER DETAILS, VEM id?', id);
     new SalesService()
       .getSaleById(token, orderId)
       .then((res) => {
@@ -40,8 +28,20 @@ function OrderDetails() {
       .catch((err) => console.error(err));
   }, []);
 
-  console.log('NO ORDER DETAILS, VEM orderDetails?', orderDetails);
-  console.log('NO ORDER DETAILS, VEM seller?', seller);
+  const getSeller = (idSeller) => {
+    new UserService()
+      .getUserById(token, idSeller)
+      .then((res) => {
+        if (res) setSeller(res.data);
+        setLoading(false);
+      })
+      .catch((err) => console.error(err));
+  };
+
+  if (isLoading) {
+    return <div className="App">Loading...</div>;
+  }
+
   return (
     <section className="pageOrders">
       <Navbar user={ user } />
@@ -49,13 +49,14 @@ function OrderDetails() {
         <br />
         <br />
         <br />
+
         <h1>Detalhes do Pedido</h1>
         <OrderDetailsHeader
           role={ role }
           orderData={ orderDetails }
           sellerData={ seller }
         />
-        {/* <OrderProductsTable /> */}
+        {/* <'OrderProductsTable /> */}
       </main>
     </section>
   );

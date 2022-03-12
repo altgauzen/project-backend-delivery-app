@@ -1,12 +1,11 @@
 import axios from 'axios';
 
 class SalesService {
-
   async createSale(token, sale) {
     const response = await axios({
       method: 'post',
       url: 'http://localhost:3001/createSale',
-      data: {sale},
+      data: { sale },
       headers: { authorization: token },
     });
     return response;
@@ -39,7 +38,7 @@ class SalesService {
       data: {},
       headers: { authorization: token },
     });
-    console.log('NO FRONT SALE SERVICE VEM SALEBYID?', response);
+    //  console.log('NO FRONT SALE SERVICE VEM SALEBYID?', response);
     return response;
   }
 }

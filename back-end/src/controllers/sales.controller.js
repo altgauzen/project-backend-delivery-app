@@ -26,7 +26,7 @@ const getSaleById = async (req, res, next) => {
     user.token = authorization;
     const { id } = req.params;
     const order = await getSaleByIdService(id);
-    return res.status(success).json({order});
+    return res.status(success).json({ order });
   } catch (error) {
     console.log(`GET SALE BY ID -> ${error.message}`);
     next(error);
@@ -41,18 +41,18 @@ const getAllSellerController = async (req, res, next) => {
     console.log(`GET ALLSELLER -> ${error.message}`);
     next(error);
   }
-}
+};
 
 const createSaleController = async (req, res, next) => {
   try {
-    const user_id = req.user.id;
+    const saleId = req.user.id;
     const { sale } = req.body;
-   const sales = await createSaleService({...sale, user_id});
+   const sales = await createSaleService({ ...sale, saleId });
     return res.status(success).json(sales);
   } catch (error) {
     console.log(`GET CREATESALES -> ${error.message}`);
     next(error);
   }
-}
+};
 
 module.exports = { getAllSales, getSaleById, createSaleController, getAllSellerController };
