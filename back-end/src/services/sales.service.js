@@ -12,13 +12,20 @@ const schemaSales = Joi.object({
   status: Joi.string().required(),
 });
 
-const updateSaleStatusOrder = async ({ saleId, status }) => {
-  const response = await sales.update({ status }, { where: { id: saleId } });
+const updateSaleStatusOrder = async ({ sale_id, status }) => {
+  const response = await sales.update({ status }, { where: { id: sale_id } });
   return response;
 };
 
 const getAllSalesService = async () => {
   const response = await sales.findAll({ raw: true });
+  return response;
+};
+
+const getSaleByIdService = async (id) => {
+  const response = await sales.findOne({
+    where: { id },
+    });
   return response;
 };
 
@@ -30,11 +37,17 @@ const getAllSeller = async () => {
   return response;
 };
 
-const createSaleService = async (user_id, seller_id, tota_price, delivery_address, delivery_number, status) => {
+const createSaleService = async (data) => {
   // const { error } = schemaSales.validate({ seller_id, total_price, delivery_address, delivery_number, status });
   // if (error) throw errorConstructor(badRequest, error.message);
-  const response = await sales.create({ user_id, seller_id, tota_price, delivery_address, delivery_number, status });
+  const response = await sales.create(data);
   return response;
 }
 
-module.exports = { updateSaleStatusOrder, getAllSalesService, createSaleService, getAllSeller };
+module.exports = {
+  updateSaleStatusOrder,
+  getSaleByIdService,
+  getAllSalesService,
+  createSaleService,
+  getAllSeller
+};

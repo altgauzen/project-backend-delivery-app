@@ -1,4 +1,9 @@
-const { getAllSalesService, createSaleService, getAllSeller } = require('../services/sales.service');
+const {
+  getAllSalesService,
+  createSaleService,
+  getAllSeller,
+  getSaleByIdService,
+} = require('../services/sales.service');
 const { success } = require('../utils/dictionary/statusCode');
 
 const getAllSales = async (req, res, next) => {
@@ -14,6 +19,20 @@ const getAllSales = async (req, res, next) => {
   }
 };
 
+const getSaleById = async (req, res, next) => {
+  try {
+    const { user } = req;
+    const { authorization } = req.headers;
+    user.token = authorization;
+    const { id } = req.params;
+    const order = await getSaleByIdService(id);
+    return res.status(success).json({order});
+  } catch (error) {
+    console.log(`GET SALE BY ID -> ${error.message}`);
+    next(error);
+  }
+};
+
 const getAllSellerController = async (req, res, next) => {
   try {
     const seller = await getAllSeller();
@@ -23,16 +42,17 @@ const getAllSellerController = async (req, res, next) => {
     next(error);
   }
 }
+
 const createSaleController = async (req, res, next) => {
   try {
-    const { sellerId, totalPrice, deliveryAddress, deliveryNumber, status } = req.body;
-    const userId = req.user.id;
-    const sales = await createSaleService(userId, sellerId, totalPrice, deliveryAddress, deliveryNumber, status, status);
-    return res.status(success).json({ sales, user });
+    const user_id = req.user.id;
+    const { sale } = req.body;
+   const sales = await createSaleService({...sale, user_id});
+    return res.status(success).json(sales);
   } catch (error) {
     console.log(`GET CREATESALES -> ${error.message}`);
     next(error);
   }
 }
 
-module.exports = { getAllSales, createSaleController, getAllSellerController };
+module.exports = { getAllSales, getSaleById, createSaleController, getAllSellerController };

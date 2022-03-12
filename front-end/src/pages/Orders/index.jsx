@@ -14,6 +14,10 @@ function Orders() {
   const [orders, setOrders] = useState([]);
   const history = useHistory();
 
+  // useEffect(() => {
+  //   socketClient.on('updated', ({ saleId, status }))
+  // }, [])
+
   useEffect(() => {
     new OrderService()
       .getSalesAll(localStorage.getItem('token'))
@@ -26,10 +30,6 @@ function Orders() {
         console.log(err);
       });
   }, [setOrders, setUser]);
-
-  // useEffect(() => {
-  //   socketClient.on('updated', ({ saleId, status }))
-  // })
 
   return (
     <div className="pageOrders">

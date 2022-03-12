@@ -10,10 +10,12 @@ const router = express.Router();
 router.post('/register', encryption, userController.create);
 router.post('/login', encryption, userController.login);
 router.get('/getUsersAll', validateToken, userController.getAllUsers);
+router.get('/users/:id', validateToken, userController.getById);
 
 router.get('/getProductsAll', validateToken, productController.getAllProducts);
 
 router.get('/customer/orders', validateToken, saleController.getAllSales);
+router.get('/customer/orders/:id', validateToken, saleController.getSaleById);
 router.post('/createSale', validateToken, saleController.createSaleController);
 router.get('/sellers', validateToken, saleController.getAllSellerController);
 
