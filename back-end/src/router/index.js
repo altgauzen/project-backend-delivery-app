@@ -10,7 +10,7 @@ const router = express.Router();
 router.post('/register', encryption, userController.create);
 router.post('/login', encryption, userController.login);
 router.get('/getUsersAll', validateToken, userController.getAllUsers);
-router.get('/users/:id', validateToken, userController.getById);
+router.get('/user/:id', validateToken, userController.getById);
 
 router.get('/getProductsAll', validateToken, productController.getAllProducts);
 

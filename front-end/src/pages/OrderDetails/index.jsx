@@ -41,42 +41,21 @@ function OrderDetails() {
     .catch((err) => { console.error(err) });
   };
 
-  // useEffect(() => {
-  //   //  console.log('NO ORDER DETAILS, VEM id?', id);
-  //   new SalesService()
-  //     .getSaleById(token, orderId)
-  //     .then((res) => {
-  //       if (res) setOrderDetails(res.data);
-  //       const idSeller = orderDetails.order.sellerId;
-  //       new UserService()
-  //       .getUserById(token, idSeller)
-  //       .then((res) => { if (res) setSeller(res.data) })
-  //       .catch((err) => { console.error(err) });
-  //     })
-  //     .catch((err) => { console.error(err) });
-  // }, []);
-
-//   useEffect(() => {
-//     const idSeller = orderDetails.order.sellerId;
-//     new UserService()
-//       .getUserById(token, idSeller)
-//       .then((res) => { if (res) setSeller(res.data) })
-//       .catch((err) => { console.error(err) });
-// }, [orderDetails]);
-
   console.log('NO ORDER DETAILS, VEM orderDetails?', orderDetails);
   console.log('NO ORDER DETAILS, VEM seller?', seller);
   return (
     <section className="pageOrders">
       <Navbar  user={ user }/>
         <main>
+          <br></br>
+          <br></br>
+          <br></br>
           <h1>Detalhes do Pedido</h1>
-          <p></p>
-          {/* <OrderDetailsHeader
+          <OrderDetailsHeader
           role={ role }
           orderData={ orderDetails }
-          // sellerData={ seller }
-          /> */}
+          sellerData={ seller }
+          />
           {/* <OrderProductsTable /> */}
         </main>
     </section>
