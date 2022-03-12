@@ -1,10 +1,12 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useContext } from 'react';
 import { useParams } from 'react-router-dom';
 import OrderDetailsHeader from '../../components/Orders/OrderDetailsHeader';
 // import OrderProductsTable from '../../components/Orders/OrderProcuctsTable';
 import Navbar from '../../components/Header/Navbar';
 import SalesService from '../../service/sale.service';
 import UserService from '../../service/user.service';
+import OrderProducts from '../../components/Orders/OrderProducts';
+
 // import contextValue from '../../context/context';
 // import './ordersDetails.css';
 
@@ -56,6 +58,7 @@ function OrderDetails() {
           orderData={ orderDetails }
           sellerData={ seller }
         />
+        <OrderProducts />
         {/* <'OrderProductsTable /> */}
       </main>
     </section>
