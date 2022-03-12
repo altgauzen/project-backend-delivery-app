@@ -17,10 +17,10 @@
 }
 
 .containerOrders {
-  text-decoration: none;
   background-color: red;
   border: none;
   display: flex;
   flex-direction: row;
   justify-content: space-evenly;
+  text-decoration: none;
 }

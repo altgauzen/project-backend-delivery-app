@@ -25,6 +25,7 @@ function Orders() {
         Utils.setLocalStorage('user', data.user);
         setUser(data.user);
         setOrders(data.orders);
+        setLoading(false);
       })
       .catch((err) => {
         console.log(err);
@@ -41,7 +42,7 @@ function Orders() {
           orders ? orders.map((order) => (
             <button
               type="button"
-              onClick={ () => { history.push(`/customer/orders/${order.id}`) } }
+              onClick={ () => history.push(`/customer/orders/${order.id}`) }
               key={ order.id }
               className="containerOrders"
             >
@@ -55,7 +56,7 @@ function Orders() {
                 {moment(order.sale_date).format('DD-MM-YY')}
               </div>
               <div>
-                {`R$ ${Utils.putMaskNumber(Number(order.totalPrice))}`}
+                {`R$ ${Utils.putMaskNumber(Number(order.total_price))}`}
               </div>
             </button>
           )) : null
