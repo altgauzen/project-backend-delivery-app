@@ -12,7 +12,7 @@ function CustomerCheckout() {
   const { user } = React.useContext(context);
   return (
     <section>
-      <Navbar user={ user }/>
+      <Navbar user={ user } />
       <FinalizeOrder />
       <DetailForDelivery />
     </section>
