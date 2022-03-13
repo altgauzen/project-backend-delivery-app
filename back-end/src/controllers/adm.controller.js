@@ -1,4 +1,4 @@
-const { createADMUser } = require('../services/adm.service.js')
+const { createADMUser } = require('../services/adm.service');
 const { created } = require('../utils/dictionary/statusCode');
 
 const ADMcreateUser = async (req, res, next) => {

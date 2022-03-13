@@ -10,15 +10,14 @@
 }
 
 .containerNavbar{
-  background: #fff;
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  z-index: 999px;
-  box-shadow: 0px 0px 6px 0px rgba(0, 0, 0, 0.5);
+  align-items: center;
+  background: rgb(210, 233, 204);
+  box-shadow: rgba(0, 0, 0, 0.5);
   display: flex;
   justify-content: space-around;
-  align-items: center;
-
+  left: 0;
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 999px;
 }

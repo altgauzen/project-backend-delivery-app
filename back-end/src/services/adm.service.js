@@ -3,7 +3,6 @@ const { users } = require('../database/models');
 const { badRequest, conflict } = require('../utils/dictionary/statusCode');
 const errorConstructor = require('../utils/functions/errorHandlers');
 
-
 const schemaUser = Joi.object({
   name: Joi.string().min(12).required(),
   email: Joi.string().email().required(),
@@ -38,4 +37,4 @@ const createADMUser = async (name, email, password, role) => {
 
 module.exports = {
   createADMUser,
-}
+};

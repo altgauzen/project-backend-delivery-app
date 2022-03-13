@@ -1,18 +1,15 @@
-import React from 'react';
+import React, { useContext } from 'react';
 
 import Navbar from '../../components/Header/Navbar';
 import FinalizeOrder from '../../components/customerCheckout/FinalizeOrder';
 import DetailForDelivery from '../../components/customerCheckout/DetailForDelivery';
-import SalesService from '../../service/sale.service';
-import Utils from '../../utils/functions/index';
-// import Header from '../../components/Header/Navbar';
-// import context from '../../context/context';
+import contextValue from '../../context/context';
 
 function CustomerCheckout() {
+  const { user } = useContext(contextValue);
   return (
     <section>
-      {/* <NavBar /> */}
-      {/* <Header  user={ user }/> */}
+      <Navbar user={ user } />
       <FinalizeOrder />
       <DetailForDelivery />
     </section>
