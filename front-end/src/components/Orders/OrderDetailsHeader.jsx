@@ -7,7 +7,6 @@ export default function OrderDetailsHeader({ orderData, sellerData }) {
     <section className="containerOrders">
       <div data-testid="customer_order_details__element-order-details-label-order-id">
         {`Pedido: ${orderData.order.id}`}
-        { console.log('NO ORDER DETAILS HEADER, VEM orderData?', orderData) }
       </div>
       <div
         data-testid="customer_order_details__element-order-details-label-seller-name"

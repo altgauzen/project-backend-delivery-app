@@ -12,10 +12,13 @@ import OrderProducts from '../../components/Orders/OrderProducts';
 
 function OrderDetails() {
   const { id: orderId } = useParams();
+
   const [orderDetails, setOrderDetails] = useState(null);
   const [seller, setSeller] = useState(null);
   const [isLoading, setLoading] = useState(true);
+
   const user = JSON.parse(localStorage.getItem('user'));
+
   const { token, role } = user;
 
   const getSeller = (idSeller) => {
