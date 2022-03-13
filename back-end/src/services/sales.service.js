@@ -1,17 +1,17 @@
-const Joi = require('joi');
+// const Joi = require('joi');
 const { sales, users } = require('../database/models');
-const { badRequest } = require('../utils/dictionary/statusCode');
-const errorConstructor = require('../utils/functions/errorHandlers');
+// const { badRequest } = require('../utils/dictionary/statusCode');
+// const errorConstructor = require('../utils/functions/errorHandlers');
 
-const schemaSales = Joi.object({
-  userId: Joi.number(),
-  sellerId: Joi.number().required(),
-  totalPrice: Joi.number().required(),
-  deliveryAddress: Joi.string().required(),
-  deliveryNumber: Joi.number().required(),
-  status: Joi.string().required(),
-  saleDate: Joi.date().required(),
-});
+// const schemaSales = Joi.object({
+//   userId: Joi.number(),
+//   sellerId: Joi.number(),
+//   totalPrice: Joi.number(),
+//   deliveryAddress: Joi.string(),
+//   deliveryNumber: Joi.number(),
+//   status: Joi.string(),
+//   saleDate: Joi.date(),
+// });
 
 const updateSaleStatusOrder = async ({ saleId, status }) => {
   const response = await sales.update({ status }, { where: { id: saleId } });
@@ -31,11 +31,10 @@ const getAllSeller = async () => {
   return response;
 };
 
-const createSaleService = async (status, sellerId, totalPrice, deliveryAddress, deliveryNumber, saleDate, userId) => {
-  const { error } = schemaSales.validate({ status, sellerId, totalPrice, deliveryAddress, deliveryNumber, saleDate, userId });
-  if (error) throw errorConstructor(badRequest, error.message);
-  const { dataValues } = await sales.create({ status, sellerId, totalPrice, deliveryAddress, deliveryNumber, saleDate, userId });
-  console.log(dataValues, 'aqui eu');
+const createSaleService = async (userId, saleData) => {
+  // const { error } = schemaSales.validate({ status, sellerId, totalPrice, deliveryAddress, deliveryNumber, saleDate, userId });
+  // if (error) throw errorConstructor(badRequest, error.message);
+  const  { dataValues } = await sales.create({ userId: userId, ...saleData });
   return dataValues;
 };
 

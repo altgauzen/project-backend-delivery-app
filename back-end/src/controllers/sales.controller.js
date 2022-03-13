@@ -30,13 +30,7 @@ const getAllSellerController = async (req, res, next) => {
 
 const createSaleController = async (req, res, next) => {
   try {
-    const userId = req.user.id;
-    const {
-      status, sellerId, totalPrice, deliveryAddress, deliveryNumber, saleDate,
-    } = req.body;
-    const sales = await createSaleService(
-      status, sellerId, totalPrice, deliveryAddress, deliveryNumber, saleDate, userId,
-      );
+    const sales = await createSaleService(req.user.id, req.body);
     return res.status(success).json(sales);
   } catch (error) {
     console.log(`GET CREATESALES -> ${error.message}`);
