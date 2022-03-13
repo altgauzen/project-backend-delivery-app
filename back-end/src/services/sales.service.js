@@ -1,5 +1,5 @@
 // const Joi = require('joi');
-const { sales, users } = require("../database/models");
+const { sales, users } = require('../database/models');
 // const { badRequest } = require('../utils/dictionary/statusCode');
 // const errorConstructor = require('../utils/functions/errorHandlers');
 
@@ -25,8 +25,8 @@ const getAllSalesService = async () => {
 
 const getAllSeller = async () => {
   const response = await users.findAll({
-    where: { role: "seller" },
-    attributes: { exclude: ["password", "email"] },
+    where: { role: 'seller' },
+    attributes: { exclude: ['password', 'email'] },
   });
   return response;
 };
