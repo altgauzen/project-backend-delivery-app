@@ -1,5 +1,5 @@
 // const Joi = require('joi');
-const { sales, users } = require('../database/models');
+const { sales, users } = require("../database/models");
 // const { badRequest } = require('../utils/dictionary/statusCode');
 // const errorConstructor = require('../utils/functions/errorHandlers');
 
@@ -25,8 +25,8 @@ const getAllSalesService = async () => {
 
 const getAllSeller = async () => {
   const response = await users.findAll({
-    where: { role: 'seller' },
-    attributes: { exclude: ['password', 'email'] },
+    where: { role: "seller" },
+    attributes: { exclude: ["password", "email"] },
   });
   return response;
 };
@@ -34,8 +34,13 @@ const getAllSeller = async () => {
 const createSaleService = async (userId, saleData) => {
   // const { error } = schemaSales.validate({ status, sellerId, totalPrice, deliveryAddress, deliveryNumber, saleDate, userId });
   // if (error) throw errorConstructor(badRequest, error.message);
-  const  { dataValues } = await sales.create({ userId: userId, ...saleData });
+  const { dataValues } = await sales.create({ userId: userId, ...saleData });
   return dataValues;
 };
 
-module.exports = { updateSaleStatusOrder, getAllSalesService, createSaleService, getAllSeller };
+module.exports = {
+  updateSaleStatusOrder,
+  getAllSalesService,
+  createSaleService,
+  getAllSeller,
+};
