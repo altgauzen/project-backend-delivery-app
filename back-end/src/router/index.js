@@ -2,6 +2,7 @@ const express = require('express');
 const userController = require('../controllers/users.controller');
 const productController = require('../controllers/products.controller');
 const saleController = require('../controllers/sales.controller');
+const ADMController = require('../controllers/adm.controller.js')
 const encryption = require('../middlewares/encryptionMd5');
 const { validateToken } = require('../middlewares/auth');
 
@@ -17,4 +18,6 @@ router.get('/customer/orders', validateToken, saleController.getAllSales);
 router.post('/createSale', validateToken, saleController.createSaleController);
 router.get('/sellers', validateToken, saleController.getAllSellerController);
 
+
+router.post('/management', ADMController.ADMcreateUser);
 module.exports = router;
