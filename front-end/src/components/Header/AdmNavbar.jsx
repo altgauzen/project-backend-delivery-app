@@ -2,7 +2,7 @@ import React, { useContext } from 'react';
 import PropTypes from 'prop-types';
 import { useHistory } from 'react-router-dom';
 import './navbar.css';
-import context from '../../context/context'
+import context from '../../context/context';
 
 function AdmNavbar() {
   const history = useHistory();
@@ -21,7 +21,7 @@ function AdmNavbar() {
       <div
         data-testid="customer_products__element-navbar-user-full-name"
       >
-      { user.name }
+        { user.name }
       </div>
       <button
         type="button"

@@ -19,15 +19,15 @@ function Login() {
         const { token, user } = res.data;
         localStorage.setItem('token', token);
         switch (user.role) {
-          case 'customer':
-            history.push('/customer/products');
-            break;
-          case 'administrator':
-            history.push('/management');
-            break;
-          case 'seller':
-            history.push('/seller/products');
-            break;
+        case 'customer':
+          history.push('/customer/products');
+          break;
+        case 'administrator':
+          history.push('/management');
+          break;
+        default:
+          history.push('/seller/products');
+          break;
         }
       })
       .catch((err) => {

@@ -18,5 +18,5 @@ router.get('/customer/orders', validateToken, saleController.getAllSales);
 router.post('/createSale', validateToken, saleController.createSaleController);
 router.get('/sellers', validateToken, saleController.getAllSellerController);
 
-router.post('/management', ADMController.ADMcreateUser);
+router.post('/management', encryption, ADMController.ADMcreateUser);
 module.exports = router;
