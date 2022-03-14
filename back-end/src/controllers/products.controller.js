@@ -3,7 +3,6 @@ const { success } = require('../utils/dictionary/statusCode');
 
 const getAllProducts = async (req, res, next) => {
   try {
-    const { user } = req;
     const products = await getAllProductsService();
     return res.status(success).json({ products });
   } catch (error) {
