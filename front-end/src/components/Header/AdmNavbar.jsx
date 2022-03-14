@@ -1,10 +1,12 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import PropTypes from 'prop-types';
 import { useHistory } from 'react-router-dom';
 import './navbar.css';
+import context from '../../context/context'
 
-function AdmNavbar({ user }) {
+function AdmNavbar() {
   const history = useHistory();
+  const { user } = useContext(context);
 
   const logout = () => {
     localStorage.clear();
@@ -19,7 +21,7 @@ function AdmNavbar({ user }) {
       <div
         data-testid="customer_products__element-navbar-user-full-name"
       >
-        {user.name}
+      { user.name }
       </div>
       <button
         type="button"

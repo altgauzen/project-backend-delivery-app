@@ -54,7 +54,7 @@ function CustomerProducts() {
 
   return (
     <div className="containerProducts">
-      <Navbar user={ user } />
+      <Navbar />
       <section className="cardsProducts">
         {products ? products.map((product) => (
           <Product

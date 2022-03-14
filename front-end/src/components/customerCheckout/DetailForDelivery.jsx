@@ -1,9 +1,9 @@
-import React, { useState, useContext, useEffect } from 'react';
-import './DetailForDelivery.css';
-import { useHistory } from 'react-router-dom';
-import contextValue from '../../context/context';
-import SalesService from '../../service/sale.service';
-import Utils from '../../utils/functions/index';
+import React, { useState, useContext, useEffect } from "react";
+import "./DetailForDelivery.css";
+import { useHistory } from "react-router-dom";
+import contextValue from "../../context/context";
+import SalesService from "../../service/sale.service";
+import Utils from "../../utils/functions/index";
 
 export default function DetailForDelivery() {
   const [select, setSelect] = useState(null);
@@ -11,14 +11,19 @@ export default function DetailForDelivery() {
   const [number, setNumber] = useState(null);
   const [sellers, setSellers] = useState([]);
 
-  const { totalPrice, user } = useContext(contextValue);
+  const { totalPrice, cart, user, loading, setLoading } =
+    useContext(contextValue);
   const history = useHistory();
 
   useEffect(() => {
     new SalesService()
-      .getSellerAll(Utils.getLocalStorage('user').token)
-      .then((res) => { if (res) setSellers(res.data); })
-      .catch((err) => { console.error(err); });
+      .getSellerAll(Utils.getLocalStorage("user").token)
+      .then((res) => {
+        if (res) setSellers(res.data);
+      })
+      .catch((err) => {
+        console.error(err);
+      });
   }, []);
 
   const handlerInput = ({ target: { value } }, set) => {
@@ -32,11 +37,11 @@ export default function DetailForDelivery() {
       total_price: Utils.removeMaskNumber(totalPrice),
       delivery_address: address,
       delivery_number: number,
-      status: 'AGUARDANDO PAGAMENTO',
+      status: "AGUARDANDO PAGAMENTO",
       sale_date: new Date(),
     };
     new SalesService()
-      .createSale(Utils.getLocalStorage('user').token, obj)
+      .createSale(Utils.getLocalStorage("user").token, obj)
       .then((res) => {
         console.log(res);
         history.push(`/customer/orders/${res.data.id}`);
@@ -54,13 +59,14 @@ export default function DetailForDelivery() {
           <select
             id="select-seller"
             data-testid="customer_checkout__select-seller"
-            onClick={ (event) => handlerInput(event, setSelect) }
+            onClick={(event) => handlerInput(event, setSelect)}
           >
-            {
-              sellers.map((seller) => (
-                <option key={ seller.id } value={ seller.id }>{seller.name}</option>
-              ))
-            }
+            <option value={""} />
+            {sellers.map((seller) => (
+              <option key={seller.id} value={seller.id}>
+                {seller.name}
+              </option>
+            ))}
           </select>
         </label>
 
@@ -70,7 +76,7 @@ export default function DetailForDelivery() {
             type="text"
             name="input-address"
             data-testid="customer_checkout__input-address"
-            onChange={ (event) => handlerInput(event, setAddress) }
+            onChange={(event) => handlerInput(event, setAddress)}
           />
         </label>
 
@@ -80,7 +86,7 @@ export default function DetailForDelivery() {
             type="text"
             name="input-addressNumber"
             data-testid="customer_checkout__input-addressNumber"
-            onChange={ (event) => handlerInput(event, setNumber) }
+            onChange={(event) => handlerInput(event, setNumber)}
           />
         </label>
       </form>
@@ -88,7 +94,7 @@ export default function DetailForDelivery() {
       <button
         data-testid="customer_checkout__button-submit-order"
         type="button"
-        onClick={ saleCreate }
+        onClick={saleCreate}
       >
         FINALIZAR PEDIDO
       </button>

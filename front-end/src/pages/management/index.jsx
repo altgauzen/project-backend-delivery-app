@@ -67,7 +67,7 @@ function Management() {
   };
   return (
     <div>
-      <AdmNavbar user={ user } />
+      <AdmNavbar />
       <div>
         <h1>cadastrar novo usuário</h1>
         <form action="" method="post" className="formContainer">
