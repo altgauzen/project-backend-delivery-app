@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 class ADMService {
-  async register(name, email, password, role) {
+  async register({ name, email, password, role }, token) {
     const response = await axios({
       method: 'post',
       url: 'http://localhost:3001/management',
@@ -11,6 +11,8 @@ class ADMService {
         password,
         role,
       },
+      headers: { authorization: token },
+      // hasToken: true
     });
     return response;
   }

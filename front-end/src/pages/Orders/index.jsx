@@ -26,7 +26,7 @@ function Orders() {
 
   return (
     <div>
-      {/* <Navbar /> */}
+      <Navbar />
       <section>
         {
           orders.map((order) => (

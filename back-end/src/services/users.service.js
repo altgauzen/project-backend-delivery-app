@@ -51,6 +51,7 @@ const userLogin = async (email, password) => {
   }
   const user = await getUserByEmail(email);
   const token = createToken({ payload: searchingUser });
+  user.token = token;
   return { token, user };
 };
 

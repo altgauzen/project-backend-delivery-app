@@ -23,8 +23,6 @@ function CustomerProducts() {
     new ProductsService()
       .getProductsAll(localStorage.getItem('token'))
       .then(({ data }) => {
-        Utils.setLocalStorage('user', data.user);
-        setUser(data.user);
         setProducts(data.products);
       })
       .catch((err) => {

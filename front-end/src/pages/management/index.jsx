@@ -1,66 +1,52 @@
-import React, { useState, useContext } from 'react';
+import React, { useState, useEffect } from 'react';
 import ADMService from '../../service/adm.service';
-import ErrorLogin from '../../components/ErrorLogin';
 import AdmNavbar from '../../components/Header/AdmNavbar';
-import contextValue from '../../context/context';
+import Utils from '../../utils/functions/index';
+import ErrorLogin from '../../components/ErrorLogin';
 
 function Management() {
-  const [name, setName] = useState('');
-  const [validName, setValidName] = useState(false);
-  const [email, setEmail] = useState('');
-  const [validEmail, setValidEmail] = useState(false);
+  const [user, setUser] = useState({
+    name: '',
+    email: '',
+    password: '',
+    role: '',
+  });
+  const [validCampus, setValidCampus] = useState({
+    name: false,
+    email: false,
+    password: false,
+    role: false,
+  });
+  const [disabled, setDisabled] = useState(true);
   const [error, setError] = useState(false);
   const [messageError, setMessageError] = useState('');
-  const [password, setPassword] = useState('a');
-  const [validPassword, setValidPassword] = useState(false);
-  const [option, setOption] = useState(['Vendedor', 'Cliente']);
-  const [role, setRole] = useState();
-  const { user } = useContext(contextValue);
-  const handlerInput = ({ target: { value } }, set) => {
-    if (value === 'Cliente') {
-      return set(value.replace('Cliente', 'customer'));
-    } if (value === 'Vendedor') {
-      return set(value.replace('Vendedor', 'seller'));
-    }
-  };
-  const signup = () => {
-    new ADMService().register(name, email, password, role).catch((err) => {
-      setError(true);
-      setMessageError(err.message);
-      console.log('ERRO -> ', err);
+
+  const handlerInput = ({ target: { value, id } }, set) => {
+    setValidCampus({
+      ...validCampus,
+      [id]: Utils[`validate${id[0].toUpperCase() + id.substr(1)}`](value),
     });
+    set({ ...user, [id]: value });
   };
-  const ValidateName = ({ target: { value } }) => {
-    const minLength = 12;
-    if (value.length > minLength) {
-      setValidName(true);
-    } else {
-      setValidName(false);
-    }
-    setName(value);
+
+  useEffect(() => {
+    const campus = Object.keys(validCampus).filter((key) => validCampus[key] === false);
+    setDisabled(!!campus.length);
+  }, [validCampus]);
+
+  const signup = () => {
+    new ADMService().register(user, localStorage.getItem('token'))
+      .then((res) => {
+        setError(false);
+        console.table(res);
+      })
+      .catch((err) => {
+        setError(true);
+        setMessageError(err.message);
+        console.log('ERRO -> ', err);
+      });
   };
-  const validateEmail = ({ target: { value } }) => {
-    const validaEmail = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    if (validaEmail.test(value)) {
-      setValidEmail(true);
-    } else {
-      setValidEmail(false);
-    }
-    setEmail(value);
-  };
-  const validatePassword = ({ target: { value } }) => {
-    const minLength = 6;
-    if (value.length >= minLength) {
-      setValidPassword(true);
-    } else {
-      setValidPassword(false);
-    }
-    setPassword(value);
-  };
-  const submit = () => {
-    if (validEmail && validPassword && validName) return false;
-    return true;
-  };
+
   const handleButtonRegister = (e) => {
     e.preventDefault();
     signup();
@@ -78,7 +64,7 @@ function Management() {
               id="name"
               data-testid="admin_manage__input-name"
               minLength="12"
-              onChange={ (event) => ValidateName(event) }
+              onChange={ (event) => handlerInput(event, setUser) }
               placeholder="12 caracteres"
             />
           </label>
@@ -88,7 +74,7 @@ function Management() {
               type="email"
               id="email"
               data-testid="admin_manage__input-email"
-              onChange={ (event) => validateEmail(event) }
+              onChange={ (event) => handlerInput(event, setUser) }
               placeholder="seu-email@site.com.br"
             />
           </label>
@@ -99,32 +85,30 @@ function Management() {
               id="password"
               data-testid="admin_manage__input-password"
               minLength="6"
-              onChange={ (event) => validatePassword(event) }
+              onChange={ (event) => handlerInput(event, setUser) }
               placeholder="******"
             />
           </label>
           <select
+            id="role"
+            value={ user.role }
             data-testid="admin_manage__select-role"
-            name="columm"
-            onChange={ (event) => handlerInput(event, setRole) }
+            onChange={ (event) => handlerInput(event, setUser) }
           >
-            {option.map((item, index) => (
-              <option key={ index } value={ item }>
-                {item}
-              </option>
-            ))}
+            <option value="customer">Cliente</option>
+            <option value="seller">Vendedor</option>
           </select>
           <button
             type="submit"
             data-testid="admin_manage__button-register"
-            disabled={ submit() }
+            disabled={ disabled }
             onClick={ handleButtonRegister }
           >
             CADASTRAR
           </button>
           {error ? (
             <ErrorLogin
-              datatestid="common_register__element-invalid_register"
+              datatestid="admin_manage__element-invalid-register"
               message={ messageError }
             />
           ) : (
