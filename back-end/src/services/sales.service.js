@@ -59,10 +59,17 @@ const createSaleService = async (data) => {
   return response;
 };
 
+const getOrderProductsByIdService = async () => {
+  const res = await sales.findOne();
+
+  return res;
+};
+
 module.exports = {
   updateSaleStatusOrder,
   getSaleByIdService,
   getAllSalesService,
   createSaleService,
   getAllSeller,
+  getOrderProductsByIdService,
 };

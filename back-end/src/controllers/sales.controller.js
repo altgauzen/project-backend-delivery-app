@@ -3,6 +3,7 @@ const {
   createSaleService,
   getAllSeller,
   getSaleByIdService,
+  getOrderProductsByIdService,
 } = require('../services/sales.service');
 const { success } = require('../utils/dictionary/statusCode');
 
@@ -57,4 +58,20 @@ const createSaleController = async (req, res, next) => {
   }
 };
 
-module.exports = { getAllSales, getSaleById, createSaleController, getAllSellerController };
+const getOrderProductsById = async (req, res, next) => {
+  try {
+    const { id } = req.params;
+    const resService = await getOrderProductsByIdService(id);
+    return res.status(success).json(resService);
+  } catch (error) {
+    next(error);
+  }
+};
+
+module.exports = {
+  getAllSales,
+  getSaleById,
+  createSaleController,
+  getAllSellerController,
+  getOrderProductsById,
+};

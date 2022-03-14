@@ -19,4 +19,7 @@ router.get('/customer/orders/:id', validateToken, saleController.getSaleById);
 router.post('/createSale', validateToken, saleController.createSaleController);
 router.get('/sellers', validateToken, saleController.getAllSellerController);
 
+// router Gênesis
+router.get('/customer/orders/products/:id', validateToken, saleController.getOrderProductsById);
+
 module.exports = router;
