@@ -1,4 +1,4 @@
-const { sales, users, salesProducts } = require('../database/models');
+const { sales, users, salesProducts, products } = require('../database/models');
 
 // const Joi = require('joi');
 // const { badRequest } = require('../utils/dictionary/statusCode');
@@ -60,7 +60,7 @@ const createSaleService = async (data) => {
 };
 
 const getOrderProductsByIdService = async () => {
-  const res = await sales.findOne();
+  const res = await salesProducts.findAll();
 
   return res;
 };
