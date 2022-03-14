@@ -8,6 +8,7 @@ import Register from './pages/Register/index';
 import Orders from './pages/Orders/index';
 import Provider from './context/provider';
 import Checkout from './pages/CustomerCheckout/index';
+import Management from './pages/management';
 
 function App() {
   return (
@@ -22,6 +23,7 @@ function App() {
           <Route path="/customer/products" component={ Products } />
           <Route path="/customer/orders" component={ Orders } />
           <Route path="/customer/checkout" component={ Checkout } />
+          <Route path="/management" component={ Management } />
         </Switch>
       </Provider>
     </div>

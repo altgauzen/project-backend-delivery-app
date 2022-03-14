@@ -1,33 +1,27 @@
 import React, { useContext } from 'react';
+import PropTypes from 'prop-types';
 import { useHistory } from 'react-router-dom';
-import contextValue from '../../context/context';
 import './navbar.css';
 import context from '../../context/context'
 
-function Navbar() {
+function AdmNavbar() {
   const history = useHistory();
   const { user } = useContext(context);
+
   const logout = () => {
     localStorage.clear();
     history.push('/login');
   };
 
   return (
-    <header className="containerHeader">
+    <header className="containerNavbar">
       <div data-testid="customer_products__element-navbar-link-products">
-        PRODUTOS
+        GERENCIAR USUÁRIOS
       </div>
-      <button
-        type="button"
-        data-testid="customer_products__element-navbar-link-orders"
-        onClick={ () => history.push('/customer/orders') }
-      >
-        <span>MEUS PEDIDOS</span>
-      </button>
       <div
         data-testid="customer_products__element-navbar-user-full-name"
       >
-        {user.name}
+      { user.name }
       </div>
       <button
         type="button"
@@ -40,4 +34,14 @@ function Navbar() {
   );
 }
 
-export default Navbar;
+AdmNavbar.propTypes = {
+  user: PropTypes.shape({
+    id: PropTypes.number,
+    name: PropTypes.string,
+    email: PropTypes.string,
+    role: PropTypes.string,
+    token: PropTypes.string,
+  }).isRequired,
+};
+
+export default AdmNavbar;

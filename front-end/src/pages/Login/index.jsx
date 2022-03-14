@@ -16,9 +16,19 @@ function Login() {
     new UserService()
       .login(email, password)
       .then((res) => {
-        const { token } = res.data;
+        const { token, user } = res.data;
         localStorage.setItem('token', token);
-        history.push('/customer/products');
+        switch (user.role) {
+          case 'customer':
+            history.push('/customer/products');
+            break;
+          case 'administrator':
+            history.push('/management');
+            break;
+          case 'seller':
+            history.push('/seller/products');
+            break;
+        }
       })
       .catch((err) => {
         setError(true);

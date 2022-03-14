@@ -7,7 +7,7 @@ import contextValue from '../../context/context';
 import Utils from '../../utils/functions/index';
 
 function Orders() {
-  const { user, setUser } = useContext(contextValue);
+  const { setUser } = useContext(contextValue);
   const { orders, setOrders } = useState([]);
 
   useEffect(() => {
@@ -26,7 +26,7 @@ function Orders() {
 
   return (
     <div>
-      <Navbar user={ user } />
+      {/* <Navbar /> */}
       <section>
         {
           orders.map((order) => (

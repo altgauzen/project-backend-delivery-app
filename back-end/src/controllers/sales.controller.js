@@ -1,6 +1,9 @@
 const {
   getAllSalesService,
-  createSaleService, getAllSeller } = require('../services/sales.service');
+  createSaleService,
+  getAllSeller,
+} = require('../services/sales.service');
+
 const { success } = require('../utils/dictionary/statusCode');
 
 const getAllSales = async (req, res, next) => {
