@@ -8,3 +8,16 @@
   position: fixed;
   width: 100%;
 }
+
+.containerNavbar {
+  align-items: center;
+  background: rgb(210, 233, 204);
+  box-shadow: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: space-around;
+  left: 0;
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 999px;
+}

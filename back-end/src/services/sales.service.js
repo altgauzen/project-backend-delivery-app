@@ -1,16 +1,17 @@
+// const Joi = require('joi');
 const { sales, users } = require('../database/models');
-const Joi = require('joi');
-const { badRequest } = require('../utils/dictionary/statusCode');
-const errorConstructor = require('../utils/functions/errorHandlers');
+// const { badRequest } = require('../utils/dictionary/statusCode');
+// const errorConstructor = require('../utils/functions/errorHandlers');
 
-const schemaSales = Joi.object({
-  userId: Joi.number().required(),
-  sellerId: Joi.number().required(),
-  totalPrice: Joi.number().required(),
-  deliveryAddress: Joi.string().required(),
-  deliveryNumber: Joi.number().required(),
-  status: Joi.string().required(),
-});
+// const schemaSales = Joi.object({
+//   userId: Joi.number(),
+//   sellerId: Joi.number(),
+//   totalPrice: Joi.number(),
+//   deliveryAddress: Joi.string(),
+//   deliveryNumber: Joi.number(),
+//   status: Joi.string(),
+//   saleDate: Joi.date(),
+// });
 
 const updateSaleStatusOrder = async ({ saleId, status }) => {
   const response = await sales.update({ status }, { where: { id: saleId } });
@@ -30,11 +31,16 @@ const getAllSeller = async () => {
   return response;
 };
 
-const createSaleService = async (data) => {
-  // const { error } = schemaSales.validate({ seller_id, total_price, delivery_address, delivery_number, status });
+const createSaleService = async (userId, saleData) => {
+  // const { error } = schemaSales.validate({ status, sellerId, totalPrice, deliveryAddress, deliveryNumber, saleDate, userId });
   // if (error) throw errorConstructor(badRequest, error.message);
-  const response = await sales.create(data);
-  return response;
-}
+  const { dataValues } = await sales.create({ userId: userId, ...saleData });
+  return dataValues;
+};
 
-module.exports = { updateSaleStatusOrder, getAllSalesService, createSaleService, getAllSeller };
+module.exports = {
+  updateSaleStatusOrder,
+  getAllSalesService,
+  createSaleService,
+  getAllSeller,
+};

@@ -16,9 +16,9 @@ const create = async (req, res, next) => {
 const login = async (req, res, next) => {
   try {
     const { email, password } = req.body;
-    const token = await userLogin(email, password);
+    const data = await userLogin(email, password);
 
-    return res.status(success).json({ token });
+    return res.status(success).json(data);
   } catch (error) {
     console.log(`POST LOGIN -> ${error.message}`);
     next(error);
