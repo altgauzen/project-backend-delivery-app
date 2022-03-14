@@ -52,7 +52,7 @@ const createSaleService = async (data) => {
   // console.log('NO SALES SERVICE, VEM NO CREATESALE O QUE NA RESPONSE???', response);
   shoppingCart.forEach((item) => {
     salesProducts.create({
-      sale_id: response.dataValues.id, product_id: item.productId, quantity: item.quantity,
+      saleId: response.dataValues.id, productId: item.productId, quantity: item.quantity,
     });
   });
 
