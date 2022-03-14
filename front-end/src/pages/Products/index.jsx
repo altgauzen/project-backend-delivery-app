@@ -11,7 +11,6 @@ function CustomerProducts() {
   const {
     products,
     setProducts,
-    user,
     setUser,
     totalPrice,
     setCart,

@@ -11,19 +11,14 @@ export default function DetailForDelivery() {
   const [number, setNumber] = useState(null);
   const [sellers, setSellers] = useState([]);
 
-  const { totalPrice, cart, user, loading, setLoading } =
-    useContext(contextValue);
+  const { totalPrice, user } = useContext(contextValue);
   const history = useHistory();
 
   useEffect(() => {
     new SalesService()
-      .getSellerAll(Utils.getLocalStorage("user").token)
-      .then((res) => {
-        if (res) setSellers(res.data);
-      })
-      .catch((err) => {
-        console.error(err);
-      });
+      .getSellerAll(Utils.getLocalStorage('user').token)
+      .then((res) => { if (res) setSellers(res.data); })
+      .catch((err) => { console.error(err); });
   }, []);
 
   const handlerInput = ({ target: { value } }, set) => {
@@ -37,7 +32,7 @@ export default function DetailForDelivery() {
       total_price: Utils.removeMaskNumber(totalPrice),
       delivery_address: address,
       delivery_number: number,
-      status: "AGUARDANDO PAGAMENTO",
+      status: 'AGUARDANDO PAGAMENTO',
       sale_date: new Date(),
     };
     new SalesService()
@@ -61,12 +56,12 @@ export default function DetailForDelivery() {
             data-testid="customer_checkout__select-seller"
             onClick={(event) => handlerInput(event, setSelect)}
           >
-            <option value={""} />
-            {sellers.map((seller) => (
-              <option key={seller.id} value={seller.id}>
-                {seller.name}
-              </option>
-            ))}
+            {
+              sellers.map((seller) => (
+                <option key={ seller.id } value={ seller.id }>{seller.name}</option>
+              ))
+            }
+
           </select>
         </label>
 

@@ -34,8 +34,8 @@ const getAllSeller = async () => {
 const createSaleService = async (userId, saleData) => {
   // const { error } = schemaSales.validate({ status, sellerId, totalPrice, deliveryAddress, deliveryNumber, saleDate, userId });
   // if (error) throw errorConstructor(badRequest, error.message);
-  const { dataValues } = await sales.create({ userId: userId, ...saleData });
-  return dataValues;
+  const response = await sales.create(data);
+  return response;
 };
 
 module.exports = {

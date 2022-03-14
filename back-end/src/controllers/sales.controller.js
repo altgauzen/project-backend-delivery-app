@@ -3,6 +3,7 @@ const {
   createSaleService,
   getAllSeller,
 } = require('../services/sales.service');
+
 const { success } = require('../utils/dictionary/statusCode');
 
 const getAllSales = async (req, res, next) => {
@@ -27,10 +28,10 @@ const getAllSellerController = async (req, res, next) => {
     next(error);
   }
 };
-
 const createSaleController = async (req, res, next) => {
   try {
-    const sales = await createSaleService(req.user.id, req.body);
+    const { sale } = req.body;
+    const sales = await createSaleService(sale);
     return res.status(success).json(sales);
   } catch (error) {
     console.log(`GET CREATESALES -> ${error.message}`);

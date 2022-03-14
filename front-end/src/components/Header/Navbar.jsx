@@ -1,6 +1,6 @@
 import React, { useContext } from 'react';
-import PropTypes from 'prop-types';
 import { useHistory } from 'react-router-dom';
+import contextValue from '../../context/context';
 import './navbar.css';
 import context from '../../context/context'
 
@@ -39,15 +39,5 @@ function Navbar() {
     </header>
   );
 }
-
-Navbar.propTypes = {
-  user: PropTypes.shape({
-    id: PropTypes.number,
-    name: PropTypes.string,
-    email: PropTypes.string,
-    role: PropTypes.string,
-    token: PropTypes.string,
-  }).isRequired,
-};
 
 export default Navbar;
