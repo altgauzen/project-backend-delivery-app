@@ -1,5 +1,4 @@
 import React, { useContext } from 'react';
-import PropTypes from 'prop-types';
 import { useHistory } from 'react-router-dom';
 import './navbar.css';
 import context from '../../context/context';
@@ -33,15 +32,5 @@ function AdmNavbar() {
     </header>
   );
 }
-
-AdmNavbar.propTypes = {
-  user: PropTypes.shape({
-    id: PropTypes.number,
-    name: PropTypes.string,
-    email: PropTypes.string,
-    role: PropTypes.string,
-    token: PropTypes.string,
-  }).isRequired,
-};
 
 export default AdmNavbar;
