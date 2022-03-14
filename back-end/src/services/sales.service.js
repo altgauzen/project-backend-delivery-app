@@ -1,4 +1,4 @@
-const { sales, users } = require('../database/models');
+const { sales, users, salesProducts } = require('../database/models');
 
 // const Joi = require('joi');
 // const { badRequest } = require('../utils/dictionary/statusCode');
@@ -37,13 +37,31 @@ const getAllSeller = async () => {
     where: { role: 'seller' },
     attributes: { exclude: ['password', 'email'] },
   });
+  console.log('NO SALES SERVICE, VEM ALL SELLERS???', response);
   return response;
 };
 
 const createSaleService = async (data) => {
+  console.log('NO SALES SERVICE VEM DATA?', data);
+  const { seller_id, user_id, total_price, delivery_address, delivery_number, status, shoppingCart, saleId } = data;
   // const { error } = schemaSales.validate({ seller_id, total_price, delivery_address, delivery_number, status });
   // if (error) throw errorConstructor(badRequest, error.message);
-  const response = await sales.create(data);
+  const response = await sales.create({
+    seller_id,
+    user_id,
+    total_price,
+    delivery_address,
+    delivery_number,
+    status,
+    sale_date: Date.now(),
+  });
+
+  shoppingCart.forEach((item) => {
+    salesProducts.create({
+      sale_id: saleId, product_id: item.productId, quantity: item.quantity,
+    });
+  });
+
   return response;
 };
 

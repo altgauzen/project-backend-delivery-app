@@ -21,7 +21,7 @@ export default function FinalizeOrder() {
     setTotalPrice(Utils.putMaskNumber(total));
     return newCart;
   };
-  console.log(cart);
+  console.log('NO FINALIZE ORDER, VEM CART?', cart);
   return (
     <div className="finalize-order">
       <table className="table">

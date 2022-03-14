@@ -46,7 +46,9 @@ const getAllSellerController = async (req, res, next) => {
 const createSaleController = async (req, res, next) => {
   try {
     const saleId = req.user.id;
+    // const saleId = JSON.stringify(req.user.id);
     const { sale } = req.body;
+    console.log('NO SALES CONTROLLER VEM SALE?', sale);
    const sales = await createSaleService({ ...sale, saleId });
     return res.status(success).json(sales);
   } catch (error) {
