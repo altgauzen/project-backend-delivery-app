@@ -49,9 +49,10 @@ const userLogin = async (email, password) => {
   if (!searchingUser || searchingUser.password !== password) {
     throw errorConstructor(notFound, 'Not Found');
   }
-
+  const user = await getUserByEmail(email);
   const token = createToken({ payload: searchingUser });
-  return token;
+  user.token = token;
+  return { token, user };
 };
 
 const getUserAll = async () => {

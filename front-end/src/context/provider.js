@@ -6,7 +6,7 @@ function Provider({ children }) {
   const [products, setProducts] = useState([]);
   const [user, setUser] = useState('');
   const [cart, setCart] = useState([]);
-  const [totalPrice, setTotalPrice] = useState('0,00');
+  const [totalPrice, setTotalPrice] = useState(0);
   const [loading, setLoading] = useState(false);
 
   const contextValue = {

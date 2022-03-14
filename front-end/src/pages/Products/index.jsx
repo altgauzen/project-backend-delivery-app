@@ -11,7 +11,6 @@ function CustomerProducts() {
   const {
     products,
     setProducts,
-    user,
     setUser,
     totalPrice,
     setCart,
@@ -24,8 +23,6 @@ function CustomerProducts() {
     new ProductsService()
       .getProductsAll(localStorage.getItem('token'))
       .then(({ data }) => {
-        Utils.setLocalStorage('user', data.user);
-        setUser(data.user);
         setProducts(data.products);
       })
       .catch((err) => {
@@ -54,7 +51,7 @@ function CustomerProducts() {
 
   return (
     <div className="containerProducts">
-      <Navbar user={ user } />
+      <Navbar />
       <section className="cardsProducts">
         {products ? products.map((product) => (
           <Product
