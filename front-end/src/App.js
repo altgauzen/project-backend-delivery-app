@@ -23,7 +23,7 @@ function App() {
           <Route path="/customer/products" component={ Products } />
           <Route path="/customer/orders" component={ Orders } />
           <Route path="/customer/checkout" component={ Checkout } />
-          <Route path="/management" component={ Management } />
+          <Route path="/admin/manage" component={ Management } />
         </Switch>
       </Provider>
     </div>

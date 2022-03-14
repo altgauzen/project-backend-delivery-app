@@ -12,8 +12,9 @@ function FormManagement({
   setRole,
   submit,
   error,
+  role
 }) {
-  const [option] = React.useState(['Vendedor', 'Cliente']);
+  const [option] = React.useState(['seller', 'customer']);
 
   return (
     <div>
@@ -52,15 +53,14 @@ function FormManagement({
           />
         </label>
         <select
+          id="role"
+          value={ role }
           data-testid="admin_manage__select-role"
-          name="columm"
-          onClick={ (event) => handlerInput(event, setRole) }
+          // name="role”        
+          onChange={ ({ target }) => setRole(target.value) }
         >
-          {option.map((item, index) => (
-            <option key={ index } value={ item }>
-              {item}
-            </option>
-          ))}
+          <option value="customer">Cliente</option>
+          <option value="seller">Vendedor</option>
         </select>
         <button
           type="submit"
@@ -72,7 +72,7 @@ function FormManagement({
         </button>
         {error ? (
           <ErrorLogin
-            datatestid="common_register__element-invalid_register"
+            datatestid="admin_manage__element-invalid-register"
             message={ messageError }
           />
         ) : (
@@ -93,6 +93,7 @@ FormManagement.propTypes = {
   setRole: PropTypes.func.isRequired,
   submit: PropTypes.func.isRequired,
   error: PropTypes.bool.isRequired,
+  role: PropTypes.string.isRequired,
 };
 
 export default FormManagement;

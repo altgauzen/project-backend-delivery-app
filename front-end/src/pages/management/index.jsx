@@ -12,14 +12,15 @@ function Management() {
   const [messageError, setMessageError] = useState('');
   const [password, setPassword] = useState('a');
   const [validPassword, setValidPassword] = useState(false);
-  const [role, setRole] = useState();
-
+  const [role, setRole] = useState('seller');
+  console.log(role)
   const handlerInput = ({ target: { value } }, set) => {
-    if (value === 'Cliente') return set(value.replace('Cliente', 'customer'));
-    if (value === 'Vendedor') return set(value.replace('Vendedor', 'seller'));
+    // if (value === 'Cliente') return set(value.replace('Cliente', 'customer'));
+    // if (value === 'Vendedor') return set(value.replace('Vendedor', 'seller'));
+    setRole(value);
   };
   const signup = () => {
-    new ADMService().register(name, email, password, role)
+    new ADMService().register(name, email, password, role, localStorage.getItem('token'))
       .then((res) => {
         setError(false);
         console.table(res);
@@ -68,7 +69,8 @@ function Management() {
         handlerInput={ handlerInput }
         messageError={ messageError }
         setRole={ setRole }
-        error={ error }
+        error={error}
+        role= {role}
       />
     </div>
   );

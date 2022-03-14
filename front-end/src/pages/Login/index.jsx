@@ -1,15 +1,19 @@
 import { useHistory } from 'react-router-dom';
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import UserService from '../../service/user.service';
 import './login.css';
 import rockGlass from '../../images/rockGlass.svg';
 import ErrorLogin from '../../components/ErrorLogin';
+import contextValue from '../../context/context';
+import Utils from '../../utils/functions/index';
 
 function Login() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState(false);
   const [messageError, setMessageError] = useState('');
+  const { setUser } = useContext(contextValue);
+
   const history = useHistory();
 
   const signup = () => {
@@ -17,13 +21,16 @@ function Login() {
       .login(email, password)
       .then((res) => {
         const { token, user } = res.data;
+        console.log(token, user);
         localStorage.setItem('token', token);
+        Utils.setLocalStorage('user', user);
+        setUser(user);
         switch (user.role) {
         case 'customer':
           history.push('/customer/products');
           break;
         case 'administrator':
-          history.push('/management');
+          history.push('/admin/manage');
           break;
         default:
           history.push('/seller/products');
