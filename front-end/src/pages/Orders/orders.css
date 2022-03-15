@@ -1,0 +1,26 @@
+.ordersStyle {
+  background-color: red;
+  display: 'flex';
+  flex-direction: column;
+  margin-top: 10%;
+}
+
+/* .ordersStyle div {
+  padding: 10%;
+} */
+
+.pageOrders {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  width: 100vw;
+}
+
+.containerOrders {
+  background-color: red;
+  border: none;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  text-decoration: none;
+}

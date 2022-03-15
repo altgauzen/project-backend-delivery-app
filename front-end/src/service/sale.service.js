@@ -30,6 +30,28 @@ class SalesService {
     });
     return response;
   }
+
+  async getSaleById(token, orderId) {
+    const response = await axios({
+      method: 'get',
+      url: `http://localhost:3001/customer/orders/${orderId}`,
+      data: {},
+      headers: { authorization: token },
+    });
+    //  console.log('NO FRONT SALE SERVICE VEM SALEBYID?', response);
+    return response;
+  }
+
+  async getOrderProductsByIdService(token, orderId) {
+    const response = await axios({
+      method: 'get',
+      url: `http://localhost:3001/customer/orders/products/${orderId}`,
+      data: {},
+      headers: { authorization: token },
+    });
+    //  console.log('NO FRONT SALE SERVICE VEM SALEBYID?', response);
+    return response;
+  }
 }
 
 export default SalesService;

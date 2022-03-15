@@ -11,7 +11,7 @@ export default function DetailForDelivery() {
   const [number, setNumber] = useState(null);
   const [sellers, setSellers] = useState([]);
 
-  const { totalPrice, user } = useContext(contextValue);
+  const { totalPrice, user, cart } = useContext(contextValue);
   const history = useHistory();
 
   useEffect(() => {
@@ -32,13 +32,14 @@ export default function DetailForDelivery() {
       total_price: Utils.removeMaskNumber(totalPrice),
       delivery_address: address,
       delivery_number: number,
-      status: 'AGUARDANDO PAGAMENTO',
+      status: 'Pendente',
       sale_date: new Date(),
+      shoppingCart: cart,
     };
     new SalesService()
       .createSale(Utils.getLocalStorage('user').token, obj)
       .then((res) => {
-        console.log(res);
+        console.log('NO DETAIL FOR DELIVERY, VEM RES?', res);
         history.push(`/customer/orders/${res.data.id}`);
       })
       .catch((err) => {
@@ -54,8 +55,9 @@ export default function DetailForDelivery() {
           <select
             id="select-seller"
             data-testid="customer_checkout__select-seller"
-            onClick={ (event) => handlerInput(event, setSelect) }
+            onChange={ (event) => handlerInput(event, setSelect) }
           >
+            <option value="">{ ' ' }</option>
             {
               sellers.map((seller) => (
                 <option key={ seller.id } value={ seller.id }>{seller.name}</option>

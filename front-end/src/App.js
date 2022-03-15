@@ -6,6 +6,7 @@ import Products from './pages/Products';
 import Login from './pages/Login/index';
 import Register from './pages/Register/index';
 import Orders from './pages/Orders/index';
+import OrderDetails from './pages/OrderDetails';
 import Provider from './context/provider';
 import Checkout from './pages/CustomerCheckout/index';
 import Management from './pages/management';
@@ -18,12 +19,13 @@ function App() {
           <Route exact path="/">
             <Redirect to="/login" />
           </Route>
-          <Route path="/login" component={ Login } />
-          <Route path="/register" component={ Register } />
-          <Route path="/customer/products" component={ Products } />
-          <Route path="/customer/orders" component={ Orders } />
-          <Route path="/customer/checkout" component={ Checkout } />
-          <Route path="/admin/manage" component={ Management } />
+          <Route exact path="/login" component={ Login } />
+          <Route exact path="/register" component={ Register } />
+          <Route exact path="/customer/products" component={ Products } />
+          <Route exact path="/customer/orders" component={ Orders } />
+          <Route exact path="/customer/orders/:id" component={ OrderDetails } />
+          <Route exact path="/customer/checkout" component={ Checkout } />
+          <Route exact path="/admin/manage" component={ Management } />
         </Switch>
       </Provider>
     </div>
