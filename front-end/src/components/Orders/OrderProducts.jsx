@@ -1,7 +1,18 @@
+import PropTypes from 'prop-types';
 import React from 'react';
-import mock from '../../utils/mock/mockProducts';
 
-export default function OrderProducts() {
+import './OrderProducts.css';
+
+export default function OrderProducts({ productsById }) {
+  // const { totalPrice, setTotalPrice } = useContext(contextValue);
+  let total = 0;
+
+  const mult = (base, times) => {
+    const res = (base * times).toFixed(2);
+    total += Number(res);
+    return res;
+  };
+
   return (
     <div>
       <table className="table">
@@ -13,7 +24,8 @@ export default function OrderProducts() {
           <th>Sub-total</th>
         </thead>
         <tbody className="titles">
-          {mock.map((row, index) => (
+          { console.log(productsById) }
+          {productsById.map((row, index) => (
             <tr key={ index }>
               <td
                 data-testid={
@@ -34,27 +46,33 @@ export default function OrderProducts() {
                   `customer_order_details__element-order-table-quantity-${index}`
                 }
               >
-                {row.quantity}
+                {row.salesProducts.quantity}
               </td>
               <td
                 data-testid={
                   `customer_order_details__element-order-table-sub-total-${index}`
                 }
               >
-                {`R$ ${row.unitPrice}`}
+                {`R$ ${row.price}`}
               </td>
               <td
                 data-testid={
                   `customer_order_details__element-order-total-price-${index}`
                 }
               >
-                {`R$ ${row.subTotal}`}
+                {`R$ ${mult(row.price, row.salesProducts.quantity)}`}
               </td>
             </tr>
           ))}
         </tbody>
       </table>
-      <button type="button">total de ...</button>
+      <h3>{`total de ${total}`}</h3>
     </div>
   );
 }
+
+OrderProducts.propTypes = {
+  productsById: PropTypes.shape({
+    map: PropTypes.func,
+  }).isRequired,
+};

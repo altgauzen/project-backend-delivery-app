@@ -16,6 +16,7 @@ function OrderDetails() {
   const [orderDetails, setOrderDetails] = useState(null);
   const [seller, setSeller] = useState(null);
   const [isLoading, setLoading] = useState(true);
+  const [productsById, setProductsById] = useState(null);
 
   const user = JSON.parse(localStorage.getItem('user'));
 
@@ -26,9 +27,19 @@ function OrderDetails() {
       .getUserById(token, idSeller)
       .then((res) => {
         if (res) setSeller(res.data);
-        setLoading(false);
+        // setLoading(false);
       })
       .catch((err) => console.error(err));
+  };
+
+  const getProductsById = (tokenUser, orderProductById) => {
+    new SalesService()
+      .getOrderProductsByIdService(tokenUser, orderProductById)
+      .then((res) => {
+        setProductsById(res.data.products);
+        setLoading(false);
+      })
+      .catch((err) => console.log(err));
   };
 
   useEffect(() => {
@@ -38,6 +49,7 @@ function OrderDetails() {
         if (res) {
           setOrderDetails(res.data);
           getSeller(res.data.order.sellerId);
+          getProductsById(token, orderId);
         }
       })
       .catch((err) => console.error(err));
@@ -61,7 +73,9 @@ function OrderDetails() {
           orderData={ orderDetails }
           sellerData={ seller }
         />
-        <OrderProducts />
+        <OrderProducts
+          productsById={ productsById }
+        />
         {/* <'OrderProductsTable /> */}
       </main>
     </section>
