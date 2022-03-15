@@ -61,7 +61,7 @@ function OrderDetails() {
 
   return (
     <section className="pageOrders">
-      <Navbar user={ user } />
+      <Navbar />
       <main>
         <br />
         <br />
