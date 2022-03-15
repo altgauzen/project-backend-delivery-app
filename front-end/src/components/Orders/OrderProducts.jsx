@@ -1,17 +1,18 @@
 import PropTypes from 'prop-types';
 import React from 'react';
+import contextValue from '../../context/context';
 
 import './OrderProducts.css';
 
 export default function OrderProducts({ productsById }) {
-  // const { totalPrice, setTotalPrice } = useContext(contextValue);
-  let total = 0;
+  const { totalPrice } = React.useContext(contextValue);
+  // let total = 0;
 
-  const mult = (base, times) => {
-    const res = (base * times).toFixed(2);
-    total += Number(res);
-    return res;
-  };
+  // const mult = (base, times) => {
+  //   const res = (base * times).toFixed(2);
+  //   total += Number(res);
+  //   return res;
+  // };
 
   return (
     <div>
@@ -58,13 +59,13 @@ export default function OrderProducts({ productsById }) {
               <td
                 data-testid="customer_order_details__element-order-total-price"
               >
-                {`R$ ${mult(row.price, row.salesProducts.quantity)}`}
+                {`R$ ${totalPrice}`}
               </td>
             </tr>
           ))}
         </tbody>
       </table>
-      <h3>{`total de ${total}`}</h3>
+      <h3>{`total de ${totalPrice}`}</h3>
     </div>
   );
 }

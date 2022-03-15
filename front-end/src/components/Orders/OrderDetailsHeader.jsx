@@ -18,7 +18,7 @@ export default function OrderDetailsHeader({ orderData, sellerData }) {
         {`Pessoa Vendedora ${sellerData.name}`}
       </div>
       <div data-testid="customer_order_details__element-order-details-label-order-date">
-        {moment(orderData.order.sale_date).format('DD-MM-YY')}
+        {moment(orderData.order.sale_date).format('DD/MM/YYYY')}
       </div>
       <div
         data-testid="customer_order_details__element-order-details-label-delivery-status"
@@ -27,7 +27,7 @@ export default function OrderDetailsHeader({ orderData, sellerData }) {
       </div>
       <button
         type="button"
-        // disabled={ !orderData.status.includes('Em Trânsito') }
+        disabled={ orderData.status !== 'Em Trânsito' }
         // onClick={ markAsDelivered }
         data-testid="customer_order_details__button-delivery-check"
       >
@@ -44,6 +44,7 @@ OrderDetailsHeader.propTypes = {
       sale_date: PropTypes.string,
       status: PropTypes.string,
     }),
+    status: PropTypes.string,
   }).isRequired,
   sellerData: PropTypes.shape({
     name: PropTypes.string,
