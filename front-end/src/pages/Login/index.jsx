@@ -1,5 +1,5 @@
 import { useHistory } from 'react-router-dom';
-import React, { useState, useContext } from 'react';
+import React, { useState, useContext, useEffect } from 'react';
 import UserService from '../../service/user.service';
 import './login.css';
 import rockGlass from '../../images/rockGlass.svg';
@@ -15,6 +15,23 @@ function Login() {
   const { setUser } = useContext(contextValue);
 
   const history = useHistory();
+
+  useEffect(() => {
+    const userLocal = Utils.getLocalStorage('user');
+    if (userLocal) {
+      switch (userLocal.role) {
+        case 'customer':
+          history.push('/customer/products');
+          break;
+        case 'administrator':
+          history.push('/admin/manage');
+          break;
+        default:
+          history.push('/seller/products');
+          break;
+      }
+    }
+  }, [])
 
   const signup = () => {
     new UserService()

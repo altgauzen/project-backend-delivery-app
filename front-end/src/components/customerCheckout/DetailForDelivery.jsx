@@ -32,7 +32,7 @@ export default function DetailForDelivery() {
       total_price: Utils.removeMaskNumber(totalPrice),
       delivery_address: address,
       delivery_number: number,
-      status: 'AGUARDANDO PAGAMENTO',
+      status: 'Pendente',
       sale_date: new Date(),
       shoppingCart: cart,
     };

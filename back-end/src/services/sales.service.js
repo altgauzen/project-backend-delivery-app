@@ -47,11 +47,15 @@ const createSaleService = async (data) => {
   const newData = data;
   delete newData.shoppingCart;
   const response = await sales.create(newData);
-  shoppingCart.forEach((item) => {
-    salesProducts.create({
-      saleId: response.dataValues.id, productId: item.productId, quantity: item.quantity,
-    });
-  });
+
+  await Promise.all(
+    shoppingCart.map((item) => {
+      const resp = salesProducts.create({
+        saleId: response.dataValues.id, productId: item.productId, quantity: item.quantity,
+      });
+      return resp;
+    })
+  )
   return response;
 };
 

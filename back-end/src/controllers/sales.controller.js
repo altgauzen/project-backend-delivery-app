@@ -5,7 +5,7 @@ const {
   getSaleByIdService,
   getOrderProductsByIdService,
 } = require('../services/sales.service');
-const { success } = require('../utils/dictionary/statusCode');
+const { success, created } = require('../utils/dictionary/statusCode');
 
 const getAllSales = async (req, res, next) => {
   try {
@@ -47,7 +47,7 @@ const createSaleController = async (req, res, next) => {
   try {
     const { sale } = req.body;
     const sales = await createSaleService(sale);
-    return res.status(success).json(sales);
+    return res.status(created).json(sales);
   } catch (error) {
     console.log(`GET CREATESALES -> ${error.message}`);
     next(error);

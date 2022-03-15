@@ -3,6 +3,10 @@ import React from 'react';
 import moment from 'moment';
 
 export default function OrderDetailsHeader({ orderData, sellerData }) {
+  const markAsDelivered = () => {
+
+  }
+
   return (
     <section className="containerOrders">
       <div data-testid="customer_order_details__element-order-details-label-order-id">

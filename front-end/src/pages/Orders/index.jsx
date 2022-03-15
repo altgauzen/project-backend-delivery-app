@@ -52,9 +52,9 @@ function Orders() {
                 { order.status }
               </div>
               <div data-testid={ `customer_orders__element-order-date-${order.id}` }>
-                {moment(order.sale_date).format('DD-MM-YY')}
+                {moment(order.sale_date).format('DD/MM/YYYY')}
               </div>
-              <div>
+              <div data-testid={`customer_orders__element-card-price-${order.id}`}>
                 {`R$ ${Utils.putMaskNumber(Number(order.total_price))}`}
               </div>
             </button>

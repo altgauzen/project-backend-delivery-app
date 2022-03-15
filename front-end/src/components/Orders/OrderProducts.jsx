@@ -56,9 +56,7 @@ export default function OrderProducts({ productsById }) {
                 {`R$ ${row.price}`}
               </td>
               <td
-                data-testid={
-                  `customer_order_details__element-order-total-price-${index}`
-                }
+                data-testid={'customer_order_details__element-order-total-price'}
               >
                 {`R$ ${mult(row.price, row.salesProducts.quantity)}`}
               </td>
