@@ -1,16 +1,16 @@
 import React, { useEffect, useState, useCallback } from 'react';
 import { useParams } from 'react-router-dom';
-import OrderDetailsHeader from '../../components/Orders/OrderDetailsHeader';
+import SellerOrdersDetails from '../../components/SellerOrderDetails/SellerOrdersDetails';
 // import OrderProductsTable from '../../components/Orders/OrderProcuctsTable';
-import Navbar from '../../components/Header/Navbar';
+import SellerNavbar from '../../components/Header/SellerNavbar';
 import SalesService from '../../service/sale.service';
 import UserService from '../../service/user.service';
-import OrderProducts from '../../components/Orders/OrderProducts';
+import SellerOrderProducts from '../../components/SellerOrderDetails/SellerOrderProducts';
 
 // import contextValue from '../../context/context';
 // import './ordersDetails.css';
 
-function OrderDetails() {
+function SellerDetails() {
   const { id: orderId } = useParams();
 
   const [orderDetails, setOrderDetails] = useState(null);
@@ -61,19 +61,19 @@ function OrderDetails() {
 
   return (
     <section className="pageOrders">
-      <Navbar />
+      <SellerNavbar />
       <main>
         <br />
         <br />
         <br />
 
         <h1>Detalhes do Pedido</h1>
-        <OrderDetailsHeader
+        <SellerOrdersDetails
           role={ role }
           orderData={ orderDetails }
           sellerData={ seller }
         />
-        <OrderProducts
+        <SellerOrderProducts
           productsById={ productsById }
         />
         {/* <'OrderProductsTable /> */}
@@ -82,4 +82,4 @@ function OrderDetails() {
   );
 }
 
-export default OrderDetails;
+export default SellerDetails;
