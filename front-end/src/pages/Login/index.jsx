@@ -20,18 +20,18 @@ function Login() {
     const userLocal = Utils.getLocalStorage('user');
     if (userLocal) {
       switch (userLocal.role) {
-        case 'customer':
-          history.push('/customer/products');
-          break;
-        case 'administrator':
-          history.push('/admin/manage');
-          break;
-        default:
-          history.push('/seller/products');
-          break;
+      case 'customer':
+        history.push('/customer/products');
+        break;
+      case 'administrator':
+        history.push('/admin/manage');
+        break;
+      default:
+        history.push('/seller/products');
+        break;
       }
     }
-  }, [])
+  }, [history]);
 
   const signup = () => {
     new UserService()

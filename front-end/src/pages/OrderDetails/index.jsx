@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useCallback } from 'react';
 import { useParams } from 'react-router-dom';
 import OrderDetailsHeader from '../../components/Orders/OrderDetailsHeader';
 // import OrderProductsTable from '../../components/Orders/OrderProcuctsTable';
@@ -22,7 +22,7 @@ function OrderDetails() {
 
   const { token, role } = user;
 
-  const getSeller = (idSeller) => {
+  const getSeller = useCallback((idSeller) => {
     new UserService()
       .getUserById(token, idSeller)
       .then((res) => {
@@ -30,7 +30,7 @@ function OrderDetails() {
         // setLoading(false);
       })
       .catch((err) => console.error(err));
-  };
+  }, [token]);
 
   const getProductsById = (tokenUser, orderProductById) => {
     new SalesService()
@@ -53,7 +53,7 @@ function OrderDetails() {
         }
       })
       .catch((err) => console.error(err));
-  }, []);
+  }, [getSeller, orderId, token]);
 
   if (isLoading) {
     return <div className="App">Loading...</div>;

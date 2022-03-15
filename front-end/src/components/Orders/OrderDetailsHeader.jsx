@@ -3,9 +3,9 @@ import React from 'react';
 import moment from 'moment';
 
 export default function OrderDetailsHeader({ orderData, sellerData }) {
-  const markAsDelivered = () => {
+  // const markAsDelivered = () => {
 
-  }
+  // }
 
   return (
     <section className="containerOrders">
