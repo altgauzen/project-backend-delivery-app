@@ -9,6 +9,7 @@ import Orders from './pages/Orders/index';
 import OrderDetails from './pages/OrderDetails';
 import Provider from './context/provider';
 import Checkout from './pages/CustomerCheckout/index';
+import Management from './pages/management';
 
 function App() {
   return (
@@ -24,6 +25,7 @@ function App() {
           <Route exact path="/customer/orders" component={ Orders } />
           <Route exact path="/customer/orders/:id" component={ OrderDetails } />
           <Route exact path="/customer/checkout" component={ Checkout } />
+          <Route exact path="/admin/manage" component={ Management } />
         </Switch>
       </Provider>
     </div>

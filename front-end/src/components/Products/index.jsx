@@ -32,13 +32,10 @@ function Product({ product, setTotalPrice }) {
       local = [...local, newObj];
     }
     Utils.setLocalStorage('carrinho', local.filter((prod) => prod.quantity !== 0));
-    setCart(() => local);
-    setTotalPrice();
+    setCart(local);
   };
 
   useEffect(() => {
-    console.log('QUANTITY -->', quantity, '<-- QUANTITY');
-
     setQuantity(() => {
       const carr = Utils.getLocalStorage('carrinho');
       const idCarr = carr && carr.length ? carr.find((x) => x.productId === id) : false;
@@ -94,7 +91,7 @@ function Product({ product, setTotalPrice }) {
           -
         </button>
         <input
-          type="number"
+          type="text"
           id={ `inputQuantity-${id}` }
           data-testid={ `customer_products__input-card-quantity-${id}` }
           onChange={ (e) => inputValue(e) }

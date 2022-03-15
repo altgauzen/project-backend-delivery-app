@@ -58,12 +58,12 @@ export default function DetailForDelivery() {
             //  defaultValue="Selecione..."
             onChange={ (event) => handlerInput(event, setSelect) }
           >
-            <option key="" value="">Selecione...</option>
             {
               sellers.map((seller) => (
                 <option key={ seller.id } value={ seller.id }>{seller.name}</option>
               ))
             }
+
           </select>
         </label>
 

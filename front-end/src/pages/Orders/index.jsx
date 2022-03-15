@@ -11,7 +11,7 @@ import Utils from '../../utils/functions/index';
 import './orders.css';
 
 function Orders() {
-  const { user, setUser } = useContext(contextValue);
+  const { setUser } = useContext(contextValue);
   const [orders, setOrders] = useState([]);
   const history = useHistory();
 
@@ -34,11 +34,9 @@ function Orders() {
   }, [setOrders, setUser]);
 
   return (
-    <div className="pageOrders">
-      <nav>
-        <Navbar user={ user } />
-      </nav>
-      <section className="ordersStyle">
+    <div>
+      <Navbar />
+      <section>
         {
           orders ? orders.map((order) => (
             <button
