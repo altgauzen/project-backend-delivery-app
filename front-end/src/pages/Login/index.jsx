@@ -27,7 +27,7 @@ function Login() {
         history.push('/admin/manage');
         break;
       default:
-        history.push('/seller/products');
+        history.push('/seller/orders');
         break;
       }
     }
@@ -50,7 +50,7 @@ function Login() {
           history.push('/admin/manage');
           break;
         default:
-          history.push('/seller/products');
+          history.push('/seller/orders');
           break;
         }
       })
