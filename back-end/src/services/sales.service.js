@@ -42,21 +42,16 @@ const getAllSeller = async () => {
 };
 
 const createSaleService = async (data) => {
-  console.log('NO SALES SERVICE VEM DATA?', data);
+  console.log('DATA -->', data);
   const { shoppingCart } = data;
   const newData = data;
   delete newData.shoppingCart;
-  console.log('NO SALES SERVICE, VEM DATA??', newData);
-  // const { error } = schemaSales.validate({ seller_id, total_price, delivery_address, delivery_number, status });
-  // if (error) throw errorConstructor(badRequest, error.message);
   const response = await sales.create(newData);
-  // console.log('NO SALES SERVICE, VEM NO CREATESALE O QUE NA RESPONSE???', response);
   shoppingCart.forEach((item) => {
     salesProducts.create({
       saleId: response.dataValues.id, productId: item.productId, quantity: item.quantity,
     });
   });
-
   return response;
 };
 

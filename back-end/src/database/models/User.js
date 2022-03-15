@@ -6,7 +6,8 @@ module.exports = (sequelize, DataTypes) => {
     role: DataTypes.STRING,
   },
   { 
-    timestamps: false
+    timestamps: false,
+    underscored: true
   });
 
   User.associate = (models) => {
