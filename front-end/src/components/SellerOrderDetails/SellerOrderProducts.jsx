@@ -1,11 +1,15 @@
 import PropTypes from 'prop-types';
 import React from 'react';
-import contextValue from '../../context/context';
+import Utils from '../../utils/functions/index';
 
-import './OrderProducts.css';
+export default function SellerOrderProducts({ productsById }) {
+  let total = 0;
 
-export default function OrderProducts({ productsById }) {
-  const { totalPrice } = React.useContext(contextValue);
+  const mult = (base, times) => {
+    const res = base * times;
+    total += res;
+    return res.toFixed(2);
+  };
 
   return (
     <div>
@@ -22,47 +26,53 @@ export default function OrderProducts({ productsById }) {
             <tr key={ index }>
               <td
                 data-testid={
-                  `customer_order_details__element-order-table-item-number-${index}`
+                  `seller_order_details__element-order-table-item-number-${index}`
                 }
               >
                 {index + 1}
               </td>
               <td
                 data-testid={
-                  `customer_order_details__element-order-table-name-${index}`
+                  `seller_order_details__element-order-table-name-${index}`
                 }
               >
                 {row.name}
               </td>
               <td
                 data-testid={
-                  `customer_order_details__element-order-table-quantity-${index}`
+                  `seller_order_details__element-order-table-quantity-${index}`
                 }
               >
                 {row.salesProducts.quantity}
               </td>
               <td
                 data-testid={
-                  `customer_order_details__element-order-table-sub-total-${index}`
+                  `seller_order_details__element-order-table-unit-price-${index}`
                 }
               >
                 {`R$ ${row.price}`}
               </td>
               <td
-                data-testid="customer_order_details__element-order-total-price"
+                data-testid={
+                  `seller_order_details__element-order-table-sub-total-${index}`
+                }
               >
-                {`R$ ${totalPrice}`}
+                {`R$ ${mult(row.price, row.salesProducts.quantity)}`}
               </td>
             </tr>
           ))}
         </tbody>
       </table>
-      <h3>{`total de ${totalPrice}`}</h3>
+      <h3
+        data-testid="seller_order_details__element-order-total-price"
+      >
+        {`${Utils.putMaskNumber(total)}`}
+      </h3>
     </div>
   );
 }
 
-OrderProducts.propTypes = {
+SellerOrderProducts.propTypes = {
   productsById: PropTypes.shape({
     map: PropTypes.func,
   }).isRequired,
