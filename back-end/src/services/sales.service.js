@@ -54,8 +54,8 @@ const createSaleService = async (data) => {
         saleId: response.dataValues.id, productId: item.productId, quantity: item.quantity,
       });
       return resp;
-    })
-  )
+    }),
+  );
   return response;
 };
 
