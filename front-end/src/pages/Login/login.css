@@ -1,8 +1,16 @@
 .container {
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
+  justify-content: space-around;
+  flex-wrap: wrap;
 }
 
+.containerButton {
+  display: flex;
+  justify-content: space-around;
+  flex-direction: column;
+}
+/*
 .container input {
   border: none;
   border-radius: 5px;
@@ -14,10 +22,9 @@
   background-color: rgba(124, 153, 95, 0.679);
   border-radius: 5px;
   font-size: medium;
-  width: 150px;
 }
 
 .container button:hover {
   background-color: rgba(132, 211, 54, 0.679);
   cursor: pointer;
-}
+} */

@@ -6,7 +6,7 @@ import rockGlass from '../../images/rockGlass.svg';
 import ErrorLogin from '../../components/ErrorLogin';
 import contextValue from '../../context/context';
 import Utils from '../../utils/functions/index';
-
+import { Form, Button, Card } from "react-bootstrap";
 function Login() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -66,47 +66,56 @@ function Login() {
     handleButton = false;
   }
   return (
-    <div className="container">
-      <span className="logo">TRYBE</span>
+    <div className="container mt-5">
       <object className="rocksGlass" type="image/svg+xml" data={ rockGlass }>
         Glass
-      </object>
-      <label htmlFor="setName">
+      </object> 
+      <section>
+
+      <Card className="shadow-lg p-3 mb-5 bg-white rounded">
+        <Card.Title>
+      <h1 className="logo">TRYBE</h1> <h1>Delivery</h1>
+        </Card.Title>
+      <label className="label" htmlFor="setName">
         login:
         <input
           data-testid="common_login__input-email"
           type="email"
           id="setName"
+          placeholder="seu-email@site.com.br"
           value={ email }
           onChange={ ({ target }) => setEmail(target.value) }
         />
       </label>
-      <label htmlFor="setPassword">
+      <label className="label" htmlFor="setPassword">
         Senha:
         <input
           data-testid="common_login__input-password"
           type="password"
           id="setPassword"
+          placeholder="******"
           value={ password }
           onChange={ ({ target }) => setPassword(target.value) }
         />
       </label>
-      <div>
-        <button
+      <div className="containerButton">
+        <Button
+          className="mt-3"
           data-testid="common_login__button-login"
           type="submit"
           onClick={ signup }
           disabled={ handleButton }
         >
           Login
-        </button>
-        <button
+        </Button>
+        <Button
+          className="mt-3" 
           data-testid="common_login__button-register"
           type="submit"
           onClick={ () => history.push('/register') }
         >
           Cadastre-se
-        </button>
+        </Button>
       </div>
       {
         error ? <ErrorLogin
@@ -114,6 +123,8 @@ function Login() {
           message={ messageError }
         /> : ''
       }
+      </Card>
+      </section>
     </div>
   );
 }
