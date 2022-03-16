@@ -1,0 +1,19 @@
+.label {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  margin-left: 10px;
+}
+
+.containerRegister {
+  align-items: center;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+
+.submitButton {
+  display: flex;
+  justify-content: space-around;
+}

@@ -37,6 +37,15 @@ class UserService {
     });
     return response;
   }
+  async allUser(token){
+    const response =await axios({
+      method: 'get',
+      url: 'http://localhost:3001/getUsersAll',
+      data: {},
+      headers: { authorization: token },
+    });
+    return response;
+  }
 }
 
 export default UserService;
