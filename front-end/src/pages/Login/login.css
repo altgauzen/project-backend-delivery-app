@@ -11,6 +11,15 @@
   flex-direction: column;
 }
 
+.logo-website {
+  width: 6em;
+  text-align: center;
+}
+
+.section-login {
+  text-align: center;
+}
+
 /*
 .container input {
   border: none;

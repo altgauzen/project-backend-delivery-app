@@ -75,45 +75,45 @@ function Product({ product, setTotalPrice }) {
   return (
     <Card className="containerCard mt-5">
       <div className="containerDescription">
-          <Card.Title data-testid={`customer_products__element-card-title-${id}`}>
-            {name}
-          </Card.Title>
-          <Card.Img
-            data-testid={`customer_products__img-card-bg-image-${id}`}
-            src={urlImage}
-            alt={name}
-          />
-      <Card.Body>
-        <div>
-          <h4 data-testid={`customer_products__element-card-price-${id}`}>
-            {`R$ ${Utils.putMaskNumber(Number(price))}`}
-          </h4>
-        </div>
-      <ButtonGroup className="containerInput">
-        <Button
-          type="button"
-          data-testid={`customer_products__button-card-rm-item-${id}`}
-          onClick={() => decrement()}
-        >
-          -
-        </Button>
-        <input
-          type="text"
-          className="form-control"
-          id={`inputQuantity-${id}`}
-          data-testid={`customer_products__input-card-quantity-${id}`}
-          onChange={(e) => inputValue(e)}
-          value={quantity}
+        <Card.Title data-testid={ `customer_products__element-card-title-${id}` }>
+          {name}
+        </Card.Title>
+        <Card.Img
+          data-testid={ `customer_products__img-card-bg-image-${id}` }
+          src={ urlImage }
+          alt={ name }
         />
-        <Button
-          type="button"
-          data-testid={`customer_products__button-card-add-item-${id}`}
-          onClick={() => increment()}
-        >
-          +
-        </Button>
-      </ButtonGroup>
-      </Card.Body>
+        <Card.Body>
+          <div>
+            <h4 data-testid={ `customer_products__element-card-price-${id}` }>
+              {`R$ ${Utils.putMaskNumber(Number(price))}`}
+            </h4>
+          </div>
+          <ButtonGroup className="containerInput">
+            <Button
+              type="button"
+              data-testid={ `customer_products__button-card-rm-item-${id}` }
+              onClick={ () => decrement() }
+            >
+              -
+            </Button>
+            <input
+              type="text"
+              className="form-control"
+              id={ `inputQuantity-${id}` }
+              data-testid={ `customer_products__input-card-quantity-${id}` }
+              onChange={ (e) => inputValue(e) }
+              value={ quantity }
+            />
+            <Button
+              type="button"
+              data-testid={ `customer_products__button-card-add-item-${id}` }
+              onClick={ () => increment() }
+            >
+              +
+            </Button>
+          </ButtonGroup>
+        </Card.Body>
       </div>
     </Card>
   );
