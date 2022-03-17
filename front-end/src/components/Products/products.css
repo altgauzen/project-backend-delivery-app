@@ -13,11 +13,10 @@
   display: flex;
   flex-flow: column wrap;
   justify-content: center;
-  height: 60vh;
 }
 
 .containerDescription img {
-  width: 35%;
+  width: 100px;
 }
 
 .containerDescription h3 {

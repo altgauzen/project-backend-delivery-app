@@ -1,14 +1,11 @@
 import PropTypes from 'prop-types';
 import React from 'react';
 import moment from 'moment';
+import { Form, Button, Card } from "react-bootstrap";
 
 export default function OrderDetailsHeader({ orderData, sellerData }) {
-  // const markAsDelivered = () => {
-
-  // }
-
   return (
-    <section className="containerOrders">
+    <section className="containerOrders mt-2">
       <div data-testid="customer_order_details__element-order-details-label-order-id">
         {`Pedido: ${orderData.order.id}`}
       </div>
@@ -25,14 +22,14 @@ export default function OrderDetailsHeader({ orderData, sellerData }) {
       >
         { orderData.order.status }
       </div>
-      <button
+      <Button
         type="button"
         disabled={ orderData.status !== 'Em Trânsito' }
         // onClick={ markAsDelivered }
         data-testid="customer_order_details__button-delivery-check"
       >
         Marcar como entregue
-      </button>
+      </Button>
     </section>
   );
 }

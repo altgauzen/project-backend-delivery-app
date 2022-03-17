@@ -1,23 +1,4 @@
-/* // teste */
-
-/* .container {
-  width: 80%;
-} */
-
 .formContainer {
   display: flex;
   flex-direction: column;
-}
-
-.container {
-
-  position: relative;
-}
-
-.child {
-  /* Centralizar na vertical e na horizontal */
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  margin: -25px 0 0 -25px; /* aplique margens superior e esquerda negativas para centralizar de verdade o elemento */
 }

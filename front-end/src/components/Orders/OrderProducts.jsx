@@ -18,17 +18,18 @@ export default function OrderProducts({ productsById }) {
     <>
       <table className="table">
         <thead className="titles">
-          <th>Item</th>
-          <th>Descrição</th>
-          <th>Quantidade</th>
-          <th>Valor Unitário</th>
-          <th>Sub-total</th>
+          <th scope="col">Item</th>
+          <th scope="col">Descrição</th>
+          <th scope="col">Quantidade</th>
+          <th scope="col">Valor Unitário</th>
+          <th scope="col">Sub-total</th>
         </thead>
         <tbody className="titles">
           { console.log(productsById) }
           {productsById.map((row, index) => (
-            <tr key={ index }>
+            <tr key={ index } className="table table-blue table-hover">
               <td
+                scope="row"
                 data-testid={
                   `customer_order_details__element-order-table-item-number-${index}`
                 }
