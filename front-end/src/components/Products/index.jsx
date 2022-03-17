@@ -1,8 +1,9 @@
-import React, { useContext, useState, useEffect } from 'react';
-import PropTypes from 'prop-types';
-import contextValue from '../../context/context';
-import Utils from '../../utils/functions/index';
-import './products.css';
+import React, { useContext, useState, useEffect } from "react";
+import PropTypes from "prop-types";
+import contextValue from "../../context/context";
+import Utils from "../../utils/functions/index";
+import "./products.css";
+import { ButtonGroup, Button, Card } from "react-bootstrap";
 
 function Product({ product, setTotalPrice }) {
   const { urlImage, id, name, price } = product;
@@ -10,7 +11,7 @@ function Product({ product, setTotalPrice }) {
   const [quantity, setQuantity] = useState(0);
 
   const setCartManual = (operation) => {
-    let local = Utils.getLocalStorage('carrinho') || [];
+    let local = Utils.getLocalStorage("carrinho") || [];
 
     const getItem = local.find((car) => id === car.productId);
     if (getItem) {
@@ -27,18 +28,22 @@ function Product({ product, setTotalPrice }) {
         name,
         quantity: operation,
         unitPrice: Utils.putMaskNumber(+price),
-        subTotal: Utils.putMaskNumber(operation * (+price)),
+        subTotal: Utils.putMaskNumber(operation * +price),
       };
       local = [...local, newObj];
     }
-    Utils.setLocalStorage('carrinho', local.filter((prod) => prod.quantity !== 0));
+    Utils.setLocalStorage(
+      "carrinho",
+      local.filter((prod) => prod.quantity !== 0)
+    );
     setCart(local);
   };
 
   useEffect(() => {
     setQuantity(() => {
-      const carr = Utils.getLocalStorage('carrinho');
-      const idCarr = carr && carr.length ? carr.find((x) => x.productId === id) : false;
+      const carr = Utils.getLocalStorage("carrinho");
+      const idCarr =
+        carr && carr.length ? carr.find((x) => x.productId === id) : false;
       return idCarr && idCarr !== quantity ? idCarr.quantity : 0;
     });
     setTotalPrice();
@@ -68,44 +73,49 @@ function Product({ product, setTotalPrice }) {
   };
 
   return (
-    <div className="containerCard">
+    <Card className="containerCard mt-5">
       <div className="containerDescription">
-        <h1 data-testid={ `customer_products__element-card-price-${id}` }>
-          {`R$ ${Utils.putMaskNumber(Number(price))}`}
-        </h1>
-        <img
-          data-testid={ `customer_products__img-card-bg-image-${id}` }
-          src={ urlImage }
-          alt={ name }
-        />
-        <h2 data-testid={ `customer_products__element-card-title-${id}` }>
-          {name}
-        </h2>
-      </div>
-      <div className="containerInput">
-        <button
+          <Card.Title data-testid={`customer_products__element-card-title-${id}`}>
+            {name}
+          </Card.Title>
+          <Card.Img
+            data-testid={`customer_products__img-card-bg-image-${id}`}
+            src={urlImage}
+            alt={name}
+          />
+      <Card.Body>
+        <div>
+          <h4 data-testid={`customer_products__element-card-price-${id}`}>
+            {`R$ ${Utils.putMaskNumber(Number(price))}`}
+          </h4>
+        </div>
+      <ButtonGroup className="containerInput">
+        <Button
           type="button"
-          data-testid={ `customer_products__button-card-rm-item-${id}` }
-          onClick={ () => decrement() }
+          data-testid={`customer_products__button-card-rm-item-${id}`}
+          onClick={() => decrement()}
         >
           -
-        </button>
+        </Button>
         <input
           type="text"
-          id={ `inputQuantity-${id}` }
-          data-testid={ `customer_products__input-card-quantity-${id}` }
-          onChange={ (e) => inputValue(e) }
-          value={ quantity }
+          className="form-control"
+          id={`inputQuantity-${id}`}
+          data-testid={`customer_products__input-card-quantity-${id}`}
+          onChange={(e) => inputValue(e)}
+          value={quantity}
         />
-        <button
+        <Button
           type="button"
-          data-testid={ `customer_products__button-card-add-item-${id}` }
-          onClick={ () => increment() }
+          data-testid={`customer_products__button-card-add-item-${id}`}
+          onClick={() => increment()}
         >
           +
-        </button>
+        </Button>
+      </ButtonGroup>
+      </Card.Body>
       </div>
-    </div>
+    </Card>
   );
 }
 

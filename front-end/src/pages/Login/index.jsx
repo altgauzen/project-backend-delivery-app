@@ -77,7 +77,7 @@ function Login() {
       <h1 className="logo">TRYBE</h1> <h1>Delivery</h1>
         </Card.Title>
       <label className="label" htmlFor="setName">
-        login:
+        Login:
         <input
           data-testid="common_login__input-email"
           type="email"

@@ -2,6 +2,7 @@ import React, { useContext } from 'react';
 import { useHistory } from 'react-router-dom';
 import context from '../../context/context';
 import './navbar.css';
+import { Button } from "react-bootstrap";
 
 function Navbar() {
   const history = useHistory();
@@ -12,29 +13,29 @@ function Navbar() {
   };
 
   return (
-    <header className="containerHeader">
+    <header className="containerNavbar">
       <div data-testid="customer_products__element-navbar-link-products">
         PRODUTOS
       </div>
-      <button
+      <Button
         type="button"
         data-testid="customer_products__element-navbar-link-orders"
         onClick={ () => history.push('/customer/orders') }
       >
         <span>MEUS PEDIDOS</span>
-      </button>
+      </Button>
       <div
         data-testid="customer_products__element-navbar-user-full-name"
       >
         {user.name}
       </div>
-      <button
+      <Button
         type="button"
         data-testid="customer_products__element-navbar-link-logout"
         onClick={ logout }
       >
         SAIR
-      </button>
+      </Button>
     </header>
   );
 }
