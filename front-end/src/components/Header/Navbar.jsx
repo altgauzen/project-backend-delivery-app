@@ -14,7 +14,10 @@ function Navbar() {
 
   return (
     <header className="containerNavbar">
-      <div data-testid="customer_products__element-navbar-link-products">
+      <div
+      data-testid="customer_products__element-navbar-link-products"
+      onClick={ () => history.push('/customer/products') }
+      >
         PRODUTOS
       </div>
       <Button

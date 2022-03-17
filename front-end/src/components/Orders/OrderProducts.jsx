@@ -15,7 +15,7 @@ export default function OrderProducts({ productsById }) {
   // };
 
   return (
-    <div>
+    <>
       <table className="table">
         <thead className="titles">
           <th>Item</th>
@@ -66,7 +66,7 @@ export default function OrderProducts({ productsById }) {
         </tbody>
       </table>
       <h3>{`total de ${totalPrice}`}</h3>
-    </div>
+    </>
   );
 }
 

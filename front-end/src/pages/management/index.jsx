@@ -80,7 +80,7 @@ function Management() {
     <div>
       <AdmNavbar />
       <div className="mt-5">
-        <Card>
+        <Card className="child">
         <Card.Header>
           <h1>cadastrar novo usuário</h1>
         </Card.Header>

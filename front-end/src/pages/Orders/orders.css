@@ -9,6 +9,28 @@
   padding: 10%;
 } */
 
+.alingItemStatus {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  flex-direction: row;
+}
+
+.alingItemColumn {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+}
+
+.alingItemPriceWithDay {
+  align-items: center;
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
 .pageOrders {
   display: flex;
   flex-direction: column;
@@ -17,7 +39,6 @@
 }
 
 .containerOrders {
-  background-color: red;
   border: none;
   display: flex;
   flex-direction: row;
