@@ -62,11 +62,7 @@ function SellerDetails() {
   return (
     <section className="pageOrders">
       <SellerNavbar />
-      <main>
-        <br />
-        <br />
-        <br />
-
+      <Card className="mt-5">
         <h1>Detalhes do Pedido</h1>
         <SellerOrdersDetails
           role={ role }
@@ -77,7 +73,7 @@ function SellerDetails() {
           productsById={ productsById }
         />
         {/* <'OrderProductsTable /> */}
-      </main>
+      </Card>
     </section>
   );
 }

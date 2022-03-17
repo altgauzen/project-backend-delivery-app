@@ -60,7 +60,7 @@ export default function DetailForDelivery() {
             data-testid="customer_checkout__select-seller"
             onChange={ (event) => handlerInput(event, setSelect) }
           >
-            {/* <option value="">{ '' }</option> */}
+            <option value="">{ '' }</option>
             {
               sellers.map((seller) => (
                 <option key={ seller.id } value={ seller.id }>{seller.name}</option>

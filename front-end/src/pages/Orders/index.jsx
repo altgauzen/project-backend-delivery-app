@@ -36,7 +36,7 @@ function Orders() {
   return (
     <div>
       <Navbar />
-      <div style={{ display: "flex", flexDirection: "row" }} className="mt-5">
+      <div style={{ display: "flex", flexDirection: "row", flexWrap: 'wrap' }} className="mt-5">
         {orders
           ? orders.map((order) => (
               <Card>

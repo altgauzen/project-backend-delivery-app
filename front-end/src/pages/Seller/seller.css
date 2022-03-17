@@ -1,0 +1,47 @@
+.ordersStyle {
+  background-color: red;
+  display: 'flex';
+  flex-direction: column;
+  margin-top: 10%;
+}
+
+/* .ordersStyle div {
+  padding: 10%;
+} */
+
+.alingItemStatus {
+  align-items: center;
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+}
+
+.alingItemColumn {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+}
+
+.alingItemPriceWithDay {
+  align-items: center;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  flex-direction: column;
+}
+
+.pageOrders {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  width: 100vw;
+}
+
+.containerOrders {
+  border: none;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  text-decoration: none;
+}
