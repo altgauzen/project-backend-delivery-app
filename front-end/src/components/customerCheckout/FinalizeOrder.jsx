@@ -2,6 +2,7 @@ import React, { useContext, useEffect } from 'react';
 import './FinalizeOrder.css';
 import contextValue from '../../context/context';
 import Utils from '../../utils/functions';
+import { Button, Card } from "react-bootstrap";
 
 export default function FinalizeOrder() {
   const { totalPrice, cart, setCart, setTotalPrice } = useContext(contextValue);
@@ -21,18 +22,19 @@ export default function FinalizeOrder() {
     setTotalPrice(Utils.putMaskNumber(total));
     return newCart;
   };
-  console.log('NO FINALIZE ORDER, VEM CART?', cart);
+
   return (
-    <div className="finalize-order">
-      <table className="table">
+    <Card className="finalize-order mt-5">
+          <Card.Body>
+      <table className="table table-primary">
         <thead className="titles">
-          <th>Item</th>
-          <th>Descrição</th>
-          <th>Quantidade</th>
-          <th>Valor Unitário</th>
-          <th>Sub-total</th>
+          <th scope="col">Item</th>
+          <th scope="col">Descrição</th>
+          <th scope="col">Quantidade</th>
+          <th scope="col">Valor Unitário</th>
+          <th scope="col">Sub-total</th>
         </thead>
-        <tbody className="titles">
+        <tbody className="titles table-hover">
           {cart.map((row, index) => (
             <tr key={ index }>
               <td
@@ -70,23 +72,24 @@ export default function FinalizeOrder() {
               >
                 {`R$ ${row.subTotal}`}
               </td>
-              <button
+              <td
                 type="button"
                 data-testid={ `customer_checkout__element-order-table-remove-${index}` }
                 onClick={ () => handlerRow(index) }
               >
                 Remover
-              </button>
+              </td>
             </tr>
           ))}
         </tbody>
       </table>
-      <button
+          </Card.Body>
+      <Button
         type="button"
         data-testid="customer_checkout__element-order-total-price"
       >
         {`Total: R$ ${totalPrice}`}
-      </button>
-    </div>
+      </Button>
+    </Card>
   );
 }

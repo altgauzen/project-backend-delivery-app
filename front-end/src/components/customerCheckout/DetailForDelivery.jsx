@@ -4,6 +4,7 @@ import { useHistory } from 'react-router-dom';
 import contextValue from '../../context/context';
 import SalesService from '../../service/sale.service';
 import Utils from '../../utils/functions/index';
+import { Button, Card } from 'react-bootstrap';
 
 export default function DetailForDelivery() {
   const [select, setSelect] = useState(null);
@@ -48,16 +49,18 @@ export default function DetailForDelivery() {
   };
 
   return (
-    <div className="detail-for-delivery">
+    <Card className="detail-for-delivery mt-5">
+      <Card.Body>
       <form className="form-address">
-        <label htmlFor="select-seller">
+        <label ClassName="form-label" htmlFor="select-seller">
           P.Vendedora Responsável
           <select
+            className="form-control"
             id="select-seller"
             data-testid="customer_checkout__select-seller"
             onChange={ (event) => handlerInput(event, setSelect) }
           >
-            <option value="">{ ' ' }</option>
+            {/* <option value="">{ '' }</option> */}
             {
               sellers.map((seller) => (
                 <option key={ seller.id } value={ seller.id }>{seller.name}</option>
@@ -67,19 +70,23 @@ export default function DetailForDelivery() {
           </select>
         </label>
 
-        <label htmlFor="input-address">
+        <label ClassName="form-label" htmlFor="input-address">
           Endereço
           <input
+            className="form-control"
             type="text"
             name="input-address"
+            placeholder="rua/bairro"
             data-testid="customer_checkout__input-address"
             onChange={ (event) => handlerInput(event, setAddress) }
           />
         </label>
 
-        <label htmlFor="input-addressNumber">
+        <label ClassName="form-label" htmlFor="input-addressNumber">
           Número
           <input
+            placeholder="número"
+            className="form-control"
             type="text"
             name="input-addressNumber"
             data-testid="customer_checkout__input-addressNumber"
@@ -87,14 +94,14 @@ export default function DetailForDelivery() {
           />
         </label>
       </form>
-
-      <button
+      </Card.Body>
+      <Button
         data-testid="customer_checkout__button-submit-order"
         type="button"
         onClick={ saleCreate }
       >
         FINALIZAR PEDIDO
-      </button>
-    </div>
+      </Button>
+    </Card>
   );
 }
