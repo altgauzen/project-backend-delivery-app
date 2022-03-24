@@ -1,14 +1,10 @@
 import React, { useEffect, useState, useCallback } from 'react';
 import { useParams } from 'react-router-dom';
 import OrderDetailsHeader from '../../components/Orders/OrderDetailsHeader';
-// import OrderProductsTable from '../../components/Orders/OrderProcuctsTable';
 import Navbar from '../../components/Header/Navbar';
 import SalesService from '../../service/sale.service';
 import UserService from '../../service/user.service';
 import OrderProducts from '../../components/Orders/OrderProducts';
-
-// import contextValue from '../../context/context';
-// import './ordersDetails.css';
 
 function OrderDetails() {
   const { id: orderId } = useParams();
@@ -62,12 +58,8 @@ function OrderDetails() {
   return (
     <section className="pageOrders">
       <Navbar />
-      <main>
-        <br />
-        <br />
-        <br />
-
-        <h1>Detalhes do Pedido</h1>
+      <main className="mt-5">
+        <h1 className="mt-3">Detalhes do Pedido</h1>
         <OrderDetailsHeader
           role={ role }
           orderData={ orderDetails }

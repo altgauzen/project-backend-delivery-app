@@ -10,8 +10,8 @@
 } */
 
 .alingItemStatus {
-  display: flex;
   align-items: center;
+  display: flex;
   flex-wrap: wrap;
   flex-direction: row;
 }
@@ -27,8 +27,8 @@
   align-items: center;
   display: flex;
   flex-wrap: wrap;
-  flex-direction: column;
   justify-content: space-between;
+  flex-direction: column;
 }
 
 .pageOrders {

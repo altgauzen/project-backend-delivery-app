@@ -5,6 +5,8 @@ import OrderService from '../../service/sale.service';
 import contextValue from '../../context/context';
 import Utils from '../../utils/functions/index';
 import SellerNavbar from '../../components/Header/SellerNavbar';
+import { Card } from 'react-bootstrap';
+import './seller.css';
 
 function Seller() {
   const { setUser } = useContext(contextValue);
@@ -26,27 +28,32 @@ function Seller() {
   }, [setOrders, setUser]);
 
   return (
-    <>
+    <div>
       <SellerNavbar />
-      <br />
-      <br />
-      <br />
-      <div>
-        <section>
+      <div style={{ display: "flex", flexDirection: "row", flexWrap: 'wrap' }} className="mt-5">
           {
             orders ? orders.map((order) => (
-              <button
+              <Card>
+              <div
                 type="button"
                 onClick={ () => history.push(`/seller/orders/${order.id}`) }
                 key={ order.id }
                 className="containerOrders"
               >
-                <div data-testid={ `seller_orders__element-order-id-${order.id}` }>
-                  { `Pedido ${order.id}` }
+                <Card.Header className="alingItemColumn">
+                <div>Pedido</div>{" "}
+                <div
+                className="containerOrders"
+                data-testid={ `seller_orders__element-order-id-${order.id}` }>
+                  { `${order.id}` }
                 </div>
-                <div data-testid={ `seller_orders__element-delivery-status-${order.id}` }>
+                </Card.Header> 
+                <Card.Title
+                className="alingItemStatus"
+                data-testid={ `seller_orders__element-delivery-status-${order.id}` }>
                   { order.status }
-                </div>
+                </Card.Title>
+                <Card.Body className="alingItemPriceWithDay mb-2">
                 <div data-testid={ `seller_orders__element-order-date-${order.id}` }>
                   {moment(order.sale_date).format('DD/MM/YYYY')}
                 </div>
@@ -56,12 +63,13 @@ function Seller() {
                 <div data-testid={ `seller_orders__element-card-address-${order.id}` }>
                   {`${order.delivery_address}, ${order.delivery_number}`}
                 </div>
-              </button>
+                  </Card.Body>
+              </div>
+          </Card>
             )) : null
           }
-        </section>
-      </div>
-    </>
+        </div>
+    </div>
   );
 }
 

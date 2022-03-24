@@ -17,22 +17,38 @@
 }
 
 .rocksGlass {
-  animation: shake 1s infinite ease;
+  animation: shake 10s infinite alternate;;
   max-height: 80vh;
 }
 
 @keyframes shake {
 
   0% {
-    transform: rotate(5deg);
+    transform: translateX(0px);
+    background-image: url('./images/deliveryman.png');
+    background-repeat: no-repeat;
+    background-position: center center;
+  }
+
+  25% {
+    transform: translateX(-100px);
+    background-image: url('./images/deliveryman.png');
+    background-repeat: no-repeat;
+    background-position: center center;
   }
 
   50% {
-    transform: rotate(-5deg);
+    transform: translateX(+100px);
+    background-image: url('./images/deliveryman.png');
+    background-repeat: no-repeat;
+    background-position: center center;
   }
 
   100% {
-    transform: rotate(5deg);
+    transform: translateX(0px);
+    background-image: url('./images/deliveryman.png');
+    background-repeat: no-repeat;
+    background-position: center center;
   }
 }
 

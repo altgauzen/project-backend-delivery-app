@@ -8,7 +8,7 @@ function Provider({ children }) {
   const [cart, setCart] = useState([]);
   const [totalPrice, setTotalPrice] = useState(0);
   const [loading, setLoading] = useState(false);
-
+  const [users, setUsers] = useState([]);
   const contextValue = {
     products,
     setProducts,
@@ -20,6 +20,8 @@ function Provider({ children }) {
     setTotalPrice,
     loading,
     setLoading,
+    setUsers,
+    users,
   };
 
   return (

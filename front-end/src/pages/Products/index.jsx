@@ -6,6 +6,7 @@ import ProductsService from '../../service/product.service';
 import contextValue from '../../context/context';
 import './products.css';
 import Utils from '../../utils/functions/index';
+import { Form, Button, Card } from "react-bootstrap";
 
 function CustomerProducts() {
   const {
@@ -60,7 +61,7 @@ function CustomerProducts() {
             product={ product }
           />
         )) : ''}
-        <button
+        <Button
           className="cartShop"
           type="button"
           onClick={ redirectCheckout }
@@ -74,7 +75,7 @@ function CustomerProducts() {
           >
             {`${totalPrice}`}
           </span>
-        </button>
+        </Button>
       </section>
     </div>
   );
