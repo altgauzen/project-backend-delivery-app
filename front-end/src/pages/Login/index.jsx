@@ -42,7 +42,6 @@ function Login() {
       .login(email, password)
       .then((res) => {
         const { token, user } = res.data;
-        console.log(token, user);
         localStorage.setItem('token', token);
         Utils.setLocalStorage('user', user);
         setUser(user);

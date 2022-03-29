@@ -37,12 +37,10 @@ const getAllSeller = async () => {
     where: { role: 'seller' },
     attributes: { exclude: ['password', 'email'] },
   });
-  console.log('NO SALES SERVICE, VEM ALL SELLERS???', response);
   return response;
 };
 
 const createSaleService = async (data) => {
-  console.log('DATA -->', data);
   const { shoppingCart } = data;
   const newData = data;
   delete newData.shoppingCart;

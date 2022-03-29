@@ -40,7 +40,6 @@ export default function DetailForDelivery() {
     new SalesService()
       .createSale(Utils.getLocalStorage('user').token, obj)
       .then((res) => {
-        console.log('NO DETAIL FOR DELIVERY, VEM RES?', res);
         history.push(`/customer/orders/${res.data.id}`);
       })
       .catch((err) => {
