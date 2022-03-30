@@ -16,34 +16,6 @@
    </a>
 </p>
 
-## 📄 Fluxos do Projeto e Estrutura do Repositório:
-
-Para facilitar o entendimento, podemos dividir a aplicação em ** 4 fluxos principais**, **uma validação de status entre cliente e pessoa vendedora** e **cobertura de testes (`front-end` e `back-end`)**:
-
-- **Fluxo Comum** que compreende: 
-  - (1) Tela de Login; 
-  - (2) Tela de Registro.
-
-- **Fluxo do Cliente** que compreende: : 
-  - (3) Tela de Produtos; 
-  - (4) Tela de Checkout; 
-  - (5) Tela de Pedidos; 
-  - (6) Tela de Detalhes do Pedido.
-
-- **Fluxo da Pessoa Vendedora** que compreende: 
-  - (7) Tela de Pedidos; 
-  - (8) Tela de Detalhes/Controle do Pedido.
-
-- **Validação do Status do Pedido** que compreende: 
-  - (9) Teste de status sem atualização em tempo real; 
-  - (10) Teste de status com atualização em tempo real.
-
-- **Fluxo da Pessoa Administradora** que compreende: 
-  - (11) Tela de gerenciamento de usuários.
-
-- **Testes da aplicação** que compreende: 
-  - (12) Testes de cobertura.
-
 ## ➕ Contexto
 
 A distribuidora de cervejas da dona Tereza está se informatizando! 🚀 Seu negócio, antes focado em um local específico da cidade, passou a receber uma quantidade massiva de encomendas de outros pontos, expandindo sua atuação, sobretudo via delivery. Isso tudo graças ao excelente preço das bebidas e atendimento da equipe de vendas.
@@ -79,6 +51,34 @@ A ideia da nossa equipe já pressupõe alguma escalabilidade, dado que foram est
 - Para o banco de dados, utilizamos a biblioteca ORM `Sequelize`, que faz interface com o `MySQL`.
 - Então você deve ter uma instancia do MySQL 8 instalada e ativa em seu sistema.
 
+## 📄 Fluxos do Projeto e Estrutura do Repositório:
+
+Para facilitar o entendimento, podemos dividir a aplicação em ** 4 fluxos principais**, **uma validação de status entre cliente e pessoa vendedora** e **cobertura de testes (`front-end` e `back-end`)**:
+
+- **Fluxo Comum** que compreende: 
+  - (1) Tela de Login; 
+  - (2) Tela de Registro.
+
+- **Fluxo do Cliente** que compreende: : 
+  - (3) Tela de Produtos; 
+  - (4) Tela de Checkout; 
+  - (5) Tela de Pedidos; 
+  - (6) Tela de Detalhes do Pedido.
+
+- **Fluxo da Pessoa Vendedora** que compreende: 
+  - (7) Tela de Pedidos; 
+  - (8) Tela de Detalhes/Controle do Pedido.
+
+- **Validação do Status do Pedido** que compreende: 
+  - (9) Teste de status sem atualização em tempo real; 
+  - (10) Teste de status com atualização em tempo real.
+
+- **Fluxo da Pessoa Administradora** que compreende: 
+  - (11) Tela de gerenciamento de usuários.
+
+- **Testes da aplicação** que compreende: 
+  - (12) Testes de cobertura.
+
 
 ## 🚀 Tecnologias 
 
@@ -91,4 +91,4 @@ A ideia da nossa equipe já pressupõe alguma escalabilidade, dado que foram est
 
 ---
 
-Made by Alexandre Altgauzen 💻 2022
+Made by Alexandre Altgauzen em 2022 💻
