@@ -12,8 +12,6 @@
 
 <p align="center">
     <img alt="totalLines" src="https://img.shields.io/tokei/lines/github/altgauzen/project-backend-delivery-app">
-    <img alt="nodeVersion" src="https://img.shields.io/node/v/sd-0x-project-delivery-app">
-    
 
    </a>
 </p>
